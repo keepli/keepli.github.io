@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="a1Rd9iQAVywm23NydyIdE_hTsDmZ8LAeWbS4d-oHBPY">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"keepli.cn","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="SpringCloud各组件的作用和使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springcloud组件">
+<meta property="og:url" content="http://keepli.cn/2020/05/13/springcloud%E7%BB%84%E4%BB%B6/index.html">
+<meta property="og:site_name" content="听风知秋雨">
+<meta property="og:description" content="SpringCloud各组件的作用和使用">
+<meta property="og:locale">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200929174342163.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200930220131513.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="article:published_time" content="2020-05-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-05-12T16:00:00.000Z">
+<meta property="article:author" content="Driven">
+<meta property="article:tag" content="微服务架构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200929174342163.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center">
+
+<link rel="canonical" href="http://keepli.cn/2020/05/13/springcloud%E7%BB%84%E4%BB%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>springcloud组件 | 听风知秋雨</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
+  <script src="/live2d-widget/autoload.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">听风知秋雨</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://keepli.cn/2020/05/13/springcloud%E7%BB%84%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Driven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风知秋雨">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          springcloud组件
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-13 00:00:00" itemprop="dateCreated datePublished" datetime="2020-05-13T00:00:00+08:00">2020-05-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">微服务架构</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/13/springcloud%E7%BB%84%E4%BB%B6/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/13/springcloud%E7%BB%84%E4%BB%B6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> <em>SpringCloud各组件的作用和使用</em></p>
+<a id="more"></a>
+
+<h2 id="一、服务注册中心Eureka"><a href="#一、服务注册中心Eureka" class="headerlink" title="一、服务注册中心Eureka"></a><font color=red>一、服务注册中心Eureka</font></h2><h3 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h3><ul>
+<li><p>Eureka就好比是滴滴，负责管理、记录服务提供者的信息。服务调用者无需自己寻找服务，而是把自己的需求告诉Eureka，然后Eureka会把符合你需求的服务告诉你</p>
+</li>
+<li><p>Eureka的主要功能是进行服务管理，定期检查服务状态，返回服务地址列表</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20200929174342163.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center"></p>
+<ul>
+<li>Eureka：就是服务注册中心（可以是一个集群），对外暴露自己的地址</li>
+<li>提供者：启动后向Eureka注册自己信息（地址，提供什么服务）</li>
+<li>消费者：向Eureka订阅服务，Eureka会将对应服务的所有提供者地址列表发送给消费者，并且定期更新</li>
+<li>心跳(续约)：提供者定期通过http方式向Eureka刷新自己的状态</li>
+</ul>
+<h3 id="2-搭建eureka-server工程"><a href="#2-搭建eureka-server工程" class="headerlink" title="2. 搭建eureka-server工程"></a>2. 搭建eureka-server工程</h3><p><strong>目标</strong>：添加eureka对应依赖和编写引导类搭建eureka服务并可访问eureka服务界面</p>
+<p><strong>分析</strong>：</p>
+<p>Eureka是服务注册中心，只做服务注册；自身并不提供服务也不消费服务。搭建web工程使用Eureka，可以使用Spring Boot方式搭建。</p>
+<p><strong>搭建步骤</strong>：</p>
+<ol>
+<li>创建工程</li>
+<li>添加启动器依赖</li>
+<li>编写启动引导类（添加Eureka的服务注解）和配置文件</li>
+<li>修改配置文件（端口，应用名称…）</li>
+<li>启动测试</li>
+</ol>
+<p><strong>小结</strong>：</p>
+<ul>
+<li>启动器依赖（父工程中已经指定了springcloud的版本号，所以这里不用指定版本号）</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在springboot的启动类中添加@EnableEurekaServer注解</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableEurekaServer</span><span class="comment">//声明当前应用是Eureka服务</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EurekaServerApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(EurekaServerApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置文件</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="comment">#port: $&#123;port:10086&#125;</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">10086</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">eureka-server</span></span><br><span class="line"></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">service-url:</span></span><br><span class="line">      <span class="comment"># eureka 服务地址（虚拟的），如果是集群的话；需要指定其它集群eureka地址,后面加逗号隔开</span></span><br><span class="line">      <span class="comment">#defaultZone: $&#123;defaultZone:http://127.0.0.1:10086/eureka&#125;</span></span><br><span class="line">      <span class="comment">#例如：defaultZone: http://127.0.0.1:10086/eureka,http://0.0.0.0:10086/eureka</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://127.0.0.1:10086/eureka</span></span><br><span class="line">      <span class="comment"># 不注册自己，默认是true，如果是集群搭建需要注册自己</span></span><br><span class="line">    <span class="attr">register-with-eureka:</span> <span class="literal">false</span></span><br><span class="line">      <span class="comment"># 不拉取服务,默认是true，集群要为true</span></span><br><span class="line">    <span class="attr">fetch-registry:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">server:</span></span><br><span class="line">    <span class="comment">#服务失效剔除时间，默认60秒（以毫秒为单位）</span></span><br><span class="line">    <span class="attr">eviction-interval-timer-in-ms:</span> <span class="number">3000</span></span><br><span class="line">    <span class="comment">#关闭自我保护模式（默认是打开的）</span></span><br><span class="line">    <span class="attr">enable-self-preservation:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-服务注册与发现"><a href="#3-服务注册与发现" class="headerlink" title="3.服务注册与发现"></a>3.服务注册与发现</h3><p><strong>目标</strong>：将user-service的服务注册到eureka并在consumer-demo中可以根据服务名称调用</p>
+<p><strong>分析</strong>：</p>
+<ul>
+<li>服务注册：在服务提供工程user-service上添加Eureka客户端依赖；自动将服务注册到EurekaServer服务地址列表。<ul>
+<li>添加依赖；</li>
+<li>改造启动引导类；添加开启Eureka客户端发现的注解；</li>
+<li>修改配置文件；设置Eureka 服务地址</li>
+</ul>
+</li>
+<li>服务发现：在服务消费工程consumer-demo上添加Eureka客户端依赖；可以使用工具类根据服务名称获取对应的服务地址列表。<ul>
+<li>添加依赖；</li>
+<li>改造启动引导类；添加开启Eureka客户端发现的注解；</li>
+<li>修改配置文件；设置Eureka 服务地址；</li>
+<li>改造处理器类ConsumerController，可以使用工具类DiscoveryClient根据服务名称获取对应服务地址列表。</li>
+</ul>
+</li>
+</ul>
+<p><strong>小结</strong>：</p>
+<ul>
+<li>添加Eureka客户端依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>添加启动引导类注解<code>@EnableDiscoveryClient</code><font color=red>（消费端与生产端都要添加）</font></p>
+<ul>
+<li><strong>以下以生产端启动引导类示例</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableDiscoveryClient</span><span class="comment">//开启Eureka客户端发现功能</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@MapperScan(&quot;cn.itcast.user.mapper&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(UserApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改配置</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">consumer-demo</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">service-url:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://127.0.0.1:10086/eureka</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在消费端的controller中获取生产端注册的url进行访问（后期一般配合负载均衡来获取，通过生产端的服务名就可获取到url）</li>
+</ul>
+<h3 id="4-高可用的Eureka-Server（集群搭建）"><a href="#4-高可用的Eureka-Server（集群搭建）" class="headerlink" title="4. 高可用的Eureka Server（集群搭建）"></a>4. 高可用的Eureka Server（集群搭建）</h3><ul>
+<li><p>多个Eureka Server之间也会互相注册为服务，当服务提供者注册到Eureka Server集群中的某个节点时，该节点会把服务的信息同步给集群中的每个节点，从而实现数据同步。因此，无论客户端访问到Eureka Server集群中的任意一个节点，都可以获取到完整的服务列表信息</p>
+</li>
+<li><p>如果有三个Eureka，则每一个EurekaServer都需要注册到其它几个Eureka服务中，例如：有三个分别为10086、10087、10088，则：</p>
+<ul>
+<li>10086要注册到10087和10088上</li>
+<li>10087要注册到10086和10088上</li>
+<li>10088要注册到10086和10087上</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-Eureka客户端与服务端配置"><a href="#5-Eureka客户端与服务端配置" class="headerlink" title="5. Eureka客户端与服务端配置"></a>5. Eureka客户端与服务端配置</h3><p><strong>目标</strong>：配置eureka客户端user-service的注册、续约等配置项，配置eureka客户端consumer-demo的获取服务间隔时间，了解失效剔除和自我保护</p>
+<p><strong>分析</strong>：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/2020092923374064.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center">Eureka客户端工程</a><ul>
+<li>user-service 服务提供<ul>
+<li>服务地址使用ip方式</li>
+<li>服务续约（心跳）</li>
+</ul>
+</li>
+<li>consumer-demo 服务消费<ul>
+<li>获取服务地址的频率</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200929233755362.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center">Eureka服务端工程 eureka-server</a><ul>
+<li>失效剔除</li>
+<li>自我保护</li>
+</ul>
+</li>
+</ul>
+<p><strong>小结</strong>：</p>
+<ul>
+<li>user-service </li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">service-url:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://127.0.0.1:10086/eureka</span></span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="comment"># 更倾向使用ip地址，而不是host名</span></span><br><span class="line">    <span class="attr">prefer-ip-address:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># ip地址</span></span><br><span class="line">    <span class="attr">ip-address:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">    <span class="comment"># 续约间隔，默认30秒</span></span><br><span class="line">    <span class="attr">lease-renewal-interval-in-seconds:</span> <span class="number">5</span></span><br><span class="line">    <span class="comment"># 服务失效时间，默认90秒</span></span><br><span class="line">    <span class="attr">lease-expiration-duration-in-seconds:</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>consumer-demo </li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">service-url:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://127.0.0.1:10086/eureka</span></span><br><span class="line">    <span class="comment"># 获取服务地址列表间隔时间，默认30秒</span></span><br><span class="line">    <span class="attr">registry-fetch-interval-seconds:</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>eureka-server</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">server:</span></span><br><span class="line">    <span class="comment"># 服务失效剔除时间间隔，默认60秒</span></span><br><span class="line">    <span class="attr">eviction-interval-timer-in-ms:</span> <span class="number">60000</span></span><br><span class="line">    <span class="comment"># 关闭自我保护模式（默认是打开的）</span></span><br><span class="line">    <span class="attr">enable-self-preservation:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二、负载均衡Ribbon"><a href="#二、负载均衡Ribbon" class="headerlink" title="二、负载均衡Ribbon"></a><font color=red>二、负载均衡Ribbon</font></h2><h3 id="1-简介-1"><a href="#1-简介-1" class="headerlink" title="1. 简介"></a>1. 简介</h3><ul>
+<li><p>负载均衡是一个算法，可以通过该算法实现从地址列表中获取一个地址进行服务调用，在Spring Cloud中提供了负载均衡器：Ribbon</p>
+</li>
+<li><p><strong>Eureka中已经集成了负载均衡组件：Ribbon</strong>，简单修改代码即可使用，不需要单独引入jar包</p>
+</li>
+</ul>
+<p><strong>小结</strong>：</p>
+<p>Ribbon提供了轮询、随机两种负载均衡算法（默认是轮询）可以实现从地址列表中使用负载均衡算法获取地址进行服务调用</p>
+<h3 id="2-应用"><a href="#2-应用" class="headerlink" title="2. 应用"></a>2. 应用</h3><p><strong>目标</strong>：配置启动两个用户服务，在consumer-demo中使用服务名实现根据用户id获取用户</p>
+<p><strong>分析</strong>：</p>
+<p>需求：可以使用RestTemplate访问<a target="_blank" rel="noopener" href="http://user-service/user/8%E8%8E%B7%E5%8F%96%E6%9C%8D%E5%8A%A1%E6%95%B0%E6%8D%AE">http://user-service/user/8获取服务数据</a><font color=red>（不需要拼字符串来获取了）</font></p>
+<p>可以使用Ribbon负载均衡：在执行RestTemplate发送服务地址请求的时候，使用负载均衡拦截器拦截，根据服务名获取服务地址列表，使用Ribbon负载均衡算法从服务地址列表中选择一个服务地址，访问该地址获取服务数据。</p>
+<p>实现步骤：</p>
+<ol>
+<li>启动多个user-service实例（9091,9092）；</li>
+<li>修改RestTemplate实例化方法，添加负载均衡注解；</li>
+<li>修改ConsumerController；</li>
+<li>测试</li>
+</ol>
+<p><strong>小结</strong>：</p>
+<ul>
+<li>在<font color=red>实例化RestTemplate</font>的时候使用<code>@LoadBalanced</code>，服务地址直接可以使用服务名，并且按算法来分配</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line">   <span class="meta">@LoadBalanced</span><span class="comment">//开启负载均衡</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate (  );</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不需要修改配置文件了，因为默认自动配置了<code>轮询方式</code>，如果要随机可以通过配置（了解）</li>
+</ul>
+<h2 id="三、熔断器Hystrix"><a href="#三、熔断器Hystrix" class="headerlink" title="三、熔断器Hystrix"></a><font color=red>三、熔断器Hystrix</font></h2><h3 id="1-简介-2"><a href="#1-简介-2" class="headerlink" title="1. 简介"></a>1. 简介</h3><ul>
+<li><p>它在微服务系统中是一款提供保护机制的组件，和eureka一样也是由netflix公司开发</p>
+</li>
+<li><p>Hystrix是一个延迟和容错库，用于隔离访问远程服务，防止出现级联失败</p>
+</li>
+</ul>
+<h3 id="2-线程隔离-amp-服务降级"><a href="#2-线程隔离-amp-服务降级" class="headerlink" title="2. 线程隔离&amp;服务降级"></a>2. 线程隔离&amp;服务降级</h3><p><a target="_blank" rel="noopener" href="https://www.showdoc.com.cn/439784909434024?page_id=2827350358722234">Hystrix解决雪崩效应</a>：</p>
+<ul>
+<li>线程隔离：用户请求不直接访问服务，而是使用线程池中空闲的线程访问服务，加速失败判断时间</li>
+<li>服务降级：及时返回服务调用失败的结果，让线程不因为等待服务而阻塞</li>
+</ul>
+<p><strong>小结</strong>：</p>
+<ul>
+<li>添加依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>开启熔断</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*@SpringBootApplication</span></span><br><span class="line"><span class="comment">@EnableDiscoveryClient //开启Eureka客户端发现功能</span></span><br><span class="line"><span class="comment">@EnableCircuitBreaker //开启熔断*/</span></span><br><span class="line"><span class="meta">@SpringCloudApplication</span> <span class="comment">//这个注解包含了上面三个注解</span></span><br><span class="line"><span class="meta">@EnableFeignClients</span> <span class="comment">//开启Feign功能</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConsumerApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(ConsumerApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@LoadBalanced</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate (  );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>降级逻辑示例<font color=red>（要注意回调方法的返回类型要跟获取请求的方法的返回类型保持一致）</font></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/consumer&quot;)</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@DefaultProperties(defaultFallback = &quot;defaultFallback&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConsumerController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DiscoveryClient discoveryClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="comment">//@HystrixCommand(fallbackMethod = &quot;queryByIdFallback&quot;)</span></span><br><span class="line">    <span class="meta">@HystrixCommand</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">queryById</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span></span>&#123;</span><br><span class="line">        String url = <span class="string">&quot;http://user-service/user/&quot;</span> + id;</span><br><span class="line">        <span class="keyword">return</span> restTemplate.getForObject(url, String.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">queryByIdFallback</span><span class="params">(Long id)</span></span>&#123;</span><br><span class="line">        log.error(<span class="string">&quot;查询用户信息失败。id：&#123;&#125;&quot;</span>, id);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;对不起，网络太拥挤了！&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">defaultFallback</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;默认提示：对不起，网络太拥挤了！&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改超时配置</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hystrix:</span></span><br><span class="line">  <span class="attr">command:</span></span><br><span class="line">    <span class="attr">default:</span></span><br><span class="line">      <span class="attr">execution:</span></span><br><span class="line">        <span class="attr">isolation:</span></span><br><span class="line">          <span class="attr">thread:</span></span><br><span class="line">            <span class="comment">#配置Hystrix的超时时长为2秒，默认为1秒</span></span><br><span class="line">            <span class="attr">timeoutInMilliseconds:</span> <span class="number">1000</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-服务熔断演示"><a href="#3-服务熔断演示" class="headerlink" title="3. 服务熔断演示"></a>3. 服务熔断演示</h3><ul>
+<li>熔断器工作原理</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20200930220131513.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center"></p>
+<p><strong>状态机有3个状态：</strong></p>
+<ul>
+<li>Closed：关闭状态（断路器关闭），所有请求都正常访问</li>
+<li>Open：打开状态（断路器打开），所有请求都会被降级。Hystrix会对请求情况计数，当一定时间内失败请求百分比达到阈值，则触发熔断，断路器会完全打开。默认失败比例的阈值是50%，请求次数最少不低于20次</li>
+<li>Half Open：半开状态，不是永久的，断路器打开后会进入休眠时间（默认是5S）。随后断路器会自动进入半开状态，此时会释放部分请求通过，若这些请求都是健康的，则会关闭断路器，否则继续保持打开，再次进行休眠计时</li>
+</ul>
+<p><strong>可以通过配置服务熔断参数修改默认：</strong><font color=red>（在开启了hystrix方配置）</font></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hystrix:</span></span><br><span class="line">  <span class="attr">command:</span></span><br><span class="line">    <span class="attr">default:</span></span><br><span class="line">      <span class="attr">execution:</span></span><br><span class="line">        <span class="attr">isolation:</span></span><br><span class="line">          <span class="attr">thread:</span></span><br><span class="line">            <span class="comment">#配置Hystrix的超时时长为2秒，默认为1秒</span></span><br><span class="line">            <span class="attr">timeoutInMilliseconds:</span> <span class="number">1000</span></span><br><span class="line">      <span class="attr">circuitBreaker:</span></span><br><span class="line">        <span class="attr">errorThresholdPercentage:</span> <span class="number">50</span> <span class="comment"># 触发熔断错误比例阈值，默认值50%</span></span><br><span class="line">        <span class="attr">sleepWindowInMilliseconds:</span> <span class="number">10000</span> <span class="comment"># 熔断后休眠时长，默认值5秒</span></span><br><span class="line">        <span class="attr">requestVolumeThreshold:</span> <span class="number">10</span> <span class="comment"># 熔断触发最小请求次数，默认值是20</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>没办法，要恰饭的嘛！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Driven 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Driven 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/" rel="tag"># 微服务架构</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/" rel="prev" title="微服务架构">
+      <i class="fa fa-chevron-left"></i> 微服务架构
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83Eureka"><span class="nav-text">一、服务注册中心Eureka</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%90%AD%E5%BB%BAeureka-server%E5%B7%A5%E7%A8%8B"><span class="nav-text">2. 搭建eureka-server工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0"><span class="nav-text">3.服务注册与发现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84Eureka-Server%EF%BC%88%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%EF%BC%89"><span class="nav-text">4. 高可用的Eureka Server（集群搭建）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Eureka%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="nav-text">5. Eureka客户端与服务端配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1Ribbon"><span class="nav-text">二、负载均衡Ribbon</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%AE%80%E4%BB%8B-1"><span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%BA%94%E7%94%A8"><span class="nav-text">2. 应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%86%94%E6%96%AD%E5%99%A8Hystrix"><span class="nav-text">三、熔断器Hystrix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%AE%80%E4%BB%8B-2"><span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%BA%BF%E7%A8%8B%E9%9A%94%E7%A6%BB-amp-%E6%9C%8D%E5%8A%A1%E9%99%8D%E7%BA%A7"><span class="nav-text">2. 线程隔离&amp;服务降级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD%E6%BC%94%E7%A4%BA"><span class="nav-text">3. 服务熔断演示</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Driven"
+      src="/images/header.jpg">
+  <p class="site-author-name" itemprop="name">Driven</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/keepli" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;keepli" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:248147986@qq.com" title="E-Mail → mailto:248147986@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Driven</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+
+  <script src='https://unpkg.com/mermaid@/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='120,120,120' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'MXe3KzTG9EgB9R1XK8Pu9G73-gzGzoHsz',
+      appKey     : 'ANq0BdfX8Hcywav62xk2lHrX',
+      placeholder: "-(￢∀￢)σ 来快活啊~",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+  
+
+  
+    <script src="/js/cursor/fireworks.js"></script>
+  
+
+
+
+
+  <script src="/js/cursor/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+</body>
+</html>

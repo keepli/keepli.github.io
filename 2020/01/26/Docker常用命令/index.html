@@ -309,11 +309,11 @@ c3数据卷容器-->数据卷;</pre>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run –it --name=c3 –v /volume centos:7 /bin/bash </span><br><span class="line"><span class="meta">#</span><span class="bash">创建启动c3数据卷容器，使用 –v 参数 设置数据卷</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>c1、c2容器的数据卷来源c3数据卷容器，就算c3容器挂了，数据卷也可以正常使用<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run –it --name=c1 --volumes-from c3 centos:7 /bin/bash</span><br></pre></td></tr></table></figure>
+<li>c1、c2容器的数据卷来源c3数据卷容器，就算c3容器挂了，数据卷也可以正常使用</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run –it --name=c1 --volumes-from c3 centos:7 /bin/bash</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run –it --name=c2 --volumes-from c3 centos:7 /bin/bash  </span><br><span class="line"><span class="meta">#</span><span class="bash">创建启动 c1 c2 容器，使用 –-volumes-from 参数 设置数据卷</span></span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
 <h3 id="制作自己的镜像文件："><a href="#制作自己的镜像文件：" class="headerlink" title="制作自己的镜像文件："></a><font color=red>制作自己的镜像文件：</font></h3><h4 id="1-普通制作镜像的方法（了解）："><a href="#1-普通制作镜像的方法（了解）：" class="headerlink" title="1. 普通制作镜像的方法（了解）："></a>1. 普通制作镜像的方法（了解）：</h4><pre class="mermaid">graph LR
 制作镜像/只能自己使用-->压缩镜像/可以进行传输
 压缩镜像/可以进行传输-->还原镜像/解压文件并还原</pre>
@@ -458,7 +458,7 @@ c3数据卷容器-->数据卷;</pre>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
