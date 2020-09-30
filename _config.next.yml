@@ -176,9 +176,9 @@ site_state: true
 # Usage: `Key: permalink || icon`
 # Key is the link label showing to end users.
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
-social:
-  #GitHub: https://github.com/yourname || fab fa-github
-  #E-Mail: mailto:yourname@gmail.com || fa fa-envelope
+social: #社交信息链接
+  GitHub: https://github.com/keepli || fab fa-github
+  E-Mail: mailto:248147986@qq.com || fa fa-envelope
   #Weibo: https://weibo.com/yourname || fab fa-weibo
   #Google: https://plus.google.com/yourname || fab fa-google
   #Twitter: https://twitter.com/yourname || fab fa-twitter
@@ -1011,3 +1011,7 @@ cursor_effect:
   enabled: true
   type: fireworks  # fireworks：礼花 | explosion：爆炸 | love：浮出爱心 | text：浮出文字
 
+# 打字特效
+typing_effect:
+  colorful: true  # 礼花特效
+  shake: false  # 震动特效
