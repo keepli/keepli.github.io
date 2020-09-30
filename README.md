@@ -32,4 +32,4 @@ typing_effect:
 #### 脚本位置
 
 - 在`themes\next\source\lib\canvas-nest`整个`canvas-nest`都为新引入的目录
-- 修改了hexo中`.gitignore`文件的忽略项，注释了`source/lib/*`
+- 修改了hexo-next中`.gitignore`文件的忽略项，注释了`source/lib/*`
