@@ -1,3 +1,4 @@
+{# 鼠标点击特效 #}
 {% if theme.cursor_effect %}
   {% if theme.cursor_effect.type == "fireworks" %}
     <script src="/js/cursor/fireworks.js"></script>
@@ -10,4 +11,14 @@
   {% elseif theme.cursor_effect.type == "text" %}
     <script src="/js/cursor/text.js"></script>
   {% endif %}
+{% endif %}
+
+{# 打字特效 #}
+{% if theme.typing_effect %}
+  <script src="/js/cursor/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = {{ theme.typing_effect.colorful }};
+    POWERMODE.shake = {{ theme.typing_effect.shake }};
+    document.body.addEventListener('input', POWERMODE);
+  </script>
 {% endif %}
