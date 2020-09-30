@@ -7,7 +7,8 @@ package-lock.json
 node_modules/
 
 # Ignore optional external libraries
-source/lib/*
+#自己注释掉了source/lib/*
+#source/lib/*
 
 # Track internal libraries & Ignore unused verdors files
 !source/lib/font-awesome/
