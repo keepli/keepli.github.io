@@ -25,12 +25,12 @@
 #waifu {
 	bottom: -1000px;
 	left: 0;
-	line-height: 0;
+	line-height: 2;
 	margin-bottom: -10px;
 	position: fixed;
 	transform: translateY(3px);
 	transition: transform .3s ease-in-out, bottom 3s ease-in-out;
-	z-index: 1;
+	z-index: 1210; //设置元素优先级，因为侧边栏的优先级是1200，所以要比它大
 }
 
 #waifu:hover {
@@ -68,9 +68,9 @@
 
 #waifu #live2d {
 	cursor: grab;
-	height: 260px;
+	height: 280px;
 	position: relative;
-	width: 250px;
+	width: 270px;
 }
 
 #waifu #live2d:active {
