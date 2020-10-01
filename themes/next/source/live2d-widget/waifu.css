@@ -1,4 +1,4 @@
-#waifu-toggle {
+﻿#waifu-toggle {
 	background-color: #fa0;
 	border-radius: 5px;
 	bottom: 66px;
@@ -30,7 +30,7 @@
 	position: fixed;
 	transform: translateY(3px);
 	transition: transform .3s ease-in-out, bottom 3s ease-in-out;
-	z-index: 1;
+	z-index: 1210; //设置元素优先级，因为侧边栏的优先级是1200，所以要比它大
 }
 
 #waifu:hover {
@@ -53,7 +53,7 @@
 	position: absolute;
 	text-overflow: ellipsis;
 	transition: opacity 1s;
-	width: 250px;
+	width: 220px;
 	word-break: break-all;
 }
 
@@ -68,9 +68,9 @@
 
 #waifu #live2d {
 	cursor: grab;
-	height: 300px;
+	height: 290px;
 	position: relative;
-	width: 300px;
+	width: 280px;
 }
 
 #waifu #live2d:active {

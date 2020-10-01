@@ -21,7 +21,7 @@ minify: false
 
 # Define custom file paths.
 # Create your custom files in site directory `source/_data` and uncomment needed files below.
-custom_file_path:
+custom_file_path: #自定义样式
   #head: source/_data/head.swig
   #header: source/_data/header.swig
   #sidebar: source/_data/sidebar.swig
@@ -29,9 +29,9 @@ custom_file_path:
   #postBodyEnd: source/_data/post-body-end.swig
   #footer: source/_data/footer.swig
   #bodyEnd: source/_data/body-end.swig
-  #variable: source/_data/variables.styl
+  variable: source/_data/variables.styl
   #mixin: source/_data/mixins.styl
-  #style: source/_data/styles.styl
+  style: source/_data/styles.styl
 
 
 # ---------------------------------------------------------------
@@ -97,7 +97,8 @@ creative_commons:
 # ---------------------------------------------------------------
 
 # Schemes 主题设置
-scheme: Pisces
+scheme: Gemini
+#scheme: Muse
 #scheme: Mist
 #scheme: Pisces
 #scheme: Gemini
@@ -140,17 +141,18 @@ sidebar: #侧边栏设置
   # Sidebar Position.
   position: left
   #position: right
+  #position: left
 
   # Manual define the sidebar width. If commented, will be default for:
   # Muse | Mist: 320
   # Pisces | Gemini: 240
-  #width: 300
+  width: 240 #侧边栏宽度设置
 
-  # Sidebar Display (only for Muse | Mist), available values:
-  #  - post    expand on posts automatically. Default.
-  #  - always  expand for all pages automatically.
-  #  - hide    expand only when click on the sidebar toggle icon.
-  #  - remove  totally remove sidebar including sidebar toggle.
+  # Sidebar Display (only for Muse | Mist), available values: 侧边栏显示, 可选值
+  #  - post    expand on posts automatically. Default. 默认行为，在文章页面（拥有目录列表）时显示
+  #  - always  expand for all pages automatically. 在所有页面中都显示
+  #  - hide    expand only when click on the sidebar toggle icon. 在所有页面中都隐藏（可以手动展开）
+  #  - remove  totally remove sidebar including sidebar toggle. 完全移除
   display: post
 
   # Sidebar padding in pixels.
@@ -163,7 +165,7 @@ sidebar: #侧边栏设置
 # Sidebar Avatar 头像设置
 avatar: 
   # Replace the default image and set the url here.
-  url: /images/header.jpg
+  url: /images/add/header.jpg
   # If true, the avatar will be dispalyed in circle.
   rounded: true # 是否圆形显示头像
   # If true, the avatar will be rotated with the cursor.
@@ -267,8 +269,8 @@ reward_settings:
   comment: 没办法，要恰饭的嘛！   
 
 reward: #打赏功能
-  wechatpay: /images/wechatpay.png #微信收款码
-  alipay: /images/alipay.png       #支付宝收款码
+  wechatpay: /images/add/wechatpay.png #微信收款码
+  alipay: /images/add/alipay.png       #支付宝收款码
   #paypal: /images/paypal.png
   #bitcoin: /images/bitcoin.png
 
@@ -409,11 +411,11 @@ github_banner:
 # Arial | Tahoma | Helvetica | Times New Roman | Courier New | Verdana | Georgia | Palatino | Garamond | Comic Sans MS | Trebuchet MS
 # ---------------------------------------------------------------
 
-font:
-  enable: false
+font:  #字体设置
+  enable: true
 
   # Uri of fonts host, e.g. https://fonts.googleapis.com (Default).
-  host:
+  host: https://fonts.googleapis.com
 
   # Font options:
   # `external: true` will load this font family from `host` above.
@@ -423,8 +425,8 @@ font:
   # Global font settings used for all elements inside <body>.
   global:
     external: true
-    family: Lato
-    size:
+    family: EB Garamond
+    size: 
 
   # Font settings for site title (.site-title).
   title:
@@ -465,7 +467,7 @@ exturl: false
 
 # Google Webmaster tools verification.
 # See: https://www.google.com/webmasters
-google_site_verification:
+google_site_verification: 
 
 # Bing Webmaster tools verification.
 # See: https://www.bing.com/webmaster
@@ -480,7 +482,7 @@ yandex_site_verification:
 baidu_site_verification:
 
 # Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO.
-baidu_push: false
+baidu_push: false # 开启百度推送
 
 
 # ---------------------------------------------------------------
@@ -851,7 +853,7 @@ pace:
   # Themes list:
   # big-counter | bounce | barber-shop | center-atom | center-circle | center-radar | center-simple
   # corner-indicator | fill-left | flat-top | flash | loading-bar | mac-osx | material | minimal
-  theme: minimal
+  theme: loading-bar
 
 # JavaScript 3D library.
 # Dependencies: https://github.com/theme-next/theme-next-three
@@ -984,8 +986,8 @@ vendors:
   # pace: //cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js
   # pace_css: //cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css
   # pace_css: //cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css
-  pace:
-  pace_css:
+  pace: https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js #加载进度条cdn配置
+  pace_css: https://cdn.jsdelivr.net/npm/pace-js@1.0.2/themes/black/pace-theme-loading-bar.css #加载进度条cdn配置
 
   # Internal version: 1.0.0
   # three: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js

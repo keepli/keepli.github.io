@@ -1,0 +1,62 @@
+﻿//文本背景
+body {
+    background:url(/images/add/background-body1.jpg);
+    background-repeat: no-repeat;
+    background-attachment:fixed; //不重复
+    background-size: cover;      //填充
+    background-position:50% 50%;
+}
+
+
+//博客内容透明化
+//文章内容的透明度设置
+.content-wrap {
+  opacity: 0.85;
+}
+
+//侧边框的透明度设置
+.sidebar {
+  opacity: 0.85;
+}
+
+//菜单栏的透明度设置
+.header-inner {
+  background: rgba(255,255,255,0.85);
+}
+
+//搜索框（local-search）的透明度设置
+.popup {
+  opacity: 0.85;
+}
+
+
+// 鼠标样式
+* {
+    cursor: url("http://om8u46rmb.bkt.clouddn.com/sword2.ico"),auto!important
+}
+:active {
+    cursor: url("http://om8u46rmb.bkt.clouddn.com/sword1.ico"),auto!important
+}
+
+
+// 美化圆角设置的，如果使用Muse和Mist主题时需要注释掉，否则侧边栏会直接变成透明
+.sidebar {
+    box-shadow: none; //去掉原有边框
+    background: none; //去掉原有背景
+}
+
+
+
+
+//------------------------------
+//以下自己调试的
+
+//设置博客黑框高度
+.site-meta {
+    padding: 35px 0;
+}
+
+//去除顶部黑线
+.headband {
+    height: 0px;
+}

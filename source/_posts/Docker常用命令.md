@@ -181,6 +181,7 @@ docker run –it --name=c3 –v /volume centos:7 /bin/bash
 #创建启动c3数据卷容器，使用 –v 参数 设置数据卷
 ```
 - c1、c2容器的数据卷来源c3数据卷容器，就算c3容器挂了，数据卷也可以正常使用
+
 ```shell
 docker run –it --name=c1 --volumes-from c3 centos:7 /bin/bash
 ```

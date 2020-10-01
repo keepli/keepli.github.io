@@ -4,8 +4,8 @@
 
 # Site
 title: 听风知秋雨 #设置博客名
-subtitle: ''
-description: ''
+subtitle: new error  #博客简介
+description: 学习使我快乐 #个性签名
 keywords:
 author: Driven #用户名
 language: zh-Hans
@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
-url: http://example.com
+url: http://keepli.cn #主动推送
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -103,12 +103,13 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: git
+- type: git
   repo: 
     github: git@github.com:keepli/keepli.github.io.git
     gitee: git@gitee.com:keepli/keepli.git
     coding: git@e.coding.net:keepli/keepli/keepli.git
   branch: master
+- type: baidu_url_submitter  # 这是新加的百度主动推送  
  
 # 开启图表功能
 mermaid: ## mermaid url https://github.com/knsv/mermaid
@@ -116,7 +117,7 @@ mermaid: ## mermaid url https://github.com/knsv/mermaid
   version: "7.1.2" # default v7.1.2
   options:  # find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js
     #startOnload: true  // default true
- 
+    
 # yilia  
 jsonContent:
   meta: false
@@ -136,3 +137,10 @@ jsonContent:
     excerpt: false
     categories: false
     tags: true  
+
+#百度推送    
+baidu_url_submit:
+  count: 5               # 提交最新的多少个链接
+  host: www.keepli.cn    # 在百度站长平台中添加的域名
+  token: zb2zCLVAVxpeQzbR      # 秘钥
+  path: baidu_urls.txt   # 文本文档的地址， 新链接会保存在此文本文档里    
