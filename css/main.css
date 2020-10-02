@@ -1220,7 +1220,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #c379e2;
+  background: #c3ed93;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2632,10 +2632,10 @@ body {
   opacity: 0.85;
 }
 * {
-  cursor: url("http://om8u46rmb.bkt.clouddn.com/sword2.ico"), auto !important;
+  cursor: url("/images/add/01.ico"), auto !important;
 }
 :active {
-  cursor: url("http://om8u46rmb.bkt.clouddn.com/sword1.ico"), auto !important;
+  cursor: url("/images/add/02.ico"), auto !important;
 }
 .sidebar {
   box-shadow: none;
