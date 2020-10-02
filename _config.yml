@@ -111,12 +111,7 @@ deploy:
   branch: master
 - type: baidu_url_submitter  # 这是新加的百度主动推送  
  
-# 开启图表功能
-mermaid: ## mermaid url https://github.com/knsv/mermaid
-  enable: true  # default true
-  version: "7.1.2" # default v7.1.2
-  options:  # find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js
-    #startOnload: true  // default true
+
     
 # yilia  
 jsonContent:
