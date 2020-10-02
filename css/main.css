@@ -1220,7 +1220,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #e853b6;
+  background: #accb88;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2632,10 +2632,10 @@ body {
   opacity: 0.85;
 }
 * {
-  cursor: url("/images/add/01.ico"), auto !important;
+  cursor: url("/images/add/1.cur"), auto !important;
 }
 :active {
-  cursor: url("/images/add/02.ico"), auto !important;
+  cursor: url("/images/add/2.cur"), auto !important;
 }
 .sidebar {
   box-shadow: none;
