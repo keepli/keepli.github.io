@@ -1220,7 +1220,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #cf40ff;
+  background: #0a1253;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2640,6 +2640,11 @@ body {
 .sidebar {
   box-shadow: none;
   background: none;
+}
+.site-brand-container {
+  background-image: url("/images/add/background-home.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .site-meta {
   padding: 35px 0;
