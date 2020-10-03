@@ -614,3 +614,295 @@ http://127.0.0.1:10010/api/user/8 --> http://127.0.0.1:9091/user/8 去除前缀�
 **小结**：
 
 客户端的请求地址与微服务的服务地址如果不一致的时候，可以通过配置路径过滤器实现路径前缀的添加和去除
+
+### 5.过滤器
+
+#### 1.类型和使用场景
+
+- 类型：局部、全局
+
+- 使用场景：请求鉴权、异常处理、记录调用时长等
+
+#### 2.默认过滤器的用法
+
+- 用法：在配置文件中指定要使用的过滤器名称
+
+
+Gateway自带过滤器有几十个，常见自带过滤器有：
+
+| 过滤器名称           | 说明                         |
+| -------------------- | ---------------------------- |
+| AddRequestHeader     | 对匹配上的请求加上Header     |
+| AddRequestParameters | 对匹配上的请求路由添加参数   |
+| AddResponseHeader    | 对从网关返回的响应添加Header |
+| StripPrefix          | 对匹配上的请求路径去除前缀   |
+
+更多过滤器和说明：[官网](https://cloud.spring.io/spring-cloud-static/spring-cloud-gateway/2.1.1.RELEASE/single/spring-cloud-gateway.html#_gatewayfilter_factories)
+
+#### 3.自定义局部过滤器
+
+**目标**：按照默认过滤器编写并配置一个自定义局部过滤器，该过滤器可以通过配置文件中的参数名称获取请求的参数值
+
+**分析**：
+
+需求：在过滤器（MyParamGatewayFilterFactory）中将http://localhost:10010/api/user/8?name=itcast中的参数name的值获取到并输出到控制台；并且参数名是可变的，也就是不一定每次都是name；需要可以通过配置过滤器的时候做到配置参数名。
+
+实现步骤：
+
+1. 配置过滤器；
+2. 编写过滤器；
+3. 测试
+
+**小结**：
+
+- 配置；与其他过滤器的配置一致
+
+```yml
+spring:
+  application:
+    name: spring-gateway
+  #配置网关
+  cloud:
+    gateway:
+      routes:
+        #id可以任意
+        - id: user-service-route
+        #代理的服务地址
+          #uri: http://127.0.0.1:9091
+          uri: lb://user-service #lb是LoadBalance（负载均衡）的简写
+          
+          filters:
+            - MyParam=name #自定义的局部过滤器
+```
+
+- 实现过滤器
+
+```java
+@Component //需要交给spring来管理，否则过滤器无效
+public class MyParamGatewayFilterFactory extends AbstractGatewayFilterFactory<MyParamGatewayFilterFactory.NameValueConfig> {
+
+    public MyParamGatewayFilterFactory() {
+        super( MyParamGatewayFilterFactory.NameValueConfig.class);
+    }
+
+    public static class NameValueConfig{
+        //对应在配置过滤器的时候指定的参数名
+        private String param;
+
+        public String getParam() {
+            return param;
+        }
+
+        public void setParam(String param) {
+            this.param = param;
+        }
+    }
+
+    public List<String> shortcutFieldOrder() {
+        //param要跟静态内部类的成员变量名一样
+        return Arrays.asList("param");
+    }
+
+    @Override
+    public GatewayFilter apply(NameValueConfig config) {
+        return new GatewayFilter ( ) {
+            @Override
+            public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+                // http://localhost:10010/api/user/8?name=itcast   config.param ==> name
+                //获取请求参数中param对应的参数名的值
+                ServerHttpRequest request = exchange.getRequest ( );
+                if (request.getQueryParams ().containsKey ( config.param )){
+                    List<String> strings = request.getQueryParams ( ).get ( config.param );
+                    for (String string : strings) {
+                        System.out.printf ("------------局部过滤器--------%s = %s------", config.param, string );
+                    }
+                }
+                return chain.filter(exchange);
+            }
+        };
+    }
+
+}
+```
+
+#### 4.自定义全局过滤器<font color=red>（不需要在配置文件中配置参数）</font>
+
+**目标**：定义一个全局过滤器检查请求中是否携带有token参数
+
+**分析**：
+
+需求：编写全局过滤器，在过滤器中检查请求地址是否携带token参数。如果token参数的值存在则放行；如果token的参数值为空或者不存在则设置返回的状态码为：未授权也不再执行下去。
+
+实现步骤：
+
+1. 编写全局过滤器
+2. 测试
+
+**小结**：
+
+```java
+@Component
+public class MyGlobalFilter implements GlobalFilter, Ordered {
+    @Override
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        System.out.println("--------------全局过滤器MyGlobalFilter------------------");
+        String token = exchange.getRequest().getQueryParams().getFirst("token");
+        if(StringUtils.isBlank(token)){
+            //设置响应状态码为未授权
+            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+            return exchange.getResponse().setComplete();
+        }
+        return chain.filter(exchange);
+    }
+
+    @Override
+    public int getOrder() {
+        //值越小越先执行
+        return 1;
+    }
+}
+```
+
+### 6.Gateway其它配置说明
+
+**目标**：Gateway网关的负载均衡和熔断参数配置
+
+**小结**：
+
+网关服务配置文件：
+
+```yml
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000
+ribbon:
+  ConnectTimeout: 1000
+  ReadTimeout: 2000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 0
+```
+
+### 7.Gateway跨域配置<font color=red>（只发生在前端，一般是ajax）</font>
+
+一般网关都是所有微服务的统一入口，必然在被调用的时候会出现跨域问题
+
+**跨域：**在js请求访问中，如果访问的地址与当前服务器的域名、ip或者端口号不一致则称为跨域请求。若不解决不
+能获取到对应地址的返回结果
+
+如：从在http://localhost:9090中的js访问 http://localhost:9000的数据，因为端口不同，所以也是跨域请求
+
+```yml
+spring:
+  application:
+    name: spring-gateway
+  #配置网关
+  cloud:
+    gateway:
+      #跨域请求处理
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            #allowedOrigins: * # 这种写法或者下面的都可以，*表示全部
+            allowedOrigins:
+              - "http://docs.spring.io"
+            allowedMethods:
+              - GET
+```
+
+>上述配置表示：可以允许来自 http://docs.spring.io 的get请求方式获取服务数据。
+>allowedOrigins 指定允许访问的服务器地址，如：http://localhost:10000 也是可以的。
+>'[/**]' 表示对所有访问到网关服务器的请求地址
+>官网具体说明：[点击跳转](https://cloud.spring.io/spring-cloud-static/spring-cloud-gateway/2.1.1.RELEASE/multi/multi__cors_configuration.html)
+
+### 8.总配置
+
+```yml
+server:
+  port: 10010
+
+spring:
+  application:
+    name: spring-gateway
+  #配置网关
+  cloud:
+    gateway:
+      routes:
+        #id可以任意
+        - id: user-service-route
+        #代理的服务地址
+          #uri: http://127.0.0.1:9091
+          uri: lb://user-service #lb是LoadBalance（负载均衡）的简写
+        #路由断言：可以匹配映射地址
+          predicates:
+            #- Path=/user/**
+            #- Path=/**
+            - Path=/api/user/**
+          filters:
+            # 添加前期路径前缀（和Path结合）
+            #- PrefixPath=/user #http://localhost:10010/2 -> http://localhost:9091/user/2
+
+            # 去除路径前缀，1表示去一个，2表示去两个，以此类推（和Path结合）
+            - StripPrefix=1 #http://localhost:10010/api/user/2 -> http://localhost:9091/user/2
+            - MyParam=name #自定义的局部过滤器
+      #默认过滤器，会对所有路由都生效
+      default-filters:
+        - AddResponseHeader=X-Response-Foo,Bar #头名称和值可以自定义
+        - AddResponseHeader=MyKey,Hello
+      #跨域请求处理
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            #allowedOrigins: * # 这种写法或者下面的都可以，*表示全部
+            allowedOrigins:
+              - "http://docs.spring.io"
+            allowedMethods:
+              - GET
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    prefer-ip-address: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000
+ribbon:
+  ConnectTimeout: 1000
+  ReadTimeout: 2000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 0
+```
+
+### 9.Gateway的高可用（了解）
+
+启动多个Gateway服务，自动注册到Eureka，形成集群。如果是服务内部访问，访问Gateway，自动负载均衡，没问题。但是，Gateway更多是外部访问，PC端、移动端等。它们无法通过Eureka进行负载均衡，那么该怎么办？此时，可以使用其它的服务网关，来对Gateway进行代理。比如：`Nginx`
+
+### 10.Gateway与Feign的区别
+
+Gateway网关一般直接给终端请求使用；Feign一般用在微服务之间调用。
+
+- Gateway 作为整个应用的流量入口，接收所有的请求，如PC、移动端等，并且将不同的请求转发至不同的处理微服务模块，其作用可视为nginx；大部分情况下用作权限鉴定、服务端流量控制
+- Feign 则是将当前微服务的部分服务接口暴露出来，并且主要用于各个微服务之间的服务调用
+
+## <font color=red>六、Spring Cloud Config分布式配置中心</font>
+
+### 1.简介
+
+在分布式系统中，由于服务数量非常多，配置文件分散在不同的微服务项目中，管理不方便。为了方便配置文件集中管理，需要分布式配置中心组件。在Spring Cloud中，提供了Spring Cloud Config，它支持配置文件放在配置服务的本地，也支持放在远程Git仓库（GitHub、码云）
+
+- 使用Spring Cloud Config配置中心后的架构如下图：
+
+![](https://img-blog.csdnimg.cn/20201003003403139.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center)
+
+> spring cloud config作用：可以通过修改在git仓库中的配置文件实现其它所有微服务的配置文件的修改
+
