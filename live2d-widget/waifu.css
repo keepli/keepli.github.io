@@ -30,7 +30,7 @@
 	position: fixed;
 	transform: translateY(3px);
 	transition: transform .3s ease-in-out, bottom 3s ease-in-out;
-	z-index: 1210; //设置元素优先级，因为侧边栏的优先级是1200，所以要比它大
+	z-index: 1210; /*设置元素优先级，因为侧边栏的优先级是1200，所以要比它大*/
 }
 
 #waifu:hover {
@@ -68,9 +68,9 @@
 
 #waifu #live2d {
 	cursor: grab;
-	height: 290px;
+	height: 260px;
 	position: relative;
-	width: 280px;
+	width: 250px;
 }
 
 #waifu #live2d:active {
@@ -94,7 +94,7 @@
 	color: #7b8c9d;
 	cursor: pointer;
 	display: block;
-	line-height: 30px;
+	line-height: 25px;
 	text-align: center;
 	transition: color .3s;
 }
@@ -303,4 +303,11 @@
 	0%, 100% {
 		transform: translate(0, 0) rotate(0);
 	}
+}
+
+/* 新添内容，覆盖cdn */
+.fa-lg {
+ font-size:1.1em;
+ line-height:.75em;
+ vertical-align:-15%
 }
