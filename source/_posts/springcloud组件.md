@@ -906,3 +906,44 @@ Gateway网关一般直接给终端请求使用；Feign一般用在微服务之�
 
 > spring cloud config作用：可以通过修改在git仓库中的配置文件实现其它所有微服务的配置文件的修改
 
+### 2.搭建配置中心微服务
+
+#### 1.创建配置文件
+
+在新建的仓库中创建需要被统一配置管理的配置文件
+
+**配置文件的命名方式：**`{application}-{profile}.yml `或 `{application}-{profile}.properties`
+
+- application为应用名称
+- profile用于区分开发环境，测试环境、生产环境等
+- 如user-dev.yml，表示用户微服务开发环境下使用的配置文件
+
+#### 2.添加配置中心依赖
+
+```xml
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-server</artifactId>
+        </dependency>
+    </dependencies>
+```
+
+#### 3. 给启动类添加`@EnableConfigServer`
+
+```java
+@SpringBootApplication
+@EnableConfigServer //开启配置服务
+public class ConfigServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ConfigServerApplication.class, args);
+    }
+}
+```
+
+#### 4.配置文件
+
