@@ -2,8 +2,8 @@
 title: Docker常用命令
 date: 2020-01-26 09:02:03
 updated: 2020-01-26 12:17:55
-tags: Docker
-categories: Docker
+tags: docker
+categories: docker
 ---
 
  *完全满足日常使用*

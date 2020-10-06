@@ -2,8 +2,8 @@
 title: HEXO中如何支持mermaid图表
 date: 2020-03-15 12:30:36
 updated: 2020-03-16 11:40:30
-tags: HEXO
-categories: HEXO
+tags: hexo
+categories: hexo
 ---
 
  *使用mermaid图表的人都说好，但是hexo不支持，以下是我亲自试用开启hexo对mermaid图表支持，大家可以放心、安全、无毒使用！！！*

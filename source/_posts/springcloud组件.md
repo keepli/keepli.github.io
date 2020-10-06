@@ -509,7 +509,7 @@ logging:
     com.itheima: debug
 ```
 
-## <font color=red>五、Spring Cloud Gateway网关简介</font>
+## <font color=red>五、服务网关Gateway</font>
 
 ### 1.简介
 
@@ -894,7 +894,7 @@ Gateway网关一般直接给终端请求使用；Feign一般用在微服务之�
 - Gateway 作为整个应用的流量入口，接收所有的请求，如PC、移动端等，并且将不同的请求转发至不同的处理微服务模块，其作用可视为nginx；大部分情况下用作权限鉴定、服务端流量控制
 - Feign 则是将当前微服务的部分服务接口暴露出来，并且主要用于各个微服务之间的服务调用
 
-## <font color=red>六、Spring Cloud Config分布式配置中心</font>
+## <font color=red>六、分布式配置中心Config</font>
 
 ### 1.简介
 
@@ -947,3 +947,186 @@ public class ConfigServerApplication {
 
 #### 4.配置文件
 
+ http://localhost:12000/user-dev.yml 可以获取到
+
+```yml
+server:
+  port: 12000
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+      	#配置Git远程仓库地址
+        git:
+          uri: https://gitee.com/keepli/my-config.git
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+```
+
+#### 5.获取配置中心配置
+
+**目标**：改造用户微服务user-service，配置文件信息不再由微服务项目提供，而是从配置中心获取
+
+**分析**：
+
+需求：将服务提供工程user-service的application.yml配置文件删除，修改为从配置中心config-server中获取
+
+实现步骤：
+
+1. 添加启动器依赖
+2. 修改配置文件
+3. 启动测试
+
+**小结**：
+
+将原来的application.yml删除；然后添加bootstrap.yml配置文件，该文件也是spring boot的默认配置文件，其内容经常配置一些项目中固定的配置项。如果是项目经常变动的应该配置到application.yml中，现在使用了配置中心则应该配置到git仓库中对于的配置文件
+
+- 依赖
+
+```xml
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+            <version>2.2.2.RELEASE</version>
+        </dependency>
+```
+
+- 配置文件bootstrap.yml
+
+```yml
+spring:
+  cloud:
+    config:
+      # 要与仓库中的配置文件的application保持一致
+      name: user
+      # 要与仓库中的配置文件的profile保持一致
+      profile: dev
+      # 要与仓库中的配置文件所属的版本（分支）一样
+      label: master
+      discovery:
+        # 使用配置中心
+        enabled: true
+        # 配置中心服务名
+        service-id: config-server
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+```
+
+## <font color=red>七、Spring Cloud Bus</font>
+
+### 1.简介
+
+Spring Cloud Bus是用轻量的消息代理将分布式的节点连接起来，可以用于广播配置文件的更改或者服务的监控管
+理。也就是消息总线可以为微服务做监控，也可以实现应用程序之间相互通信。 Spring Cloud Bus可选的消息代理有RabbitMQ和Kafka
+
+使用了Bus之后：
+
+![](https://img-blog.csdnimg.cn/20201003123913334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center)
+
+> Spring Cloud Bus作用：将git仓库的配置文件更新，在不重启系统的情况下实现及时同步到各个微服务
+
+### 2.应用
+
+**目标**：启动RabbitMQ通过修改码云中的配置文件后发送Post请求实现及时更新用户微服务中的配置项
+
+**分析**：
+
+需求：在码云的git仓库中修改user-dev.yml配置文件，实现不重启user-service的情况下可以及时更新配置文件。
+
+实现步骤：
+
+1. 启动RabbitMQ
+2. 修改配置中心config-server
+3. 修改服务提供工程user-service
+4. 测试
+
+**小结**：
+
+- config-server的依赖添加内容
+
+```xml
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-bus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+        </dependency>
+
+```
+
+- config-server的配置文件添加内容
+
+```yml
+server:
+  port: 12000
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        #配置Git远程仓库地址
+        git:
+          uri: https://gitee.com/keepli/my-config.git
+  #配置RabbitMQ信息
+  rabbitmq:
+    host: 121.196.161.193
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        #暴露触发消息总线的地址
+        include: bus-refresh
+```
+
+- UserController的修改
+
+```java
+@RestController
+@RequestMapping("/user")
+@RefreshScope //刷新配置（bus）
+public class UserController {
+
+    @Value( "${test.name}" )
+    private String name;
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/{id}")
+    public User findById(@PathVariable Integer id){
+        System.out.println ("配置文件test.name为："+name );
+        return userService.findById ( id );
+    }
+}
+```
+
+**测试：**
+
+修改了配置内容后使用Postman或者RESTClient工具发送<font color=red>POST方式</font>请求访问地址http://127.0.0.1:12000/actuator/bus-refresh进行刷新
+
+ ## <font color=red>八、Spring Cloud 体系技术综合应用说明</font>
+
+Spring Cloud中的Eureka、GateWay、Config、Bus、Feign等技术的综合应用
+
+![](https://img-blog.csdnimg.cn/20201004152823392.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center)
