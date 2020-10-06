@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Docker安装和配置镜像加速</title>
+    <url>/2020/01/24/Docker%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/</url>
+    <content><![CDATA[<p><em>Docker 是一个开源的应用容器引擎，诞生于 2013 年初，基于 Go 语言实现， dotCloud 公司出品（后改名为Docker Inc） Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上</em></p>
+<a id="more"></a>
+
+<h3 id="一、安装Docker"><a href="#一、安装Docker" class="headerlink" title="一、安装Docker"></a>一、安装Docker</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1、yum 包更新到最新 </span></span><br><span class="line">yum update</span><br><span class="line"><span class="meta">#</span><span class="bash"> 2、安装需要的软件包， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的 </span></span><br><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"><span class="meta">#</span><span class="bash"> 3、 设置yum源</span></span><br><span class="line">yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br><span class="line"><span class="meta">#</span><span class="bash"> 4、 安装docker，出现输入的界面都按 y </span></span><br><span class="line">yum install -y docker-ce</span><br><span class="line"><span class="meta">#</span><span class="bash"> 5、 查看docker版本，验证是否验证成功</span></span><br><span class="line">docker -v</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="二、配置镜像加速"><a href="#二、配置镜像加速" class="headerlink" title="二、配置镜像加速"></a>二、配置镜像加速</h3><p>因为docker下载镜像时默认都是通过外网下载，速度慢的要死，所以自己还是要配置国内镜像地址</p>
+<p><strong>我使用的是阿里云镜像加速，在阿里云控制台找到容器镜像服务中的镜像加速器，可以看到自己的加速地址与操作步骤</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20201006150308592.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center"></p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Dockerfile常用关键字</title>
     <url>/2020/01/27/Dockerfile%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E5%AD%97/</url>
     <content><![CDATA[<p> <em>Dockerfile常用关键字和作用</em></p>
@@ -111,72 +130,6 @@
       </categories>
       <tags>
         <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker安装和配置镜像加速</title>
-    <url>/2020/01/24/Docker%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/</url>
-    <content><![CDATA[<p><em>Docker 是一个开源的应用容器引擎，诞生于 2013 年初，基于 Go 语言实现， dotCloud 公司出品（后改名为Docker Inc） Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上</em></p>
-<a id="more"></a>
-
-<h3 id="一、安装Docker"><a href="#一、安装Docker" class="headerlink" title="一、安装Docker"></a>一、安装Docker</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1、yum 包更新到最新 </span></span><br><span class="line">yum update</span><br><span class="line"><span class="meta">#</span><span class="bash"> 2、安装需要的软件包， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的 </span></span><br><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"><span class="meta">#</span><span class="bash"> 3、 设置yum源</span></span><br><span class="line">yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br><span class="line"><span class="meta">#</span><span class="bash"> 4、 安装docker，出现输入的界面都按 y </span></span><br><span class="line">yum install -y docker-ce</span><br><span class="line"><span class="meta">#</span><span class="bash"> 5、 查看docker版本，验证是否验证成功</span></span><br><span class="line">docker -v</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="二、配置镜像加速"><a href="#二、配置镜像加速" class="headerlink" title="二、配置镜像加速"></a>二、配置镜像加速</h3><p>因为docker下载镜像时默认都是通过外网下载，速度慢的要死，所以自己还是要配置国内镜像地址</p>
-<p><strong>我使用的是阿里云镜像加速，在阿里云控制台找到容器镜像服务中的镜像加速器，可以看到自己的加速地址与操作步骤</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/20201006150308592.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center"></p>
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HEXO中如何支持mermaid图表</title>
-    <url>/2020/03/15/HEXO%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81mermaid%E5%9B%BE%E8%A1%A8/</url>
-    <content><![CDATA[<p> <em>使用mermaid图表的人都说好，但是hexo不支持，以下是我亲自试用开启hexo对mermaid图表支持，大家可以放心、安全、无毒使用！！！</em></p>
-<a id="more"></a>
-
-<h4 id="一、首先想要HEXO支持-mermaid-图表需要安装一个插件："><a href="#一、首先想要HEXO支持-mermaid-图表需要安装一个插件：" class="headerlink" title="一、首先想要HEXO支持 mermaid 图表需要安装一个插件："></a>一、首先想要HEXO支持 mermaid 图表需要安装一个插件：</h4><ul>
-<li>执行npm命令</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-filter-mermaid-diagrams</span><br></pre></td></tr></table></figure>
-<h4 id="二、-编辑-config-yml-配置文件"><a href="#二、-编辑-config-yml-配置文件" class="headerlink" title="二、 编辑_config.yml 配置文件"></a>二、 编辑<em>_config.yml</em> 配置文件</h4><ul>
-<li>在 <em>_config.yml</em>配置文件中<font color=red>（根目录下的 ）</font>的最后加上以下内容 </li>
-</ul>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># mermaid chart</span></span><br><span class="line"><span class="attr">mermaid:</span> <span class="comment">## mermaid url https://github.com/knsv/mermaid</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span>  <span class="comment"># default true</span></span><br><span class="line">  <span class="attr">version:</span> <span class="string">&quot;7.1.2&quot;</span> <span class="comment"># default v7.1.2</span></span><br><span class="line">  <span class="attr">options:</span>  <span class="comment"># find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js</span></span><br><span class="line">    <span class="comment">#startOnload: true  // default true</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>需要注意的是检查<font color=red>主题中</font>的<em>_config.yml</em>配置文件是否有mermaid的配置<font color=red>（next主题）</font></li>
-<li>如果有的话默认是一下配置，需要把enable改为<code>true</code>，否则插件不会被启用</li>
-</ul>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Mermaid tag</span></span><br><span class="line"><span class="attr">mermaid:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span> </span><br><span class="line">  <span class="comment"># Available themes: default | dark | forest | neutral</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">forest</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="三、-引入相关的js文件"><a href="#三、-引入相关的js文件" class="headerlink" title="三、 引入相关的js文件"></a>三、 引入相关的js文件</h4><ul>
-<li>找到主题里面的页脚文件， <code>themes/next/layout/_partials/footer.swig</code> ，在文件最末尾加入以下内容 </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% if (theme.mermaid.enable)  %&#125;</span><br><span class="line">  &lt;script src&#x3D;&#39;https:&#x2F;&#x2F;unpkg.com&#x2F;mermaid@&#123;&#123; theme.mermaid.version &#125;&#125;&#x2F;dist&#x2F;mermaid.min.js&#39;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    if (window.mermaid) &#123;</span><br><span class="line">      mermaid.initialize(&#123;theme: &#39;forest&#39;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;&#x2F;script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="四、配置完成之后执行三部曲："><a href="#四、配置完成之后执行三部曲：" class="headerlink" title="四、配置完成之后执行三部曲："></a>四、配置完成之后执行三部曲：</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean # 清理</span><br><span class="line">hexo g	   # 构建</span><br><span class="line">hexo s     # 运行</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="五、最后献上几个链接供参考："><a href="#五、最后献上几个链接供参考：" class="headerlink" title="五、最后献上几个链接供参考："></a>五、最后献上几个链接供参考：</h4><p><code>官网：</code></p>
-<blockquote>
-<p> <a href="https://github.com/webappdevelp/hexo-filter-mermaid-diagrams">https://github.com/webappdevelp/hexo-filter-mermaid-diagrams </a></p>
-</blockquote>
-<p><code>参考文献:</code></p>
-<blockquote>
-<p><a href="https://tyloafer.github.io/posts/7790/">https://tyloafer.github.io/posts/7790/  </a></p>
-<p><a href="https://rogersnowing.cn/post/38b5106c.html">https://rogersnowing.cn/post/38b5106c.html </a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -301,6 +254,53 @@ c3数据卷容器-->数据卷;</pre>
       </categories>
       <tags>
         <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HEXO中如何支持mermaid图表</title>
+    <url>/2020/03/15/HEXO%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81mermaid%E5%9B%BE%E8%A1%A8/</url>
+    <content><![CDATA[<p> <em>使用mermaid图表的人都说好，但是hexo不支持，以下是我亲自试用开启hexo对mermaid图表支持，大家可以放心、安全、无毒使用！！！</em></p>
+<a id="more"></a>
+
+<h4 id="一、首先想要HEXO支持-mermaid-图表需要安装一个插件："><a href="#一、首先想要HEXO支持-mermaid-图表需要安装一个插件：" class="headerlink" title="一、首先想要HEXO支持 mermaid 图表需要安装一个插件："></a>一、首先想要HEXO支持 mermaid 图表需要安装一个插件：</h4><ul>
+<li>执行npm命令</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-filter-mermaid-diagrams</span><br></pre></td></tr></table></figure>
+<h4 id="二、-编辑-config-yml-配置文件"><a href="#二、-编辑-config-yml-配置文件" class="headerlink" title="二、 编辑_config.yml 配置文件"></a>二、 编辑<em>_config.yml</em> 配置文件</h4><ul>
+<li>在 <em>_config.yml</em>配置文件中<font color=red>（根目录下的 ）</font>的最后加上以下内容 </li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># mermaid chart</span></span><br><span class="line"><span class="attr">mermaid:</span> <span class="comment">## mermaid url https://github.com/knsv/mermaid</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span>  <span class="comment"># default true</span></span><br><span class="line">  <span class="attr">version:</span> <span class="string">&quot;7.1.2&quot;</span> <span class="comment"># default v7.1.2</span></span><br><span class="line">  <span class="attr">options:</span>  <span class="comment"># find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js</span></span><br><span class="line">    <span class="comment">#startOnload: true  // default true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>需要注意的是检查<font color=red>主题中</font>的<em>_config.yml</em>配置文件是否有mermaid的配置<font color=red>（next主题）</font></li>
+<li>如果有的话默认是一下配置，需要把enable改为<code>true</code>，否则插件不会被启用</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Mermaid tag</span></span><br><span class="line"><span class="attr">mermaid:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span> </span><br><span class="line">  <span class="comment"># Available themes: default | dark | forest | neutral</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">forest</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="三、-引入相关的js文件"><a href="#三、-引入相关的js文件" class="headerlink" title="三、 引入相关的js文件"></a>三、 引入相关的js文件</h4><ul>
+<li>找到主题里面的页脚文件， <code>themes/next/layout/_partials/footer.swig</code> ，在文件最末尾加入以下内容 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% if (theme.mermaid.enable)  %&#125;</span><br><span class="line">  &lt;script src&#x3D;&#39;https:&#x2F;&#x2F;unpkg.com&#x2F;mermaid@&#123;&#123; theme.mermaid.version &#125;&#125;&#x2F;dist&#x2F;mermaid.min.js&#39;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    if (window.mermaid) &#123;</span><br><span class="line">      mermaid.initialize(&#123;theme: &#39;forest&#39;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;&#x2F;script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="四、配置完成之后执行三部曲："><a href="#四、配置完成之后执行三部曲：" class="headerlink" title="四、配置完成之后执行三部曲："></a>四、配置完成之后执行三部曲：</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean # 清理</span><br><span class="line">hexo g	   # 构建</span><br><span class="line">hexo s     # 运行</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="五、最后献上几个链接供参考："><a href="#五、最后献上几个链接供参考：" class="headerlink" title="五、最后献上几个链接供参考："></a>五、最后献上几个链接供参考：</h4><p><code>官网：</code></p>
+<blockquote>
+<p> <a href="https://github.com/webappdevelp/hexo-filter-mermaid-diagrams">https://github.com/webappdevelp/hexo-filter-mermaid-diagrams </a></p>
+</blockquote>
+<p><code>参考文献:</code></p>
+<blockquote>
+<p><a href="https://tyloafer.github.io/posts/7790/">https://tyloafer.github.io/posts/7790/  </a></p>
+<p><a href="https://rogersnowing.cn/post/38b5106c.html">https://rogersnowing.cn/post/38b5106c.html </a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -880,7 +880,7 @@ c3数据卷容器-->数据卷;</pre>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-config<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.2.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>配置文件bootstrap.yml</li>
+<li>配置文件<code>bootstrap.yml</code><font color=red>（此文件名也是springboot支持的）</font></li>
 </ul>
 <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">config:</span></span><br><span class="line">      <span class="comment"># 要与仓库中的配置文件的application保持一致</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">user</span></span><br><span class="line">      <span class="comment"># 要与仓库中的配置文件的profile保持一致</span></span><br><span class="line">      <span class="attr">profile:</span> <span class="string">dev</span></span><br><span class="line">      <span class="comment"># 要与仓库中的配置文件所属的版本（分支）一样</span></span><br><span class="line">      <span class="attr">label:</span> <span class="string">master</span></span><br><span class="line">      <span class="attr">discovery:</span></span><br><span class="line">        <span class="comment"># 使用配置中心</span></span><br><span class="line">        <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">        <span class="comment"># 配置中心服务名</span></span><br><span class="line">        <span class="attr">service-id:</span> <span class="string">config-server</span></span><br><span class="line"></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">service-url:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://127.0.0.1:10086/eureka</span></span><br></pre></td></tr></table></figure>
 
