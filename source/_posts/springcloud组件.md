@@ -995,7 +995,7 @@ eureka:
         </dependency>
 ```
 
-- 配置文件bootstrap.yml
+- 配置文件`bootstrap.yml`<font color=red>（此文件名也是springboot支持的）</font>
 
 ```yml
 spring:
