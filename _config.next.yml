@@ -257,7 +257,7 @@ symbols_count_time:
   item_text_total: false
 
 # Use icon instead of the symbol # to indicate the tag at the bottom of the post
-tag_icon: false
+tag_icon: true #文章底部标签使用图标
 
 # Reward (Donate)
 # Front-matter variable (unsupport animation).
@@ -383,18 +383,18 @@ reading_progress:
   height: 3px
 
 # Bookmark Support
-bookmark:
+bookmark: #书签设置
   enable: false
   # Customize the color of the bookmark.
   color: "#222"
   # If auto, save the reading progress when closing the page or clicking the bookmark-icon.
   # If manual, only save it by clicking the bookmark-icon.
-  save: auto
+  save: auto #auto 自动 | manual 手动  （自动的在退出的时候会自动保存标签）
 
 # `Follow me on GitHub` banner in the top-right corner.
-github_banner:
-  enable: false
-  permalink: https://github.com/yourname
+github_banner: #github图标
+  enable: true
+  permalink: https://github.com/keepli
   title: Follow me on GitHub
 
 
