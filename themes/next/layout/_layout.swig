@@ -58,6 +58,7 @@
   {{- next_inject('bodyEnd') }}
   {%- if theme.pjax %}
     </div>
+  {# 引入鼠标、打字特效 #}
   {%- endif %}
   {% include '_custom/custom.swig' %}
 </body>

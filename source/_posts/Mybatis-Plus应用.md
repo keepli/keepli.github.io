@@ -24,9 +24,10 @@ top: true
 - 自动热加载： Mapper对应的xml可以热加载，大大减少重启Web服务器时间，提升开发效率
 - 全局拦截：提供全表 delete、update操作智能分析阻断
 - 避免 Sql注入：内置Sql注入内容剥离器，预防Sql注入攻击
+
 ## <font color=red>2. 配置</font>
 
-#### 1. 在pom.xml文件中引入相关依赖
+### 1. 在pom.xml文件中引入相关依赖
 
 ``` xml
  <!-- mybatis-plus begin -->
@@ -42,7 +43,7 @@ top: true
         </dependency>
 <!-- mybatis-plus end -->
 ```
-#### 2. 在配置文件application.yml中添加相关配置
+### 2. 在配置文件application.yml中添加相关配置
 
 ``` yml
 # Mybatis-Plus 配置
@@ -61,7 +62,7 @@ mybatis-plus:
       multipleResultSetsEnabled: true #开启延时加载，否则按需加载属性
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql语句,调试用
 ```
-#### 3. 启动类中添加增加@MapperScan注解扫描
+### 3. 启动类中添加增加@MapperScan注解扫描
 
 ``` java
 @SpringBootApplication
@@ -82,9 +83,10 @@ public class ArticleApplication {
     }
 }
 ```
+
 ## <font color=red>3. MVC应用规范</font>
 
-#### 1.实体类要遵守的规范
+### 1.实体类要遵守的规范
 
 - @TableName("表名")
 - 实现Serializable序列化接口
@@ -117,7 +119,7 @@ public class Article implements Serializable {
 }
 ```
 
-#### 2.持久层dao要遵守的规范
+### 2.持久层dao要遵守的规范
 
 - 只要继承`BaseMapper<T>`接口就行了
 - dao接口获得继承方法，`mabatis-plus`自动生成dao实现类
@@ -127,7 +129,7 @@ public interface ArticleDao extends BaseMapper<Article> {
 }
 ```
 
-#### 3.业务层service要遵守的规范
+### 3.业务层service要遵守的规范
 
 - 跟以往使用`mybatis`一样，主要是在调用dao的方法时要调用`mybatis-plus`为我们提供的方法
 **案例：通过id修改记录**
@@ -144,14 +146,13 @@ public void updateById(Article article) {
     }
 ```
 
-
-#### 4.控制层controller要遵守的规范
+### 4.控制层controller要遵守的规范
 
 - 没有任何变化，跟使用`mybatis`一摸一样
 
 ## <font color=red>4. 条件查询和分页查询</font>
 
-#### 1.条件查询
+### 1.条件查询
 
 - 使用mybatis-plus提供的`EntityWrapper`对象封装where查询条件
 
@@ -163,7 +164,7 @@ wrapper.eq("id", article.getId());
 wrapper.eq(null != map.get(field), field, map.get(field));
 ```
 
-#### 2.分页
+### 2.分页
 
 - 使用mybatis-plus提供的`Page`对象
 
@@ -229,8 +230,6 @@ public class MybatisPlusConfig {
 **懒癌发作，直接搬运现成的**
 
 链接地址：
-
 - [官网](https://baomidou.com/)
 - [ 简书文章 ](https://www.jianshu.com/p/ceb1df475021)
 - [csdn文章](https://blog.csdn.net/zdsg45/article/details/105138493?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160213305819724848338191%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160213305819724848338191&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-105138493.pc_first_rank_v2_rank_v28_p&utm_term=mybatis-plus&spm=1018.2118.3001.4187)
-

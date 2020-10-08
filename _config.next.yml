@@ -24,14 +24,14 @@ minify: false
 custom_file_path: #自定义样式
   #head: source/_data/head.swig
   #header: source/_data/header.swig
-  #sidebar: source/_data/sidebar.swig
-  #postMeta: source/_data/post-meta.swig
+  #sidebar: source/_data/sidebar.swig #对应/_macro/sidebar.swig
+  postMeta: source/_data/post-meta.swig
   #postBodyEnd: source/_data/post-body-end.swig
   #footer: source/_data/footer.swig
-  #bodyEnd: source/_data/body-end.swig
+  bodyEnd: source/_data/body-end.swig #对应/_layout/_custom/custom.swig
   variable: source/_data/variables.styl
   #mixin: source/_data/mixins.styl
-  style: source/_data/styles.styl
+  style: source/_data/styles.styl #对应/source/css/_custom/_custom.styl
 
 
 # ---------------------------------------------------------------
@@ -1017,3 +1017,10 @@ cursor_effect:
 typing_effect:
   colorful: true  # 礼花特效
   shake: false  # 震动特效
+
+#修改文本超链接颜色  
+custom_css:
+  post_body_a:
+    enable: true
+    normal_color: "#3296FA"
+    hover_color: "#0593d3"

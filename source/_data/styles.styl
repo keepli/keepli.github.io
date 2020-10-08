@@ -53,6 +53,18 @@ body {
     background-size: cover;      //填充
 }
 
+//修改文本超链接颜色 （主题配置文件中有添加相关配置）
+if hexo-config("custom_css.post_body_a.enable")
+  .post-body 
+    a:not(.btn){
+      color: convert(hexo-config("custom_css.post_body_a.normal_color"));
+      border-bottom: none;
+      &:hover {
+        color: convert(hexo-config("custom_css.post_body_a.hover_color"));
+        text-decoration: underline;
+      }
+    }
+
 
 //------------------------------
 //以下自己调试的
