@@ -4,14 +4,14 @@
   <url>
     <loc>http://keepli.cn/tags/index.html</loc>
     
-    <lastmod>2020-09-29</lastmod>
+    <lastmod>2020-10-08</lastmod>
     
   </url>
   
   <url>
     <loc>http://keepli.cn/categories/index.html</loc>
     
-    <lastmod>2020-09-29</lastmod>
+    <lastmod>2020-10-08</lastmod>
     
   </url>
   
@@ -216,7 +216,7 @@
 
   
   <url>
-    <loc>http://keepli.cn/categories/docker%E5%AE%B9%E5%99%A8/</loc>
+    <loc>http://keepli.cn/categories/docker/</loc>
     <lastmod>2020-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
