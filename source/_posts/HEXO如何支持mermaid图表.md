@@ -1,5 +1,5 @@
 ---
-title: HEXO中如何支持mermaid图表
+title: hexo中如何支持mermaid图表
 date: 2020-03-15 12:30:36
 updated: 2020-03-16 11:40:30
 tags: hexo

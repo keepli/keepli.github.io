@@ -1,7 +1,7 @@
 ---
 title: springcloud组件
 date: 2020-05-13
-updated: 2020-05-13
+updated: 2020-05-20
 tags: 微服务架构
 categories: 微服务架构
 ---

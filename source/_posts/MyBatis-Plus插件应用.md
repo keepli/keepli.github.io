@@ -1,7 +1,7 @@
 ---
-title: MyBatis-Plus插件应用
-date: 2020-01-20 
-updated: 2020-01-20 
+title: myBatis-plus插件应用
+date: 2020-02-19 
+updated: 2020-02-19
 tags: mybatis-plus
 categories: 持久层框架
 top: true

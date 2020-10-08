@@ -1,5 +1,5 @@
 ---
-title: Dockerfile常用关键字
+title: dockerfile常用关键字
 date: 2020-01-27 
 updated: 2020-01-27 
 tags: docker

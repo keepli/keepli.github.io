@@ -1,5 +1,5 @@
 ---
-title: Docker安装和配置镜像加速
+title: docker安装和配置镜像加速
 date: 2020-01-24 
 updated: 2020-01-24 
 tags: docker
