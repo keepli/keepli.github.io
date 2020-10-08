@@ -10,6 +10,10 @@ categories: live2d看板娘
 
 <!-- more -->
 
+---
+
+
+
  ### <font color=red>一、简单模式</font>
 
 #### 1. 安装hexo-helper-live2d插件

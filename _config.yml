@@ -4,8 +4,8 @@
 
 # Site
 title: 听风知秋雨 #设置博客名
-subtitle: new error  #博客简介
-description: 学习使我快乐 #个性签名
+subtitle: new dream  #博客简介
+description: 大大的世界，小小的梦想 #个性签名
 keywords:
 author: Driven #用户名
 language: zh-Hans
@@ -63,7 +63,7 @@ prismjs:
 # order_by: Posts order. (Order by date descending by default)
 index_generator: #分页设置
   path: ''
-  per_page: 6
+  per_page: 8
   order_by: -date
 
 # Category & Tag

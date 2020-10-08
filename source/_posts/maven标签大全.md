@@ -10,6 +10,10 @@ categories: maven
 
 <!-- more -->
 
+---
+
+
+
 ## pom配置文件应用
 
 ```xml

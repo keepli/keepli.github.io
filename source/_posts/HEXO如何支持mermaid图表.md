@@ -10,6 +10,10 @@ categories: hexo
 
 <!-- more -->
 
+---
+
+
+
 #### 一、首先想要HEXO支持 mermaid 图表需要安装一个插件：
 
 - 执行npm命令
