@@ -704,6 +704,106 @@
       </tags>
   </entry>
   <entry>
+    <title>live2d看板娘带回家</title>
+    <url>/2020/04/10/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E5%B8%A6%E5%9B%9E%E5%AE%B6/</url>
+    <content><![CDATA[<p> <em>萌萌的看板娘不仅B格上来了，还能在你遨游知识的海洋时进行互动，可萌可看家，还等什么，动手吧~</em></p>
+<a id="more"></a>
+
+<hr>
+<h3 id="一、简单模式"><a href="#一、简单模式" class="headerlink" title="一、简单模式"></a><font color=red>一、简单模式</font></h3><h4 id="1-安装hexo-helper-live2d插件"><a href="#1-安装hexo-helper-live2d插件" class="headerlink" title="1. 安装hexo-helper-live2d插件"></a>1. 安装hexo-helper-live2d插件</h4><ul>
+<li>如果之前安装过先卸载掉</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm uninstall hexo-helper-live2d</span><br><span class="line"><span class="meta">#</span><span class="bash"> 检查博客主目录下面的 package.json里是否有<span class="string">&quot;hexo-helper-live2d&quot;</span>: <span class="string">&quot;^3.0.3&quot;</span> 依赖</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>没有则执行安装命令</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
+
+<p> <strong>注意：</strong> <font color=red>命令都是在博客主目录执行 </font></p>
+<h4 id="2-安装之后-node-moduels目录下，可以看到有live2d-widget文件夹，这些都是动画主配置"><a href="#2-安装之后-node-moduels目录下，可以看到有live2d-widget文件夹，这些都是动画主配置" class="headerlink" title="2.  安装之后 node_moduels目录下，可以看到有live2d-widget文件夹，这些都是动画主配置"></a>2.  安装之后 <code>node_moduels</code>目录下，可以看到有<code>live2d-widget</code>文件夹，这些都是动画主配置</h4><ul>
+<li>到github中下载各种动画model </li>
+</ul>
+<p><a href="https://github.com/xiazeyu/live2d-widget-models.git"> https://github.com/xiazeyu/live2d-widget-models.git </a></p>
+<h4 id="3-下载好之后将packages里的所有动画模板拷贝到博客的node-modules目录里"><a href="#3-下载好之后将packages里的所有动画模板拷贝到博客的node-modules目录里" class="headerlink" title="3. 下载好之后将packages里的所有动画模板拷贝到博客的node_modules目录里"></a>3. 下载好之后将packages里的所有动画模板拷贝到博客的node_modules目录里</h4><ul>
+<li>注意：拷出的文件跟<code>live2d-widget</code>文件夹平级</li>
+</ul>
+<h4 id="4-把下面的配置复制到博客站点配置文件-config-yml-最下面"><a href="#4-把下面的配置复制到博客站点配置文件-config-yml-最下面" class="headerlink" title="4.  把下面的配置复制到博客站点配置文件_config.yml 最下面"></a>4.  把下面的配置复制到博客站点配置文件<code>_config.yml </code>最下面</h4><ul>
+<li>模板效果参考链接：<a href="https://blog.csdn.net/wang_123_zy/article/details/87181892"> https://blog.csdn.net/wang_123_zy/article/details/87181892 </a></li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">live2d:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">pluginModelPath:</span> <span class="string">assets/</span></span><br><span class="line">  <span class="attr">model:</span></span><br><span class="line">    <span class="attr">use:</span> <span class="string">live2d-widget-model-epsilon2_1</span>  <span class="comment">#模板目录，在node_modules里</span></span><br><span class="line">  <span class="attr">display:</span></span><br><span class="line">    <span class="attr">position:</span> <span class="string">right</span></span><br><span class="line">    <span class="attr">width:</span> <span class="number">150</span> </span><br><span class="line">    <span class="attr">height:</span> <span class="number">300</span></span><br><span class="line">  <span class="attr">mobile:</span></span><br><span class="line">    <span class="attr">show:</span> <span class="literal">false</span>  <span class="comment">#是否在手机进行显示</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-配置完成之后执行三部曲就OK了："><a href="#5-配置完成之后执行三部曲就OK了：" class="headerlink" title="5. 配置完成之后执行三部曲就OK了："></a>5. 配置完成之后执行三部曲就OK了：</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean # 清理</span><br><span class="line">hexo g	   # 构建</span><br><span class="line">hexo s     # 运行</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、困难模式"><a href="#二、困难模式" class="headerlink" title="二、困难模式"></a><font color=red>二、困难模式</font></h3><h4 id="1-把之前的live2d卸载掉-npm-uninstall-hexo-helper-live2d"><a href="#1-把之前的live2d卸载掉-npm-uninstall-hexo-helper-live2d" class="headerlink" title="1.  把之前的live2d卸载掉 npm uninstall hexo-helper-live2d"></a>1.  把之前的live2d卸载掉 <code>npm uninstall hexo-helper-live2d</code></h4><h4 id="2-下载配置-戳这里"><a href="#2-下载配置-戳这里" class="headerlink" title="2. 下载配置 戳这里"></a>2. 下载配置 <font color=blue><a href="https://github.com/stevenjoezhang/live2d-widget">戳这里</a></font></h4><h4 id="3-下载好后目录为live2d-widget-拷贝到主目录-themes-next-source目录下"><a href="#3-下载好后目录为live2d-widget-拷贝到主目录-themes-next-source目录下" class="headerlink" title="3. 下载好后目录为live2d-widget ,拷贝到主目录\themes\next\source目录下"></a>3. 下载好后目录为live2d-widget ,拷贝到主目录\themes\next\source目录下</h4><h4 id="4-然后修改autoload-js文件，将路径改为绝对路径"><a href="#4-然后修改autoload-js文件，将路径改为绝对路径" class="headerlink" title="4.  然后修改autoload.js文件，将路径改为绝对路径"></a>4.  然后修改autoload.js文件，将路径改为绝对路径</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 注意：live2d_path 参数应使用绝对路径</span></span><br><span class="line"><span class="comment">//const live2d_path = &quot;https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/&quot;;</span></span><br><span class="line"><span class="keyword">const</span> live2d_path = <span class="string">&quot;/live2d-widget/&quot;</span>; <span class="comment">//把这里注释解开，上面的路径注释掉就行了</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-引入链接-，修改-layout-swing文件（复制到head标签中）"><a href="#5-引入链接-，修改-layout-swing文件（复制到head标签中）" class="headerlink" title="5.  引入链接 ，修改_layout.swing文件（复制到head标签中）"></a>5.  引入链接 ，修改<code>_layout.swing</code>文件<font color=red>（复制到head标签中）</font></h4><ul>
+<li>有一些主题,路径在<code>/themes/主题名字/layout/_partial/head.ejs</code>目录下 </li>
+<li>我自己使用的next主题,是在<code>/themes/next/layout/_layout.swing</code>目录下 </li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/live2d-widget/autoload.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>添加之后如下：</strong></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  &#123;&#123; partial(&#x27;_partials/head/head.swig&#x27;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">  &#123;% include &#x27;_partials/head/head-unique.swig&#x27; %&#125;</span><br><span class="line">  &#123;&#123;- next_inject(&#x27;head&#x27;) &#125;&#125;</span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>&#123;% block title %&#125;&#123;% endblock %&#125;<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  &#123;&#123; partial(&#x27;_third-party/analytics/index.swig&#x27;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">  &#123;&#123; partial(&#x27;_scripts/noscript.swig&#x27;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/live2d-widget/autoload.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>想修改看板娘大小、位置、格式、文本内容等，可查看并修改 <code>waifu-tips.js</code> 、 <code>waifu-tips.json</code> 、<code>waifu.css</code>文件</strong></p>
+<p><a href=https://www.chensheng.group/2020/07/27/135-hexo%E7%9C%8B%E6%9D%BF%E5%A8%98/><font color=pink>链接参考</font></a></p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>live2d看板娘</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo中如何支持mermaid图表</title>
+    <url>/2020/03/15/hexo%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81mermaid%E5%9B%BE%E8%A1%A8/</url>
+    <content><![CDATA[<p> <em>使用mermaid图表的人都说好，但是hexo不支持，以下是我亲自试用开启hexo对mermaid图表支持，大家可以放心、安全、无毒使用！！！</em></p>
+<a id="more"></a>
+
+<hr>
+<h4 id="一、首先想要HEXO支持-mermaid-图表需要安装一个插件："><a href="#一、首先想要HEXO支持-mermaid-图表需要安装一个插件：" class="headerlink" title="一、首先想要HEXO支持 mermaid 图表需要安装一个插件："></a>一、首先想要HEXO支持 mermaid 图表需要安装一个插件：</h4><ul>
+<li>执行npm命令</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-filter-mermaid-diagrams</span><br></pre></td></tr></table></figure>
+<h4 id="二、-编辑-config-yml-配置文件"><a href="#二、-编辑-config-yml-配置文件" class="headerlink" title="二、 编辑_config.yml 配置文件"></a>二、 编辑<em>_config.yml</em> 配置文件</h4><ul>
+<li>在 <em>_config.yml</em>配置文件中<font color=red>（根目录下的 ）</font>的最后加上以下内容 </li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># mermaid chart</span></span><br><span class="line"><span class="attr">mermaid:</span> <span class="comment">## mermaid url https://github.com/knsv/mermaid</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span>  <span class="comment"># default true</span></span><br><span class="line">  <span class="attr">version:</span> <span class="string">&quot;7.1.2&quot;</span> <span class="comment"># default v7.1.2</span></span><br><span class="line">  <span class="attr">options:</span>  <span class="comment"># find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js</span></span><br><span class="line">    <span class="comment">#startOnload: true  // default true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>需要注意的是检查<font color=red>主题中</font>的<em>_config.yml</em>配置文件是否有mermaid的配置<font color=red>（next主题）</font></li>
+<li>如果有的话默认是一下配置，需要把enable改为<code>true</code>，否则插件不会被启用</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Mermaid tag</span></span><br><span class="line"><span class="attr">mermaid:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span> </span><br><span class="line">  <span class="comment"># Available themes: default | dark | forest | neutral</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">forest</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="三、-引入相关的js文件"><a href="#三、-引入相关的js文件" class="headerlink" title="三、 引入相关的js文件"></a>三、 引入相关的js文件</h4><ul>
+<li>找到主题里面的页脚文件， <code>themes/next/layout/_partials/footer.swig</code> ，在文件最末尾加入以下内容 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% if (theme.mermaid.enable)  %&#125;</span><br><span class="line">  &lt;script src&#x3D;&#39;https:&#x2F;&#x2F;unpkg.com&#x2F;mermaid@&#123;&#123; theme.mermaid.version &#125;&#125;&#x2F;dist&#x2F;mermaid.min.js&#39;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    if (window.mermaid) &#123;</span><br><span class="line">      mermaid.initialize(&#123;theme: &#39;forest&#39;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;&#x2F;script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="四、配置完成之后执行三部曲："><a href="#四、配置完成之后执行三部曲：" class="headerlink" title="四、配置完成之后执行三部曲："></a>四、配置完成之后执行三部曲：</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean # 清理</span><br><span class="line">hexo g	   # 构建</span><br><span class="line">hexo s     # 运行</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="五、最后献上几个链接供参考："><a href="#五、最后献上几个链接供参考：" class="headerlink" title="五、最后献上几个链接供参考："></a>五、最后献上几个链接供参考：</h4><p><code>官网：</code></p>
+<blockquote>
+<p> <a href="https://github.com/webappdevelp/hexo-filter-mermaid-diagrams">https://github.com/webappdevelp/hexo-filter-mermaid-diagrams </a></p>
+</blockquote>
+<p><code>参考文献:</code></p>
+<blockquote>
+<p><a href="https://tyloafer.github.io/posts/7790/">https://tyloafer.github.io/posts/7790/  </a></p>
+<p><a href="https://rogersnowing.cn/post/38b5106c.html">https://rogersnowing.cn/post/38b5106c.html </a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何设计接口的幂等性（insert/update）</title>
     <url>/2020/03/10/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%B9%82%E7%AD%89%E6%80%A7/</url>
     <content><![CDATA[<p> <em>在使用insert和update方法对数据库表的数据进行操作会涉及到幂等性问题（ 同样的请求，不论请求多少次，资源的状态是一样的 ），在分布式开发中保证幂等性显得尤为重要，以下方法具体选用要根据实际情况</em></p>
@@ -744,6 +844,265 @@
       <tags>
         <tag>springboot</tag>
         <tag>异常处理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>dockerfile常用关键字</title>
+    <url>/2020/01/27/dockerfile%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E5%AD%97/</url>
+    <content><![CDATA[<p> <em>Dockerfile常用关键字和作用</em></p>
+<a id="more"></a>
+
+<hr>
+<h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FROM</td>
+<td>指定父镜像</td>
+<td>指定dockerfile基于那个image构建</td>
+</tr>
+<tr>
+<td>MAINTAINER</td>
+<td>作者信息</td>
+<td>用来标明这个dockerfile谁写的</td>
+</tr>
+<tr>
+<td>LABEL</td>
+<td>标签</td>
+<td>用来标明dockerfile的标签 可以使用Label代替Maintainer 最终都是在docker image基本信息中可以查看</td>
+</tr>
+<tr>
+<td>RUN</td>
+<td>执行命令</td>
+<td>执行一段命令 默认是/bin/sh 格式: RUN command 或者 RUN [“command” , “param1”,”param2”]</td>
+</tr>
+<tr>
+<td>CMD</td>
+<td>容器启动命令</td>
+<td>提供启动容器时候的默认命令 和ENTRYPOINT配合使用.格式 CMD command param1 param2 或者 CMD [“command” , “param1”,”param2”]</td>
+</tr>
+<tr>
+<td>ENTRYPOINT</td>
+<td>入口</td>
+<td>一般在制作一些执行就关闭的容器中会使用</td>
+</tr>
+<tr>
+<td>COPY</td>
+<td>复制文件</td>
+<td>build的时候复制文件到image中</td>
+</tr>
+<tr>
+<td>ADD</td>
+<td>添加文件</td>
+<td>build的时候添加文件到image中 不仅仅局限于当前build上下文 可以来源于远程服务</td>
+</tr>
+<tr>
+<td>ENV</td>
+<td>环境变量</td>
+<td>指定build时候的环境变量 可以在启动的容器的时候 通过-e覆盖 格式ENV name=value</td>
+</tr>
+<tr>
+<td>ARG</td>
+<td>构建参数</td>
+<td>构建参数 只在构建的时候使用的参数 如果有ENV 那么ENV的相同名字的值始终覆盖arg的参数</td>
+</tr>
+<tr>
+<td>VOLUME</td>
+<td>定义外部可以挂载的数据卷</td>
+<td>指定build的image那些目录可以启动的时候挂载到文件系统中 启动容器的时候使用 -v 绑定 格式 VOLUME [“目录”]</td>
+</tr>
+<tr>
+<td>EXPOSE</td>
+<td>暴露端口</td>
+<td>定义容器运行的时候监听的端口 启动容器的使用-p来绑定暴露端口 格式: EXPOSE 8080 或者 EXPOSE 8080/udp</td>
+</tr>
+<tr>
+<td>WORKDIR</td>
+<td>工作目录</td>
+<td>指定容器内部的工作目录 如果没有创建则自动创建 如果指定/ 使用的是绝对地址 如果不是/开头那么是在上一条workdir的路径的相对路径</td>
+</tr>
+<tr>
+<td>USER</td>
+<td>指定执行用户</td>
+<td>指定build或者启动的时候 用户 在RUN CMD ENTRYPONT执行的时候的用户</td>
+</tr>
+<tr>
+<td>HEALTHCHECK</td>
+<td>健康检查</td>
+<td>指定监测当前容器的健康监测的命令 基本上没用 因为很多时候 应用本身有健康监测机制</td>
+</tr>
+<tr>
+<td>ONBUILD</td>
+<td>触发器</td>
+<td>当存在ONBUILD关键字的镜像作为基础镜像的时候 当执行FROM完成之后 会执行 ONBUILD的命令 但是不影响当前镜像 用处也不怎么大</td>
+</tr>
+<tr>
+<td>STOPSIGNAL</td>
+<td>发送信号量到宿主机</td>
+<td>该STOPSIGNAL指令设置将发送到容器的系统调用信号以退出。</td>
+</tr>
+<tr>
+<td>SHELL</td>
+<td>指定执行脚本的shell</td>
+<td>指定RUN CMD ENTRYPOINT 执行命令的时候 使用的shell</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker常用命令</title>
+    <url>/2020/01/26/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p> <em>完全满足日常使用</em></p>
+<a id="more"></a>
+
+<hr>
+<h3 id="进程相关："><a href="#进程相关：" class="headerlink" title="进程相关："></a><font color=red>进程相关：</font></h3><h4 id="1-启动docker服务"><a href="#1-启动docker服务" class="headerlink" title="1. 启动docker服务"></a>1. 启动docker服务</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-停止docker服务"><a href="#2-停止docker服务" class="headerlink" title="2. 停止docker服务"></a>2. 停止docker服务</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl stop docker</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-重启docker服务"><a href="#3-重启docker服务" class="headerlink" title="3. 重启docker服务"></a>3. 重启docker服务</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-查看docker运行状态"><a href="#4-查看docker运行状态" class="headerlink" title="4. 查看docker运行状态"></a>4. 查看docker运行状态</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl status docker</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-设置docker开机自启"><a href="#5-设置docker开机自启" class="headerlink" title="5. 设置docker开机自启"></a>5. 设置docker开机自启</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure>
+<h3 id="镜像相关："><a href="#镜像相关：" class="headerlink" title="镜像相关："></a><font color=red>镜像相关：</font></h3><h4 id="1-查看镜像："><a href="#1-查看镜像：" class="headerlink" title="1. 查看镜像："></a>1. 查看镜像：</h4><ul>
+<li>查看本地所有镜像</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker images</span><br><span class="line">docker images -q   # 查看所用镜像的id</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-搜索镜像："><a href="#2-搜索镜像：" class="headerlink" title="2. 搜索镜像："></a>2. 搜索镜像：</h4><ul>
+<li>从网络中查找需要的镜像</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker search 镜像名称</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-拉取镜像："><a href="#3-拉取镜像：" class="headerlink" title="3. 拉取镜像："></a>3. 拉取镜像：</h4><ul>
+<li>从Docker仓库下载镜像到本地，镜像名称格式为名称:版本号，如果版本号不指定则是最新的版本。<br>如果不知道镜像版本，可以去docker hub搜索对应镜像查看。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull 镜像名称</span><br><span class="line">docker pull 镜像名称:版本号</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-删除镜像："><a href="#4-删除镜像：" class="headerlink" title="4. 删除镜像："></a>4. 删除镜像：</h4><ul>
+<li>删除本地镜像</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker rmi 镜像id   # 通过id删除本地镜像</span><br><span class="line">docker rmi 镜像名称:版本号 # 通过名称加版本号删除本地镜像</span><br><span class="line">docker rmi docker images -q   # 删除所有本地镜像</span><br></pre></td></tr></table></figure>
+<h3 id="容器相关："><a href="#容器相关：" class="headerlink" title="容器相关："></a><font color=red>容器相关：</font></h3><h4 id="1-创建容器："><a href="#1-创建容器：" class="headerlink" title="1. 创建容器："></a>1. 创建容器：</h4><ul>
+<li>-i: 允许你对容器内的标准输入 (STDIN) 进行交互<br>（保持容器一直运行着，否则在没有客户端连接时可能会自动关闭）</li>
+<li>-t: 在新容器内指定一个伪终端或终端</li>
+<li>-d：以守护（后台）模式运行容器。创建一个容器在后台运行，需要使用docker exec 进入容器。退出后，容器不会关闭</li>
+<li>-p：映射端口</li>
+<li>-it 创建的容器一般称为交互式容器，-id 创建的容器一般称为守护式容器</li>
+<li>–name：为创建的容器命名</li>
+<li>如果要运行的镜像如果不存在，则自动会进行下载</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -it --name=自定义容器名称 镜像名称:版本号 /bin/bash </span><br><span class="line"><span class="meta">#</span><span class="bash">示例：docker run -it --name=c1 centos:7 /bin/bash</span></span><br><span class="line"></span><br><span class="line">docker run -id --name=命名 镜像名称:版本号 /bin/bash </span><br><span class="line"><span class="meta">#</span><span class="bash">后台创建容器，创建之后不会自己进入容器，并且在执行<span class="built_in">exit</span>之后容器也不会退出</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -id -p 宿主机端口:容器端口 --name=自定义容器名称 镜像名称:版本号 /bin/bash </span><br><span class="line"><span class="meta">#</span><span class="bash"> 端口映射创建容器</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="2-进入容器："><a href="#2-进入容器：" class="headerlink" title="2. 进入容器："></a>2. 进入容器：</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker exec -it 容器名称 /bin/bash #  退出容器，容器不会关闭</span><br></pre></td></tr></table></figure>
+<h4 id="3-退出容器："><a href="#3-退出容器：" class="headerlink" title="3. 退出容器："></a>3. 退出容器：</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-停止容器："><a href="#4-停止容器：" class="headerlink" title="4. 停止容器："></a>4. 停止容器：</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker stop 容器名称</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-启动容器："><a href="#5-启动容器：" class="headerlink" title="5. 启动容器："></a>5. 启动容器：</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker start 容器名称</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-删除容器："><a href="#6-删除容器：" class="headerlink" title="6. 删除容器："></a>6. 删除容器：</h4><ul>
+<li>如果容器是运行状态则删除失败，需要停止容器才能删除</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">shelldocker rm 容器名称</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker rm `docker ps -aq`  # 删除所有容器</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="7-查看容器信息："><a href="#7-查看容器信息：" class="headerlink" title="7. 查看容器信息："></a>7. 查看容器信息：</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker inspect 容器名称</span><br></pre></td></tr></table></figure>
+<h4 id="8-查看运行的容器："><a href="#8-查看运行的容器：" class="headerlink" title="8. 查看运行的容器："></a>8. 查看运行的容器：</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker ps</span><br><span class="line">docker ps -a #查看历史运行过的容器</span><br></pre></td></tr></table></figure>
+<h3 id="数据卷相关："><a href="#数据卷相关：" class="headerlink" title="数据卷相关："></a><font color=red>数据卷相关：</font></h3><h4 id="1-配置数据卷："><a href="#1-配置数据卷：" class="headerlink" title="1. 配置数据卷："></a>1. 配置数据卷：</h4><ul>
+<li>目录必须是绝对路径</li>
+<li>如果目录不存在，会自动创建</li>
+<li>一个容器可以挂载多个数据卷</li>
+<li>一个数据卷也可以被多个容器所挂载</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run ... –v 宿主机目录(文件):容器内目录(文件) ... </span><br><span class="line"><span class="meta">#</span><span class="bash"> 示例：docker run -id --name=c1 -v /root/data:/root/data centos:7 /bin/bash</span></span><br><span class="line">docker run -it --name=c2 -v /root/data2:/root/data2 -v /root/data3:/root/data3 centos:7 /bin/bash</span><br><span class="line"><span class="meta">#</span><span class="bash"> 一个容器上可以挂载多个数据卷</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-配置数据卷容器："><a href="#2-配置数据卷容器：" class="headerlink" title="2. 配置数据卷容器："></a>2. 配置数据卷容器：</h4><pre class="mermaid">graph LR;
+c1容器-->c3数据卷容器;
+c2容器-->c3数据卷容器;
+c3数据卷容器-->数据卷;</pre>
+
+<ul>
+<li>由于没有指定宿主机的目录，所以会自动创建一个目录做为数据卷，/volume是容器的数据卷（可以自定义命名）</li>
+<li>通过查看容器信息的命令知道宿主机的数据卷位置</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run –it --name=c3 –v /volume centos:7 /bin/bash </span><br><span class="line"><span class="meta">#</span><span class="bash">创建启动c3数据卷容器，使用 –v 参数 设置数据卷</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>c1、c2容器的数据卷来源c3数据卷容器，就算c3容器挂了，数据卷也可以正常使用</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run –it --name=c1 --volumes-from c3 centos:7 /bin/bash</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run –it --name=c2 --volumes-from c3 centos:7 /bin/bash  </span><br><span class="line"><span class="meta">#</span><span class="bash">创建启动 c1 c2 容器，使用 –-volumes-from 参数 设置数据卷</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="制作自己的镜像文件："><a href="#制作自己的镜像文件：" class="headerlink" title="制作自己的镜像文件："></a><font color=red>制作自己的镜像文件：</font></h3><h4 id="1-普通制作镜像的方法（了解）："><a href="#1-普通制作镜像的方法（了解）：" class="headerlink" title="1. 普通制作镜像的方法（了解）："></a>1. 普通制作镜像的方法（了解）：</h4><pre class="mermaid">graph LR
+制作镜像/只能自己使用-->压缩镜像/可以进行传输
+压缩镜像/可以进行传输-->还原镜像/解压文件并还原</pre>
+
+<ul>
+<li><h5 id="1-制作镜像"><a href="#1-制作镜像" class="headerlink" title="1. 制作镜像"></a>1. 制作镜像</h5></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker commit 容器id 镜像名称:版本号</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h5 id="2-压缩镜像"><a href="#2-压缩镜像" class="headerlink" title="2. 压缩镜像"></a>2. 压缩镜像</h5></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker save -o 压缩文件名称.tar 镜像名称:版本号</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h5 id="3-还原镜像"><a href="#3-还原镜像" class="headerlink" title="3. 还原镜像"></a>3. 还原镜像</h5></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker load –i 压缩文件名称</span><br></pre></td></tr></table></figure>
+<h4 id="2-使用Dockerfile制作镜像"><a href="#2-使用Dockerfile制作镜像" class="headerlink" title="2. 使用Dockerfile制作镜像"></a>2. 使用Dockerfile制作镜像</h4><pre class="mermaid">graph LR
+创建dockerfile文件-->通过dockerfile文件创建镜像
+通过dockerfile文件创建镜像-->创建容器进行使用</pre>
+<ul>
+<li><h5 id="1-通过dockerfile文件创建镜像"><a href="#1-通过dockerfile文件创建镜像" class="headerlink" title="1.通过dockerfile文件创建镜像"></a>1.通过dockerfile文件创建镜像</h5></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker build -f dockerfile文件名 -t 要构建镜像的名称 版本号 .</span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意：.一定要加，并且前面有空格，用来指定路径的</span></span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker安装和配置镜像加速</title>
+    <url>/2020/01/24/docker%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/</url>
+    <content><![CDATA[<p><em>Docker 是一个开源的应用容器引擎，诞生于 2013 年初，基于 Go 语言实现， dotCloud 公司出品（后改名为Docker Inc） Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上</em></p>
+<a id="more"></a>
+
+<hr>
+<h3 id="一、安装Docker"><a href="#一、安装Docker" class="headerlink" title="一、安装Docker"></a>一、安装Docker</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1、yum 包更新到最新 </span></span><br><span class="line">yum update</span><br><span class="line"><span class="meta">#</span><span class="bash"> 2、安装需要的软件包， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的 </span></span><br><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"><span class="meta">#</span><span class="bash"> 3、 设置yum源</span></span><br><span class="line">yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br><span class="line"><span class="meta">#</span><span class="bash"> 4、 安装docker，出现输入的界面都按 y </span></span><br><span class="line">yum install -y docker-ce</span><br><span class="line"><span class="meta">#</span><span class="bash"> 5、 查看docker版本，验证是否验证成功</span></span><br><span class="line">docker -v</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="二、配置镜像加速"><a href="#二、配置镜像加速" class="headerlink" title="二、配置镜像加速"></a>二、配置镜像加速</h3><p>因为docker下载镜像时默认都是通过外网下载，速度慢的要死，所以自己还是要配置国内镜像地址</p>
+<p><strong>我使用的是阿里云镜像加速，在阿里云控制台找到容器镜像服务中的镜像加速器，可以看到自己的加速地址与操作步骤</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20201006150308592.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center"></p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
