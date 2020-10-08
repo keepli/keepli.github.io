@@ -107,7 +107,7 @@ deploy:
   repo: 
     github: git@github.com:keepli/keepli.github.io.git
     gitee: git@gitee.com:keepli/keepli.git
-    coding: git@e.coding.net:keepli/keepli/keepli.git
+    #coding: git@e.coding.net:keepli/keepli/keepli.git
   branch: master
 - type: baidu_url_submitter  # 这是新加的百度主动推送  
  
