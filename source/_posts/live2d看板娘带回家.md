@@ -2,8 +2,8 @@
 title: live2d看板娘带回家
 date: 2020-04-10 10:12:22
 updated: 2020-04-10 10:12:22
-tags: live2d
-categories: live2d看板娘
+tags: live2d看板娘
+categories: hexo
 ---
 
  *萌萌的看板娘不仅B格上来了，还能在你遨游知识的海洋时进行互动，可萌可看家，还等什么，动手吧~*
