@@ -15,7 +15,7 @@ top: true
 
 
 
-## <font color=red>1. 概述</font>
+## <font color=red>一. 概述</font>
 
 - 是对 Mybatis框架的二次封装和扩展
 - 纯正血统：完全继承原生 Mybatis 的所有特性
@@ -25,7 +25,7 @@ top: true
 - 全局拦截：提供全表 delete、update操作智能分析阻断
 - 避免 Sql注入：内置Sql注入内容剥离器，预防Sql注入攻击
 
-## <font color=red>2. 配置</font>
+## <font color=red>二. 配置</font>
 
 ### 1. 在pom.xml文件中引入相关依赖
 
@@ -84,7 +84,7 @@ public class ArticleApplication {
 }
 ```
 
-## <font color=red>3. MVC应用规范</font>
+## <font color=red>三. MVC应用规范</font>
 
 ### 1.实体类要遵守的规范
 
@@ -150,7 +150,7 @@ public void updateById(Article article) {
 
 - 没有任何变化，跟使用`mybatis`一摸一样
 
-## <font color=red>4. 条件查询和分页查询</font>
+## <font color=red>四. 条件查询和分页查询</font>
 
 ### 1.条件查询
 
@@ -225,7 +225,7 @@ public class MybatisPlusConfig {
     }
 ```
 
-## <font color=red>5. 具体方法使用</font> 
+## <font color=red>五. 具体方法使用</font> 
 
 **懒癌发作，直接搬运现成写的还不错的文章**
 
