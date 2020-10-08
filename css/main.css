@@ -1291,7 +1291,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff0fff;
+  background: #0b1fff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2816,6 +2816,14 @@ body {
   background-image: url("/images/add/background-home.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+}
+.post-body a:not(.btn) {
+  color: #3296fa;
+  border-bottom: none;
+}
+.post-body a:not(.btn):hover {
+  color: #0593d3;
+  text-decoration: underline;
 }
 .site-meta {
   padding: 35px 0;
