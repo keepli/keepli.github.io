@@ -81,7 +81,7 @@
 
   <url>
     <loc>http://keepli.cn/</loc>
-    <lastmod>2020-10-07</lastmod>
+    <lastmod>2020-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -89,35 +89,35 @@
   
   <url>
     <loc>http://keepli.cn/tags/docker/</loc>
-    <lastmod>2020-10-07</lastmod>
+    <lastmod>2020-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://keepli.cn/tags/hexo/</loc>
-    <lastmod>2020-10-07</lastmod>
+    <lastmod>2020-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://keepli.cn/tags/live2d/</loc>
-    <lastmod>2020-10-07</lastmod>
+    <lastmod>2020-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://keepli.cn/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</loc>
-    <lastmod>2020-10-07</lastmod>
+    <lastmod>2020-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://keepli.cn/tags/maven/</loc>
-    <lastmod>2020-10-07</lastmod>
+    <lastmod>2020-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -126,35 +126,35 @@
   
   <url>
     <loc>http://keepli.cn/categories/docker/</loc>
-    <lastmod>2020-10-07</lastmod>
+    <lastmod>2020-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://keepli.cn/categories/hexo/</loc>
-    <lastmod>2020-10-07</lastmod>
+    <lastmod>2020-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://keepli.cn/categories/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98/</loc>
-    <lastmod>2020-10-07</lastmod>
+    <lastmod>2020-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://keepli.cn/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</loc>
-    <lastmod>2020-10-07</lastmod>
+    <lastmod>2020-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://keepli.cn/categories/maven/</loc>
-    <lastmod>2020-10-07</lastmod>
+    <lastmod>2020-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
