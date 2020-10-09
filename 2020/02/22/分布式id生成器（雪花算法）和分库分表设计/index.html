@@ -25,7 +25,7 @@
   <meta name="description" content="在采用分库分表的数据库结构设计时，往数据库中新增数据（insert）不能在通过自增id来保证id唯一了，因为分表两个同样的表在不同服务器上自增id会重复，所有必须通过手动添加id来保证id的唯一性，snowflake （雪花）算法（twitter出品）就是用来生成唯一主键值很好的选择">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布式id生成器（雪花算法）和分库分表设计">
-<meta property="og:url" content="http://www.keepli.cn/2020/02/22/%E5%88%86%E5%B8%83%E5%BC%8Fid%E7%94%9F%E6%88%90%E5%99%A8%EF%BC%88%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95%EF%BC%89%E5%92%8C%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:url" content="http://www.keepli.cn,http//keepli.cn/2020/02/22/%E5%88%86%E5%B8%83%E5%BC%8Fid%E7%94%9F%E6%88%90%E5%99%A8%EF%BC%88%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95%EF%BC%89%E5%92%8C%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E8%AE%BE%E8%AE%A1/index.html">
 <meta property="og:site_name" content="听风知秋雨">
 <meta property="og:description" content="在采用分库分表的数据库结构设计时，往数据库中新增数据（insert）不能在通过自增id来保证id唯一了，因为分表两个同样的表在不同服务器上自增id会重复，所有必须通过手动添加id来保证id的唯一性，snowflake （雪花）算法（twitter出品）就是用来生成唯一主键值很好的选择">
 <meta property="og:locale">
@@ -39,7 +39,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201008184644358.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center">
 
-<link rel="canonical" href="http://www.keepli.cn/2020/02/22/%E5%88%86%E5%B8%83%E5%BC%8Fid%E7%94%9F%E6%88%90%E5%99%A8%EF%BC%88%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95%EF%BC%89%E5%92%8C%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E8%AE%BE%E8%AE%A1/">
+<link rel="canonical" href="http://www.keepli.cn,http//keepli.cn/2020/02/22/%E5%88%86%E5%B8%83%E5%BC%8Fid%E7%94%9F%E6%88%90%E5%99%A8%EF%BC%88%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95%EF%BC%89%E5%92%8C%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E8%AE%BE%E8%AE%A1/">
 
 
 <script id="page-configurations">
@@ -201,7 +201,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/02/22/%E5%88%86%E5%B8%83%E5%BC%8Fid%E7%94%9F%E6%88%90%E5%99%A8%EF%BC%88%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95%EF%BC%89%E5%92%8C%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E8%AE%BE%E8%AE%A1/">
+    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn,http//keepli.cn/2020/02/22/%E5%88%86%E5%B8%83%E5%BC%8Fid%E7%94%9F%E6%88%90%E5%99%A8%EF%BC%88%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95%EF%BC%89%E5%92%8C%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E8%AE%BE%E8%AE%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/add/header.jpg">
