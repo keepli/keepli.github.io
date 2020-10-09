@@ -457,7 +457,66 @@
 <ul>
 <li>查询评论内容中以“加班”开头的，代码如下：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.comment.find(&#123;content:&#x2F;^加班&#x2F;&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.comment.find(&#123;content:/^加班/&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-大于-小于-不等于"><a href="#6-大于-小于-不等于" class="headerlink" title="6.大于 小于 不等于"></a>6.大于 小于 不等于</h3><blockquote>
+<p>&lt;, &lt;=, &gt;, &gt;= 这个操作符也是很常用的，格式如下:</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.集合名称.find(&#123; &quot;field&quot; : &#123; $gt: value &#125;&#125;) // 大于: field &gt; value</span><br><span class="line">db.集合名称.find(&#123; &quot;field&quot; : &#123; $lt: value &#125;&#125;) // 小于: field &lt; value</span><br><span class="line">db.集合名称.find(&#123; &quot;field&quot; : &#123; $gte: value &#125;&#125;) // 大于等于: field &gt;= value</span><br><span class="line">db.集合名称.find(&#123; &quot;field&quot; : &#123; $lte: value &#125;&#125;) // 小于等于: field &lt;= value</span><br><span class="line">db.集合名称.find(&#123; &quot;field&quot; : &#123; $ne: value &#125;&#125;) // 不等于: field != value</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询评论点赞数大于1000的记录：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.comment.find(&#123;thumbup:&#123;$gt:1000&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-包含与不包含"><a href="#7-包含与不包含" class="headerlink" title="7.包含与不包含"></a>7.包含与不包含</h3><blockquote>
+<p>包含使用$in操作符</p>
+</blockquote>
+<ul>
+<li>查询评论集合中userid字段包含1013和1014的文档：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.comment.find(&#123;userid:&#123;$in:[&quot;1013&quot;,&quot;1014&quot;]&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>不包含使用$nin操作符</p>
+</blockquote>
+<ul>
+<li>查询评论集合中userid字段不包含1013和1014的文档：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.comment.find(&#123;userid:&#123;$nin:[&quot;1013&quot;,&quot;1014&quot;]&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-条件连接"><a href="#8-条件连接" class="headerlink" title="8.条件连接"></a>8.条件连接</h3><blockquote>
+<p>查询同时满足两个以上条件，需要使用$and操作符将条件进行关联（相当于SQL的and）。格式为：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">and:[ &#123;条件&#125;,&#123;条件&#125;,&#123;条件&#125; ]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询评论集合中thumbup大于等于1000 并且小于2000的文档：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.comment.find(&#123;$and:[ &#123;thumbup:&#123;$gte:1000&#125;&#125; ,&#123;thumbup:&#123;$lt:2000&#125; &#125;]&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果两个以上条件之间是或者的关系，使用操作符进行关联，与前面and的使用方式相同，格式为：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">or:[ &#123;条件&#125;,&#123;条件&#125;,&#123;条件&#125; ]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询评论集合中userid为1013，或者点赞数小于2000的文档记录：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.comment.find(&#123;$or:[ &#123;userid:&quot;1013&quot;&#125; ,&#123;thumbup:&#123;$lt:2000&#125; &#125;]&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-列值增长"><a href="#9-列值增长" class="headerlink" title="9.列值增长"></a>9.列值增长</h3><blockquote>
+<p>对某列值在原有值的基础上进行增加或减少，可以使用$inc运算符：</p>
+</blockquote>
+<ul>
+<li>正数增加</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.comment.update(&#123;_id:&quot;2&quot;&#125;,&#123;$inc:&#123;thumbup:1&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>负数减少</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.comment.update(&#123;_id:&quot;2&quot;&#125;,&#123;$inc:&#123;thumbup:-2&#125;&#125;)</span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -565,7 +624,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81MongoDB%E7%AE%80%E4%BB%8B"><span class="nav-text">一、MongoDB简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="nav-text">1.文章评论数据分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BB%80%E4%B9%88%E6%98%AFMongoDB"><span class="nav-text">2.什么是MongoDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-MongoDB%E7%89%B9%E7%82%B9"><span class="nav-text">3.MongoDB特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-MongoDB%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-text">4.MongoDB体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-MongoDB%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">5.MongoDB数据类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81MongoDB%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-text">二、MongoDB常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%80%89%E6%8B%A9%E5%92%8C%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">1.选择和创建数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%8F%92%E5%85%A5%E4%B8%8E%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3"><span class="nav-text">2.插入与查询文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BF%AE%E6%94%B9%E4%B8%8E%E5%88%A0%E9%99%A4%E6%96%87%E6%A1%A3"><span class="nav-text">3.修改与删除文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BB%9F%E8%AE%A1%E6%9D%A1%E6%95%B0"><span class="nav-text">4.统计条数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2"><span class="nav-text">5.模糊查询</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81MongoDB%E7%AE%80%E4%BB%8B"><span class="nav-text">一、MongoDB简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="nav-text">1.文章评论数据分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BB%80%E4%B9%88%E6%98%AFMongoDB"><span class="nav-text">2.什么是MongoDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-MongoDB%E7%89%B9%E7%82%B9"><span class="nav-text">3.MongoDB特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-MongoDB%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-text">4.MongoDB体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-MongoDB%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">5.MongoDB数据类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81MongoDB%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-text">二、MongoDB常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%80%89%E6%8B%A9%E5%92%8C%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">1.选择和创建数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%8F%92%E5%85%A5%E4%B8%8E%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3"><span class="nav-text">2.插入与查询文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BF%AE%E6%94%B9%E4%B8%8E%E5%88%A0%E9%99%A4%E6%96%87%E6%A1%A3"><span class="nav-text">3.修改与删除文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BB%9F%E8%AE%A1%E6%9D%A1%E6%95%B0"><span class="nav-text">4.统计条数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2"><span class="nav-text">5.模糊查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%A4%A7%E4%BA%8E-%E5%B0%8F%E4%BA%8E-%E4%B8%8D%E7%AD%89%E4%BA%8E"><span class="nav-text">6.大于 小于 不等于</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E5%8C%85%E5%90%AB%E4%B8%8E%E4%B8%8D%E5%8C%85%E5%90%AB"><span class="nav-text">7.包含与不包含</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E6%9D%A1%E4%BB%B6%E8%BF%9E%E6%8E%A5"><span class="nav-text">8.条件连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E5%88%97%E5%80%BC%E5%A2%9E%E9%95%BF"><span class="nav-text">9.列值增长</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -902,7 +902,66 @@
 <ul>
 <li>查询评论内容中以“加班”开头的，代码如下：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.comment.find(&#123;content:&#x2F;^加班&#x2F;&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.find(&#123;content:/^加班/&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-大于-小于-不等于"><a href="#6-大于-小于-不等于" class="headerlink" title="6.大于 小于 不等于"></a>6.大于 小于 不等于</h3><blockquote>
+<p>&lt;, &lt;=, &gt;, &gt;= 这个操作符也是很常用的，格式如下:</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.集合名称.find(&#123; &quot;field&quot; : &#123; $gt: value &#125;&#125;) // 大于: field &gt; value</span><br><span class="line">db.集合名称.find(&#123; &quot;field&quot; : &#123; $lt: value &#125;&#125;) // 小于: field &lt; value</span><br><span class="line">db.集合名称.find(&#123; &quot;field&quot; : &#123; $gte: value &#125;&#125;) // 大于等于: field &gt;= value</span><br><span class="line">db.集合名称.find(&#123; &quot;field&quot; : &#123; $lte: value &#125;&#125;) // 小于等于: field &lt;= value</span><br><span class="line">db.集合名称.find(&#123; &quot;field&quot; : &#123; $ne: value &#125;&#125;) // 不等于: field != value</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询评论点赞数大于1000的记录：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.find(&#123;thumbup:&#123;$gt:1000&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-包含与不包含"><a href="#7-包含与不包含" class="headerlink" title="7.包含与不包含"></a>7.包含与不包含</h3><blockquote>
+<p>包含使用$in操作符</p>
+</blockquote>
+<ul>
+<li>查询评论集合中userid字段包含1013和1014的文档：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.find(&#123;userid:&#123;$in:[&quot;1013&quot;,&quot;1014&quot;]&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>不包含使用$nin操作符</p>
+</blockquote>
+<ul>
+<li>查询评论集合中userid字段不包含1013和1014的文档：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.find(&#123;userid:&#123;$nin:[&quot;1013&quot;,&quot;1014&quot;]&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-条件连接"><a href="#8-条件连接" class="headerlink" title="8.条件连接"></a>8.条件连接</h3><blockquote>
+<p>查询同时满足两个以上条件，需要使用$and操作符将条件进行关联（相当于SQL的and）。格式为：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">and:[ &#123;条件&#125;,&#123;条件&#125;,&#123;条件&#125; ]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询评论集合中thumbup大于等于1000 并且小于2000的文档：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.comment.find(&#123;$and:[ &#123;thumbup:&#123;$gte:1000&#125;&#125; ,&#123;thumbup:&#123;$lt:2000&#125; &#125;]&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果两个以上条件之间是或者的关系，使用操作符进行关联，与前面and的使用方式相同，格式为：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">or:[ &#123;条件&#125;,&#123;条件&#125;,&#123;条件&#125; ]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询评论集合中userid为1013，或者点赞数小于2000的文档记录：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.find(&#123;$or:[ &#123;userid:&quot;1013&quot;&#125; ,&#123;thumbup:&#123;$lt:2000&#125; &#125;]&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-列值增长"><a href="#9-列值增长" class="headerlink" title="9.列值增长"></a>9.列值增长</h3><blockquote>
+<p>对某列值在原有值的基础上进行增加或减少，可以使用$inc运算符：</p>
+</blockquote>
+<ul>
+<li>正数增加</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.update(&#123;_id:&quot;2&quot;&#125;,&#123;$inc:&#123;thumbup:1&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>负数减少</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.update(&#123;_id:&quot;2&quot;&#125;,&#123;$inc:&#123;thumbup:-2&#125;&#125;)</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>

@@ -12,5 +12,5 @@ Disallow: /vendors/
 Disallow: /fancybox/
 Disallow: /categories/
 
-Sitemap: http://keepli.cn/sitemap.xml
+Sitemap: http://keepli.cn/sitemap.txt
 Sitemap: http://keepli.cn/baidusitemap.xml

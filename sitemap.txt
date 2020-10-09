@@ -158,6 +158,13 @@
   </url>
   
   <url>
+    <loc>http://keepli.cn/tags/mybatis-plus/</loc>
+    <lastmod>2020-10-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://keepli.cn/tags/mongDB/</loc>
     <lastmod>2020-10-09</lastmod>
     <changefreq>daily</changefreq>
@@ -166,13 +173,6 @@
   
   <url>
     <loc>http://keepli.cn/tags/nosql/</loc>
-    <lastmod>2020-10-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://keepli.cn/tags/mybatis-plus/</loc>
     <lastmod>2020-10-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -258,14 +258,14 @@
   </url>
   
   <url>
-    <loc>http://keepli.cn/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <loc>http://keepli.cn/categories/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/</loc>
     <lastmod>2020-10-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://keepli.cn/categories/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/</loc>
+    <loc>http://keepli.cn/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2020-10-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
