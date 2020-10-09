@@ -178,8 +178,9 @@ site_state: true
 # Usage: `Key: permalink || icon`
 # Key is the link label showing to end users.
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
-social: #社交信息链接
-  GitHub: https://github.com/keepli || fab fa-github
+social: #侧边栏社交信息链接
+  QQ: http://wpa.qq.com/msgrd?v=3&uin=248147986&site=qq&menu=yes || fab fa-qq
+  #GitHub: https://github.com/keepli || fab fa-github
   E-Mail: mailto:248147986@qq.com || fa fa-envelope
   #Weibo: https://weibo.com/yourname || fab fa-weibo
   #Google: https://plus.google.com/yourname || fab fa-google
@@ -425,7 +426,7 @@ font:  #字体设置
   # Global font settings used for all elements inside <body>.
   global:
     external: true
-    family: EB Garamond
+    family: Piazzolla  #可选其它英文字体 Roboto | EB Garamond | Piazzolla
     size: 
 
   # Font settings for site title (.site-title).

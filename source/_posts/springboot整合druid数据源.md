@@ -6,7 +6,7 @@ tags: [springboot,druid]
 categories: jdbc
 ---
 
- *springboot2.X版整合druid数据源配置*
+ *springboot2.x版整合 druid数据源配置*
 
 <!-- more -->
 
