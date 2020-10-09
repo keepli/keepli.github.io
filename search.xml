@@ -710,7 +710,7 @@
 <a id="more"></a>
 
 <hr>
-<h2 id="MongoDB简介"><a href="#MongoDB简介" class="headerlink" title="MongoDB简介"></a><font color=red>MongoDB简介</font></h2><h3 id="1-文章评论数据分析"><a href="#1-文章评论数据分析" class="headerlink" title="1.文章评论数据分析"></a>1.文章评论数据分析</h3><ul>
+<h2 id="一、MongoDB简介"><a href="#一、MongoDB简介" class="headerlink" title="一、MongoDB简介"></a><font color=red>一、MongoDB简介</font></h2><h3 id="1-文章评论数据分析"><a href="#1-文章评论数据分析" class="headerlink" title="1.文章评论数据分析"></a>1.文章评论数据分析</h3><ul>
 <li>数据量大</li>
 <li>写入操作频繁</li>
 <li>价值较低（评论数据丢失不会有什么太大影响）</li>
@@ -792,6 +792,118 @@
 <p> 表示当前距离 Unix新纪元（1970年1月1日）的毫秒数。日期类型是有符号的, 负数表示 1970 年之前的日期 </p>
 </li>
 </ol>
+<h2 id="二、MongoDB常用命令"><a href="#二、MongoDB常用命令" class="headerlink" title="二、MongoDB常用命令"></a><font color=red>二、MongoDB常用命令</font></h2><h3 id="1-选择和创建数据库"><a href="#1-选择和创建数据库" class="headerlink" title="1.选择和创建数据库"></a>1.选择和创建数据库</h3><blockquote>
+<p>选择和创建数据库的语法格式：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">use 数据库名称</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果数据库存在则选择该数据库，如果数据库不存在则自动创建。以下语句创建commentdb数据库：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use commentdb</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>查看数据库：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">show dbs</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>查看集合:</p>
+</blockquote>
+<ul>
+<li>需要先选择数据库之后，才能查看该数据库的集合</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">show collections</span><br></pre></td></tr></table></figure>
+<h3 id="2-插入与查询文档"><a href="#2-插入与查询文档" class="headerlink" title="2.插入与查询文档"></a>2.插入与查询文档</h3><blockquote>
+<p>选择数据库后，使用集合来对文档进行操作，插入文档语法格式：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.集合名称.insert(数据);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>插入以下测试数据：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.insert(&#123;content:&quot;十次方课程&quot;,userid:&quot;1011&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>查询集合的语法格式：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.集合名称.find()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询comment集合的所有文档，输入以下命令：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.find()</span><br></pre></td></tr></table></figure>
+
+<p><code>发现文档会有一个叫_id的字段，这个相当于我们原来关系数据库中表的主键，当你在插入文档记录时没有指定该字段，MongoDB会自动创建，其类型是ObjectID类型。如果我们在插入文档记录时指定该字段也可以，其类型可以是ObjectID类型，也可以是MongoDB支持的任意类型</code> </p>
+<hr>
+<p><strong>输入以下测试语句:</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.insert(&#123;_id:&quot;1&quot;,content:&quot;到底为啥出错&quot;,userid:&quot;1012&quot;,thumbup:2020&#125;);</span><br><span class="line">db.comment.insert(&#123;_id:&quot;2&quot;,content:&quot;加班到半夜&quot;,userid:&quot;1013&quot;,thumbup:1023&#125;);</span><br><span class="line">db.comment.insert(&#123;_id:&quot;3&quot;,content:&quot;手机流量超了咋办&quot;,userid:&quot;1013&quot;,thumbup:111&#125;);</span><br><span class="line">db.comment.insert(&#123;_id:&quot;4&quot;,content:&quot;坚持就是胜利&quot;,userid:&quot;1014&quot;,thumbup:1223&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>按一定条件来查询，比如查询userid为1013的记录，只要在find()中添加参数即可，参数也是json格式，如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.find(&#123;userid:&#x27;1013&#x27;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>只需要返回符合条件的第一条数据，我们可以使用findOne命令来实现：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.findOne(&#123;userid:&#x27;1013&#x27;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>返回指定条数的记录，可以在find方法后调用limit来返回结果，例如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.find().limit(2)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-修改与删除文档"><a href="#3-修改与删除文档" class="headerlink" title="3.修改与删除文档"></a>3.修改与删除文档</h3><blockquote>
+<p>修改文档的语法结构：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.集合名称.update(条件,修改后的数据)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改_id为1的记录，点赞数为1000，输入以下语句：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.update(&#123;_id:&quot;1&quot;&#125;,&#123;thumbup:1000&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>执行后发现，这条文档除了thumbup字段其它字段都不见了</strong></p>
+<p>为了解决这个问题，我们需要使用<font color=red>修改器$set</font>来实现，命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.update(&#123;_id:&quot;2&quot;&#125;,&#123;$set:&#123;thumbup:2000&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>删除文档的语法结构：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.集合名称.remove(条件)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><font color=red>以下语句可以将数据全部删除，慎用~</font></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.remove(&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除条件可以放到大括号中，例如删除thumbup为1000的数据，输入以下语句：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">db.comment.remove(&#123;thumbup:1000&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-统计条数"><a href="#4-统计条数" class="headerlink" title="4.统计条数"></a>4.统计条数</h3><blockquote>
+<p>统计记录条件使用count()方法。以下语句统计comment集合的记录数：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.count()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>按条件统计 ，例如统计userid为1013的记录条数：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.count(&#123;userid:&quot;1013&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-模糊查询"><a href="#5-模糊查询" class="headerlink" title="5.模糊查询"></a>5.模糊查询</h3><blockquote>
+<p>MongoDB的模糊查询是通过正则表达式的方式实现的：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;模糊查询字符串&#x2F;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询评论内容包含“流量”的所有文档，代码如下：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">db.comment.find(&#123;content:/流量/&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询评论内容中以“加班”开头的，代码如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.comment.find(&#123;content:&#x2F;^加班&#x2F;&#125;)</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>非关系型数据库</category>
