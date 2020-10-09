@@ -12,7 +12,7 @@ categories: 非关系型数据库
 
 ---
 
-## <font color=red>MongoDB简介</font>
+## <font color=red>一、MongoDB简介</font>
 
 ### 1.文章评论数据分析
 
@@ -97,3 +97,166 @@ Mongo最大的特点是它支持的查询语言非常强大，其语法有点类
 
     表示当前距离 Unix新纪元（1970年1月1日）的毫秒数。日期类型是有符号的, 负数表示 1970 年之前的日期 
 
+## <font color=red>二、MongoDB常用命令</font>
+
+### 1.选择和创建数据库
+
+> 选择和创建数据库的语法格式：
+
+```shell
+use 数据库名称
+```
+
+- 如果数据库存在则选择该数据库，如果数据库不存在则自动创建。以下语句创建commentdb数据库：
+
+```
+use commentdb
+```
+
+> 查看数据库：
+
+```shell
+show dbs
+```
+
+> 查看集合:
+
+- 需要先选择数据库之后，才能查看该数据库的集合
+
+```shell
+show collections
+```
+### 2.插入与查询文档
+
+> 选择数据库后，使用集合来对文档进行操作，插入文档语法格式：
+
+```shell
+db.集合名称.insert(数据);
+```
+
+- 插入以下测试数据：
+
+```shell
+db.comment.insert({content:"十次方课程",userid:"1011"})
+```
+
+> 查询集合的语法格式：
+
+```shell
+db.集合名称.find()
+```
+
+- 查询comment集合的所有文档，输入以下命令：
+
+```shell
+db.comment.find()
+```
+
+`发现文档会有一个叫_id的字段，这个相当于我们原来关系数据库中表的主键，当你在插入文档记录时没有指定该字段，MongoDB会自动创建，其类型是ObjectID类型。如果我们在插入文档记录时指定该字段也可以，其类型可以是ObjectID类型，也可以是MongoDB支持的任意类型` 
+
+---
+
+**输入以下测试语句:**
+
+```shell
+db.comment.insert({_id:"1",content:"到底为啥出错",userid:"1012",thumbup:2020});
+db.comment.insert({_id:"2",content:"加班到半夜",userid:"1013",thumbup:1023});
+db.comment.insert({_id:"3",content:"手机流量超了咋办",userid:"1013",thumbup:111});
+db.comment.insert({_id:"4",content:"坚持就是胜利",userid:"1014",thumbup:1223});
+```
+
+ 
+
+按一定条件来查询，比如查询userid为1013的记录，只要在find()中添加参数即可，参数也是json格式，如下：
+
+```shell
+db.comment.find({userid:'1013'})
+```
+
+只需要返回符合条件的第一条数据，我们可以使用findOne命令来实现：
+
+```shell
+db.comment.findOne({userid:'1013'})
+```
+
+返回指定条数的记录，可以在find方法后调用limit来返回结果，例如：
+
+```shell
+db.comment.find().limit(2)
+```
+
+### 3.修改与删除文档
+
+> 修改文档的语法结构：
+
+```shell
+db.集合名称.update(条件,修改后的数据)
+```
+
+- 修改_id为1的记录，点赞数为1000，输入以下语句：
+
+```shell
+db.comment.update({_id:"1"},{thumbup:1000})
+```
+
+**执行后发现，这条文档除了thumbup字段其它字段都不见了**
+
+为了解决这个问题，我们需要使用<font color=red>修改器$set</font>来实现，命令如下：
+
+```shell
+db.comment.update({_id:"2"},{$set:{thumbup:2000}})
+```
+
+> 删除文档的语法结构：
+
+```shell
+db.集合名称.remove(条件)
+```
+
+- <font color=red>以下语句可以将数据全部删除，慎用~</font>
+
+```shell
+db.comment.remove({})
+```
+
+- 删除条件可以放到大括号中，例如删除thumbup为1000的数据，输入以下语句：
+
+```bash
+db.comment.remove({thumbup:1000})
+```
+
+###  4.统计条数
+
+> 统计记录条件使用count()方法。以下语句统计comment集合的记录数：
+
+```shell
+db.comment.count()
+```
+
+- 按条件统计 ，例如统计userid为1013的记录条数：
+
+```shell
+db.comment.count({userid:"1013"})
+```
+
+ ### 5.模糊查询
+
+> MongoDB的模糊查询是通过正则表达式的方式实现的：
+
+```
+/模糊查询字符串/
+```
+
+- 查询评论内容包含“流量”的所有文档，代码如下：
+
+```shell
+db.comment.find({content:/流量/})
+```
+
+- 查询评论内容中以“加班”开头的，代码如下：
+
+```
+db.comment.find({content:/^加班/})
+```
+
+ 
