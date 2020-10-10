@@ -100,3 +100,8 @@ if (hexo-config('sidebar.position') == 'right') {
     width: auto;
   }
 }
+
+//修改两侧留白
+.header{ width: 90%; } /* 调节的是主题栏两边的留白 */
+.container .main-inner { width: 90%; } /* 调节的内容栏两边的留白 */
+.content-wrap { width: calc(100% - 260px); } /* 100%不要动，后面的px是调节两个模块直接的留白 */
