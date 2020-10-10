@@ -13,4 +13,6 @@ Disallow: /fancybox/
 Disallow: /categories/
 
 Sitemap: http://keepli.cn/sitemap.txt
+Sitemap: http://www.keepli.cn/sitemap.txt
 Sitemap: http://keepli.cn/baidusitemap.xml
+Sitemap: http://www.keepli.cn/baidusitemap.xml
