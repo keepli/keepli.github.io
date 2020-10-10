@@ -255,8 +255,85 @@ db.comment.find({content:/流量/})
 
 - 查询评论内容中以“加班”开头的，代码如下：
 
-```
+```shell
 db.comment.find({content:/^加班/})
 ```
 
- 
+ ### 6.大于 小于 不等于
+
+> <, <=, >, >= 这个操作符也是很常用的，格式如下:
+
+```shell
+db.集合名称.find({ "field" : { $gt: value }}) // 大于: field > value
+db.集合名称.find({ "field" : { $lt: value }}) // 小于: field < value
+db.集合名称.find({ "field" : { $gte: value }}) // 大于等于: field >= value
+db.集合名称.find({ "field" : { $lte: value }}) // 小于等于: field <= value
+db.集合名称.find({ "field" : { $ne: value }}) // 不等于: field != value
+```
+
+- 查询评论点赞数大于1000的记录：
+
+```shell
+db.comment.find({thumbup:{$gt:1000}})
+```
+
+ ### 7.包含与不包含
+
+> 包含使用$in操作符
+
+- 查询评论集合中userid字段包含1013和1014的文档：
+
+```shell
+db.comment.find({userid:{$in:["1013","1014"]}})
+```
+
+> 不包含使用$nin操作符
+
+- 查询评论集合中userid字段不包含1013和1014的文档：
+
+```shell
+db.comment.find({userid:{$nin:["1013","1014"]}})
+```
+
+ ### 8.条件连接
+
+> 查询同时满足两个以上条件，需要使用$and操作符将条件进行关联（相当于SQL的and）。格式为：
+
+```shell
+$and:[ {条件},{条件},{条件} ]
+```
+
+- 查询评论集合中thumbup大于等于1000 并且小于2000的文档：
+
+```
+db.comment.find({$and:[ {thumbup:{$gte:1000}} ,{thumbup:{$lt:2000} }]})
+```
+
+> 如果两个以上条件之间是或者的关系，使用操作符进行关联，与前面and的使用方式相同，格式为：
+
+```shell
+$or:[ {条件},{条件},{条件} ]
+```
+
+- 查询评论集合中userid为1013，或者点赞数小于2000的文档记录：
+
+```shell
+db.comment.find({$or:[ {userid:"1013"} ,{thumbup:{$lt:2000} }]})
+```
+
+### 9.列值增长
+
+> 对某列值在原有值的基础上进行增加或减少，可以使用$inc运算符：
+
+- 正数增加
+
+```shell
+db.comment.update({_id:"2"},{$inc:{thumbup:1}})
+```
+
+- 负数减少
+
+```shell
+db.comment.update({_id:"2"},{$inc:{thumbup:-2}})
+```
+

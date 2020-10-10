@@ -5,12 +5,14 @@ Allow: /about/
 Allow: /archives/
 Allow: /categories/
 Allow: /tags/
+
 Disallow: /js/
 Disallow: /css/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
-Disallow: /categories/
 
-Sitemap: http://keepli.cn/sitemap.xml
+Sitemap: http://keepli.cn/sitemap.txt
+Sitemap: http://www.keepli.cn/sitemap.txt
 Sitemap: http://keepli.cn/baidusitemap.xml
+Sitemap: http://www.keepli.cn/baidusitemap.xml
