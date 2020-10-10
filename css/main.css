@@ -1291,7 +1291,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffa3ff;
+  background: #1b6e5e;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2448,12 +2448,6 @@ ul.breadcrumb li + li:last-child {
     width: auto;
   }
 }
-.header {
-  width: 90%;
-}
-.container .main-inner {
-  width: 90%;
-}
 .site-brand-container {
   background: #222;
 }
@@ -2831,6 +2825,32 @@ body {
   color: #0593d3;
   text-decoration: underline;
 }
+.header {
+  width: 90%; /* 调节的是主题栏两边的留白 */
+}
+@media (max-width: 991px) {
+  .header {
+    width: auto;
+  }
+}
+.content-wrap {
+  width: calc(100% - 260px); /* 100%不要动，后面的px是调节两个模块直接的留白 */
+}
+@media (max-width: 991px) {
+  .content-wrap {
+    width: 100%;
+  }
+}
+.main-inner {
+  width: 90%; /* 调节的内容栏两边的留白 */
+}
+@media (max-width: 991px) {
+  .main-inner {
+    width: auto;
+  }
+}
+/*------------------------------*/
+/*------------------------------*/
 .site-meta {
   padding: 35px 0;
 }
