@@ -1291,7 +1291,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #e770f1;
+  background: #954bbb;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2447,15 +2447,6 @@ ul.breadcrumb li + li:last-child {
     padding-right: 0;
     width: auto;
   }
-}
-.header {
-  width: 90%;
-}
-.container .main-inner {
-  width: 90%;
-}
-.content-wrap {
-  width: calc(100% - 260px);
 }
 .site-brand-container {
   background: #222;
