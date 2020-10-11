@@ -270,10 +270,10 @@
 <li>写入操作频繁</li>
 <li>价值较低（评论数据丢失不会有什么太大影响）</li>
 </ul>
-<p>对于这样的数据，我们更适合使用MongoDB来实现数据的存储，<font color=red>如果使用mysql来存储成本太高</font></p>
+<p>对于这样的数据，我们更适合使用MongoDB来实现数据的存储，<font color=#FFA500 >如果使用mysql来存储成本太高</font></p>
 <h3 id="2-什么是MongoDB"><a href="#2-什么是MongoDB" class="headerlink" title="2.什么是MongoDB"></a>2.什么是MongoDB</h3><ul>
 <li>MongoDB是一个基于分布式文件存储的数据库。由C++语言编写。旨在为WEB应<br>用提供可扩展的高性能数据存储解决方案</li>
-<li>MongoDB是一个介于关系数据库和非关系数据库之间的产品<font color=red>（自身是非关系型数据库NoSql）</font>，是非关系数据库当中功能最丰富，最像关系数据库的</li>
+<li>MongoDB是一个介于关系数据库和非关系数据库之间的产品<font color=#FFA500>（自身是非关系型数据库NoSql）</font>，是非关系数据库当中功能最丰富，最像关系数据库的</li>
 <li>它支持的数据结构非常松散，是类似json的bson格式，因此可以存储比较复杂的数据类型</li>
 </ul>
 <h3 id="3-MongoDB特点"><a href="#3-MongoDB特点" class="headerlink" title="3.MongoDB特点"></a>3.MongoDB特点</h3><p>Mongo最大的特点是它支持的查询语言非常强大，其语法有点类似于面向对象的<br>查询语言，几乎可以实现类似关系数据库单表查询的绝大部分功能，而且还支持对<br>数据建立索引</p>
@@ -325,7 +325,7 @@
 
 <ol>
 <li><p><strong>ObjectId</strong></p>
-<p>ObjectId 类似唯一主键<font color=red>（不指定，会自动生成）</font>，可以很快的去生成和排序，包含 12 bytes，含义是：</p>
+<p>ObjectId 类似唯一主键<font color=#FFA500>（不指定，会自动生成）</font>，可以很快的去生成和排序，包含 12 bytes，含义是：</p>
 <ul>
 <li>前 4 个字节表示创建 unix 时间戳，格林尼治时间 UTC 时间，比北京时间晚了 8 个小时</li>
 <li>接下来的 3 个字节是机器标识码</li>
@@ -416,7 +416,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.comment.update(&#123;_id:&quot;1&quot;&#125;,&#123;thumbup:1000&#125;)</span><br></pre></td></tr></table></figure>
 
 <p><strong>执行后发现，这条文档除了thumbup字段其它字段都不见了</strong></p>
-<p>为了解决这个问题，我们需要使用<font color=red>修改器$set</font>来实现，命令如下：</p>
+<p>为了解决这个问题，我们需要使用<font color=#FFA500>修改器$set</font>来实现，命令如下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.comment.update(&#123;_id:&quot;2&quot;&#125;,&#123;$set:&#123;thumbup:2000&#125;&#125;)</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -425,7 +425,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.集合名称.remove(条件)</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><font color=red>以下语句可以将数据全部删除，慎用~</font></li>
+<li><font color=#FFA500>以下语句可以将数据全部删除，慎用~</font></li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.comment.remove(&#123;&#125;)</span><br></pre></td></tr></table></figure>
 
