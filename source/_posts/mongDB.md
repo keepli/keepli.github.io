@@ -20,13 +20,13 @@ categories: 非关系型数据库
 - 写入操作频繁
 - 价值较低（评论数据丢失不会有什么太大影响）
 
-对于这样的数据，我们更适合使用MongoDB来实现数据的存储，<font color=red>如果使用mysql来存储成本太高</font>
+对于这样的数据，我们更适合使用MongoDB来实现数据的存储，<font color=#FFA500 >如果使用mysql来存储成本太高</font>
 
 ### 2.什么是MongoDB
 
 - MongoDB是一个基于分布式文件存储的数据库。由C++语言编写。旨在为WEB应
   用提供可扩展的高性能数据存储解决方案
-- MongoDB是一个介于关系数据库和非关系数据库之间的产品<font color=red>（自身是非关系型数据库NoSql）</font>，是非关系数据库当中功能最丰富，最像关系数据库的
+- MongoDB是一个介于关系数据库和非关系数据库之间的产品<font color=#FFA500>（自身是非关系型数据库NoSql）</font>，是非关系数据库当中功能最丰富，最像关系数据库的
 - 它支持的数据结构非常松散，是类似json的bson格式，因此可以存储比较复杂的数据类型
 
 ### 3.MongoDB特点
@@ -73,7 +73,7 @@ Mongo最大的特点是它支持的查询语言非常强大，其语法有点类
 
 1. **ObjectId**
 
-   ObjectId 类似唯一主键<font color=red>（不指定，会自动生成）</font>，可以很快的去生成和排序，包含 12 bytes，含义是：
+   ObjectId 类似唯一主键<font color=#FFA500>（不指定，会自动生成）</font>，可以很快的去生成和排序，包含 12 bytes，含义是：
 
    - 前 4 个字节表示创建 unix 时间戳，格林尼治时间 UTC 时间，比北京时间晚了 8 个小时
    - 接下来的 3 个字节是机器标识码
@@ -201,7 +201,7 @@ db.comment.update({_id:"1"},{thumbup:1000})
 
 **执行后发现，这条文档除了thumbup字段其它字段都不见了**
 
-为了解决这个问题，我们需要使用<font color=red>修改器$set</font>来实现，命令如下：
+为了解决这个问题，我们需要使用<font color=#FFA500>修改器$set</font>来实现，命令如下：
 
 ```shell
 db.comment.update({_id:"2"},{$set:{thumbup:2000}})
@@ -213,7 +213,7 @@ db.comment.update({_id:"2"},{$set:{thumbup:2000}})
 db.集合名称.remove(条件)
 ```
 
-- <font color=red>以下语句可以将数据全部删除，慎用~</font>
+- <font color=#FFA500>以下语句可以将数据全部删除，慎用~</font>
 
 ```shell
 db.comment.remove({})
