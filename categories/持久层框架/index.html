@@ -453,6 +453,16 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://www.keepli.cn/categories/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/',]
+      });
+      });
+  </script>
 
 
 <script>

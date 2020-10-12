@@ -548,6 +548,16 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://www.keepli.cn/2020/01/22/springboot%E6%95%B4%E5%90%88druid%E6%95%B0%E6%8D%AE%E6%BA%90/',]
+      });
+      });
+  </script>
 
 
 <script>

@@ -577,6 +577,16 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://www.keepli.cn/2020/03/15/hexo%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81mermaid%E5%9B%BE%E8%A1%A8/',]
+      });
+      });
+  </script>
 
 
 <script>

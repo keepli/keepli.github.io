@@ -574,6 +574,16 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://www.keepli.cn/2020/04/10/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E5%B8%A6%E5%9B%9E%E5%AE%B6/',]
+      });
+      });
+  </script>
 
 
 <script>
