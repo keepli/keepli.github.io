@@ -376,7 +376,7 @@
 <h3 id="4-IM功能实现"><a href="#4-IM功能实现" class="headerlink" title="4.IM功能实现"></a><font color=#F39C12>4.IM功能实现</font></h3><p>由于即时通讯功能的实现其实也是非常复杂的，一个完善的即时通讯系统是需要投入很多成本的，很多公司也不会自行去开发一个即时通讯系统，很多都是采用第三方服务来实现即时通讯。</p>
 <p><strong>第三方即时通讯服务：</strong></p>
 <ul>
-<li>环信im云 &lt;<a href="https://www.easemob.com/product/im">官网</a>&gt;</li>
+<li><a href="http://keepli.cn/2020/06/10/%E7%8E%AF%E4%BF%A1IM%E7%9A%84%E9%9B%86%E6%88%90/">环信IM云的集成使用链接</a></li>
 </ul>
 <h3 id="5-好文推荐"><a href="#5-好文推荐" class="headerlink" title="5.好文推荐"></a><font color=#F39C12>5.好文推荐</font></h3><ul>
 <li><p><a href="https://www.cnblogs.com/sunsky303/p/10414146.html">长连接及心跳保活原理简介</a></p>
