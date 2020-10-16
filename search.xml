@@ -128,6 +128,176 @@
       </tags>
   </entry>
   <entry>
+    <title>摘要算法和加密算法s</title>
+    <url>/2020/06/23/%E6%8E%A5%E5%8F%A3%E5%8A%A0%E5%AF%86/</url>
+    <content><![CDATA[<p><em>数据在网络上传输时，如果不对数据进行加密，很容易被黑客和不法分子窃取，比如使用抓包工具就能获取到没有加密的数据，直接就可能造成财产损失和账号密码泄露等等严重的风险，所以，对网络的传输数据进行加密至关重要，本文主要对摘要算法和加密算法做个简单介绍</em></p>
+<a id="more"></a>
+
+<hr>
+<h2 id="一、加密方式"><a href="#一、加密方式" class="headerlink" title="一、加密方式"></a><font color=red>一、加密方式</font></h2><h3 id="1-摘要算法"><a href="#1-摘要算法" class="headerlink" title="1. 摘要算法"></a><font color=#F39C12>1. 摘要算法</font></h3><ol>
+<li><p><strong>简介</strong></p>
+<p>消息摘要是把任意长度的输入揉和而产生长度固定的信息 </p>
+</li>
+<li><p><strong>特征</strong></p>
+<ul>
+<li>加密过程不需要密钥</li>
+<li>经过加密的数据无法被解密，只有输入相同的明文数据经过相同的消息摘要算法才能得到相同的密文</li>
+<li>消息摘要算法不存在密钥的管理与分发问题，适合于分布式网络上使用 </li>
+</ul>
+</li>
+<li><p><strong>特点</strong> </p>
+<ul>
+<li>无论输入的消息有多长，计算出来的消息摘要的长度总是固定的</li>
+<li>消息摘要看起来是“随机的”。这些数据看上去是胡乱的杂凑在一起的</li>
+<li>只要输入的消息不同，对其进行摘要后产生的摘要消息也必不相同；但相同的输入必会产生相同的输出</li>
+<li>只能进行正向的消息摘要，而无法从摘要中恢复出任何消息，甚至根本就找不到任何与原信息相关的信息</li>
+<li>虽然“碰撞”是肯定存在的，但好的摘要算法很难能从中找到“碰撞”。即无法找到两条不同消息，但是它们的摘要相同</li>
+</ul>
+</li>
+<li><p><strong>常见的摘要算法 (用的是哈希/散列算法)</strong></p>
+<p>CRC、<strong>MD5</strong>、SHA等 </p>
+</li>
+<li><p><strong>应用场景</strong></p>
+<p>  数字签名，密码加密，文件完整性的校验 ， 版权等应用场景</p>
+<p> <a href="https://blog.csdn.net/jike_yangyujing/article/details/80512205">更详细讲解</a></p>
+</li>
+<li><p><strong>思考</strong></p>
+<p>  由于相同的明文数据经过相同的消息摘要算法得到相同的密文这一特征，<strong>单一的摘要算法变得不安全了</strong>，很多简单常用的明文密码都得到了破解，那么如何解决这个问题呢？</p>
+<blockquote>
+<p>其实我们可以对一个明文密码进行多次加密，或者多种算法混合进行加密，又或者在明文上添加序列，进行计算等等手段</p>
+</blockquote>
+</li>
+<li><p><strong>注意</strong></p>
+<p>  在电脑环境安全的情况下，不法分子通常是在传输阶段进行数据的截取，所以，在数据传输之前就要进行加密处理，也就是说在前端就要进行数据的加密，后端进行解密等处理</p>
+</li>
+</ol>
+<h3 id="2-对称加密"><a href="#2-对称加密" class="headerlink" title="2. 对称加密"></a><font color=#F39C12>2. 对称加密</font></h3><ol>
+<li><p><strong>简介</strong></p>
+<p> 加密和解密使用相同<a href="https://baike.baidu.com/item/%E5%AF%86%E9%92%A5">密钥</a>的<a href="https://baike.baidu.com/item/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95">加密算法</a></p>
+</li>
+<li><p><strong>特点</strong></p>
+<ul>
+<li>速度快，通常在消息发送方需要加密大量数据时使用</li>
+<li>密钥是控制加密及解密过程的指令</li>
+<li>算法是一组规则，规定如何进行加密和解密</li>
+</ul>
+</li>
+<li><p><strong>应用场景</strong></p>
+<p> 离线的大量数据加密（用于存储的） </p>
+</li>
+<li><p><strong>常见的加密算法</strong> </p>
+<p><strong>DES</strong>、3DES、<strong>AES</strong>、TDEA、Blowfish、RC2、RC4、RC5、IDEA、SKIPJACK等 </p>
+</li>
+<li><p><strong>对称加密的工作流程图</strong></p>
+<img src="https://img-blog.csdnimg.cn/20201015094547103.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center" style="zoom:80%;" />
+
+<blockquote>
+<p> 加密的安全性不仅取决于加密算法本身，密钥管理的安全性更是重要。如何把密钥安全地传递到解密者手上就成了必须要解决的问题 </p>
+</blockquote>
+</li>
+</ol>
+<h3 id="3-非对称加密"><a href="#3-非对称加密" class="headerlink" title="3. 非对称加密"></a><font color=#F39C12>3. 非对称加密</font></h3><ol>
+<li><p><strong>简介</strong></p>
+<p>非对称加密算法是一种<strong>密钥</strong>的保密方法，加密和解密使用两个不同的密钥，公开密钥（publickey:简称公钥）和私有密钥（privatekey:简称私钥）。公钥与私钥是一对，如果用公钥对数据进行加密，只有用对应的私钥才能解密</p>
+</li>
+<li><p><strong>特点</strong> </p>
+<ul>
+<li>算法强度复杂</li>
+<li>加密解密速度没有对称密钥算法的速度快</li>
+</ul>
+</li>
+<li><p><strong>应用场景</strong> </p>
+<p>数字签名（私钥加密，公钥验证） </p>
+</li>
+<li><p><strong>常见的加密算法</strong> </p>
+<p><strong>RSA</strong>、Elgamal、背包算法、Rabin、D-H、ECC（椭圆曲线加密算法） </p>
+</li>
+<li><p><strong>非对称加密算法的工作流程图</strong></p>
+<img src="https://img-blog.csdnimg.cn/20201015103638513.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center" style="zoom:80%;" />
+
+</li>
+</ol>
+<h3 id="4-数字签名"><a href="#4-数字签名" class="headerlink" title="4. 数字签名"></a><font color=#F39C12>4. 数字签名</font></h3><ol>
+<li><p><strong>简介</strong></p>
+<p>数字签名（又称<a href="https://baike.baidu.com/item/%E5%85%AC%E9%92%A5">公钥</a>数字签名）是一种类似写在纸上的普通的物理签名，是使用了公钥加密领域的技术实现，用于鉴别数字信息的方法 </p>
+</li>
+<li><p><strong>特点</strong> </p>
+<p>数字签名通常使用私钥生成签名，使用公钥验证签名 </p>
+</li>
+<li><p><strong>签名及验证过程</strong> </p>
+<ul>
+<li><p>发送方用一个哈希函数（例如MD5）从报文文本中生成<a href="https://baike.baidu.com/item/%E6%8A%A5%E6%96%87%E6%91%98%E8%A6%81">报文摘要</a>，然后用自己的私钥对这个摘要进行加密</p>
+</li>
+<li><p>将加密后的摘要作为报文的数字签名和报文一起发送给接收方</p>
+</li>
+<li><p>接收方用与发送方一样的哈希函数从接收到的原始报文中计算出报文摘要</p>
+</li>
+<li><p>接收方再用发送方的公用密钥来对报文附加的数字签名进行解密</p>
+</li>
+<li><p>如果这两个摘要相同、接收方就能确认该数字签名是发送方的</p>
+</li>
+</ul>
+<img src="https://img-blog.csdnimg.cn/2020101510454172.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center" style="zoom:80%;" />
+</li>
+<li><p><strong>作用</strong></p>
+<ul>
+<li>确定消息确实是由发送方签名并发出来的</li>
+<li>确定消息的完整性</li>
+</ul>
+</li>
+<li><p><strong>思考</strong></p>
+<p>为什么有了摘要算法和加密算法还需要数字签名呢？</p>
+<blockquote>
+<p>数字签名其实是两者的结合，是一种应用。非对称加密算法虽然私钥没有泄密，但是不法分子可以使用公钥对密文进行截取替换，而不需要对原来的密文进行解密，服务端是没有能力分清密文是谁发送的，被替换的都不知道，从而造成解密到的是被替换的密文</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="二、秘钥的生成"><a href="#二、秘钥的生成" class="headerlink" title="二、秘钥的生成"></a><font color=red>二、秘钥的生成</font></h2><h3 id="1-RSA加密算法"><a href="#1-RSA加密算法" class="headerlink" title="1. RSA加密算法"></a><font color=#F39C12>1. RSA加密算法</font></h3><ol>
+<li><p><strong>RSA算法的密钥格式</strong></p>
+<ul>
+<li><p>密钥长度介于 512 - 65536 之间（JDK 中默认长度是1024），且<strong>必须是64 的倍数</strong>。密钥的常用文件格式有pem（文本存储）或者der（二进制存储）</p>
+</li>
+<li><p>当使用Java API生成RSA密钥对时，公钥以X.509格式编码，私钥以PKCS#8格式编码</p>
+</li>
+</ul>
+<p><strong>RSA使用pkcs协议定义密钥的存储结构等内容</strong></p>
+<table><thead><tr><th><span>协议</span></th><th><span>说明</span></th></tr></thead><tbody><tr><td><span>PKCS#1</span></td><td><span>定义了RSA公钥函数的基本格式标准，特别是数字签名。</span></td></tr><tr><td><span>PKCS#2</span></td><td><span>涉及了RSA的消息摘要加密，已被并入PKCS#1中。</span></td></tr><tr><td><span>PKCS#3</span></td><td><span>Diffie-Hellman密钥协议标准。</span></td></tr><tr><td><span>PKCS#4</span></td><td><span>最初是规定RSA密钥语法的，现已经被包含进PKCS#1中。</span></td></tr><tr><td><span>PKCS#5</span></td><td><span>基于口令的加密标准，描述了使用由口令生成的密钥来加密8位位组串并产生一个加密的8位位组串的方法。PKCS#5可以用于加密私钥，以便于密钥的安全传输（这在PKCS#8中描述）。</span></td></tr><tr><td><span>PKCS#6</span></td><td><span>扩展证书语法标准，定义了提供附加实体信息的X.509证书属性扩展的语法。</span></td></tr><tr><td><span>PKCS#7</span></td><td><span>密码消息语法标准。为使用密码算法的数据规定了通用语法，比如数字签名和数字信封。</span></td></tr><tr><td><strong><span>PKCS#8</span></strong></td><td><span>私钥信息语法标准。定义了私钥信息语法和加密私钥语法，其中私钥加密使用了PKCS#5标准。</span></td></tr><tr><td><span>PKCS#9</span></td><td><span>可选属性类型。</span></td></tr><tr><td><span>PKCS#10</span></td><td><span>证书请求语法标准。</span></td></tr><tr><td><span>PKCS#11</span></td><td><span>密码令牌接口标准。</span></td></tr><tr><td><span>PKCS#12</span></td><td><span>个人信息交换语法标准。</span></td></tr><tr><td><span>PKCS#13</span></td><td><span>椭圆曲线密码标准。</span></td></tr><tr><td><span>PKCS#14</span></td><td><span>伪随机数产生标准。</span></td></tr><tr><td><span>PKCS#15</span></td><td><span>密码令牌信息语法标准。</span></td></tr></tbody></table>
+链接地址
+
+
+
+</li>
+</ol>
+<ul>
+<li><p><a href="https://www.rfc-editor.org/search/rfc_search_detail.php?title=pkcs&pubstatus%5B%5D=Any&pub_date_type=any">pkcs标准详细说明</a></p>
+</li>
+<li><p><a href="https://www.rsa.com/">RSA官方网站 </a></p>
+</li>
+</ul>
+<h3 id="2-OpenSSL生成RSA密钥对的命令"><a href="#2-OpenSSL生成RSA密钥对的命令" class="headerlink" title="2. OpenSSL生成RSA密钥对的命令"></a><font color=#F39C12>2. OpenSSL生成RSA密钥对的命令</font></h3><p><strong><font color=red>没配置环境变量需要进入到bin目录下执行下面的命令</font></strong></p>
+<ol>
+<li><p>生成rsa私钥，文本存储格式，长度2048 </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">openssl genrsa -out ../mycerts/rsa_private_key.pem 2048</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根据私钥生成对应的公钥 </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">openssl rsa -in ../mycerts/rsa_private_key.pem -pubout -out ../mycerts/rsa_public_key_2048.pub</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>私钥转化成pkcs8格式（java中使用的规定）</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">openssl pkcs8 -topk8 -inform PEM -in ../mycerts/rsa_private_key.pem -outform PEM -nocrypt &gt; ../mycerts/rsa_private_key_pkcs8.pem</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="3-接口加解密请求参数的流程"><a href="#3-接口加解密请求参数的流程" class="headerlink" title="3.  接口加解密请求参数的流程 "></a><font color=#F39C12>3.  接口加解密请求参数的流程 </font></h3><img src="https://img-blog.csdnimg.cn/20201015123441688.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center" style="zoom:80%;" />]]></content>
+      <categories>
+        <category>加密</category>
+      </categories>
+      <tags>
+        <tag>摘要算法</tag>
+        <tag>加密算法</tag>
+        <tag>数字签名</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>环信IM的集成</title>
     <url>/2020/06/10/%E7%8E%AF%E4%BF%A1IM%E7%9A%84%E9%9B%86%E6%88%90/</url>
     <content><![CDATA[<p><em>第三方即时通讯服务，环信 IM云的集成使用，我这里主要以 web集成为主，如何把单聊模块集成到自己的项目进行的操作讲解，更多详细操作可以参考官网提供的开发文档</em></p>
