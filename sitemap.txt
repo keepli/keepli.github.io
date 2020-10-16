@@ -193,13 +193,6 @@
   </url>
   
   <url>
-    <loc>http://www.keepli.cn/tags/mybatis-plus/</loc>
-    <lastmod>2020-10-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://www.keepli.cn/tags/springboot/</loc>
     <lastmod>2020-10-16</lastmod>
     <changefreq>daily</changefreq>
@@ -208,6 +201,34 @@
   
   <url>
     <loc>http://www.keepli.cn/tags/druid/</loc>
+    <lastmod>2020-10-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.keepli.cn/tags/mybatis-plus/</loc>
+    <lastmod>2020-10-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.keepli.cn/tags/%E5%88%86%E5%B8%83%E5%BC%8Fid%E7%94%9F%E6%88%90%E5%99%A8/</loc>
+    <lastmod>2020-10-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.keepli.cn/tags/%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2020-10-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.keepli.cn/tags/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E8%AE%BE%E8%AE%A1/</loc>
     <lastmod>2020-10-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -235,21 +256,7 @@
   </url>
   
   <url>
-    <loc>http://www.keepli.cn/tags/%E5%88%86%E5%B8%83%E5%BC%8Fid%E7%94%9F%E6%88%90%E5%99%A8/</loc>
-    <lastmod>2020-10-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.keepli.cn/tags/%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2020-10-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.keepli.cn/tags/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E8%AE%BE%E8%AE%A1/</loc>
+    <loc>http://www.keepli.cn/tags/%E5%B9%82%E7%AD%89%E6%80%A7/</loc>
     <lastmod>2020-10-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -278,13 +285,6 @@
   
   <url>
     <loc>http://www.keepli.cn/tags/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D/</loc>
-    <lastmod>2020-10-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.keepli.cn/tags/%E5%B9%82%E7%AD%89%E6%80%A7/</loc>
     <lastmod>2020-10-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -328,6 +328,13 @@
   </url>
   
   <url>
+    <loc>http://www.keepli.cn/categories/jdbc/</loc>
+    <lastmod>2020-10-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.keepli.cn/categories/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/</loc>
     <lastmod>2020-10-16</lastmod>
     <changefreq>daily</changefreq>
@@ -335,7 +342,7 @@
   </url>
   
   <url>
-    <loc>http://www.keepli.cn/categories/jdbc/</loc>
+    <loc>http://www.keepli.cn/categories/java%E5%B7%A5%E5%85%B7%E7%B1%BB/</loc>
     <lastmod>2020-10-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -356,7 +363,7 @@
   </url>
   
   <url>
-    <loc>http://www.keepli.cn/categories/java%E5%B7%A5%E5%85%B7%E7%B1%BB/</loc>
+    <loc>http://www.keepli.cn/categories/%E5%B9%82%E7%AD%89%E6%80%A7/</loc>
     <lastmod>2020-10-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -371,13 +378,6 @@
   
   <url>
     <loc>http://www.keepli.cn/categories/%E5%8A%A0%E5%AF%86/</loc>
-    <lastmod>2020-10-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.keepli.cn/categories/%E5%B9%82%E7%AD%89%E6%80%A7/</loc>
     <lastmod>2020-10-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
