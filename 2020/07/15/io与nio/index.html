@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/add/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/add/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Piazzolla:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/themes/black/pace-theme-loading-bar.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.keepli.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"width":240},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="传统 I &#x2F; O 与 NIO 的区别，netty框架的简单了解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="传统I&#x2F;O与NIO">
+<meta property="og:url" content="http://www.keepli.cn/2020/07/15/io%E4%B8%8Enio/index.html">
+<meta property="og:site_name" content="听风知秋雨">
+<meta property="og:description" content="传统 I &#x2F; O 与 NIO 的区别，netty框架的简单了解">
+<meta property="og:locale">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/15eccfd330f9fc2c526a311a724dde84/xmlnote/5B3D9F8D23824FB8970D6A08D696A6FE/20111">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/15eccfd330f9fc2c526a311a724dde84/xmlnote/0B803FF1B7C546A4B7D1B6BFC3DAF50A/20114">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/15eccfd330f9fc2c526a311a724dde84/xmlnote/19C50AB3161D41D0BF698AA2D369B762/20116">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/15eccfd330f9fc2c526a311a724dde84/xmlnote/457A4EBA5A2D499688B66ACB92AB003F/20118">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/15eccfd330f9fc2c526a311a724dde84/xmlnote/E6C0990A05F74EC5903A8831F4733035/20120">
+<meta property="article:published_time" content="2020-07-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-07-14T16:00:00.000Z">
+<meta property="article:author" content="Driven">
+<meta property="article:tag" content="netty">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://note.youdao.com/yws/public/resource/15eccfd330f9fc2c526a311a724dde84/xmlnote/5B3D9F8D23824FB8970D6A08D696A6FE/20111">
+
+<link rel="canonical" href="http://www.keepli.cn/2020/07/15/io%E4%B8%8Enio/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>传统I/O与NIO | 听风知秋雨</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
+  <script src="/live2d-widget/autoload.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">听风知秋雨</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">new dream</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/keepli" class="github-corner" title="参观我的GitHub" aria-label="参观我的GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/07/15/io%E4%B8%8Enio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/add/header.jpg">
+      <meta itemprop="name" content="Driven">
+      <meta itemprop="description" content="大大的世界，小小的梦想">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风知秋雨">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          传统I/O与NIO
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-15 00:00:00" itemprop="dateCreated datePublished" datetime="2020-07-15T00:00:00+08:00">2020-07-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">网络编程</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/15/io%E4%B8%8Enio/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/15/io%E4%B8%8Enio/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  ﻿
+	
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> <em>传统 I / O 与 NIO 的区别，netty框架的简单了解</em></p>
+<a id="more"></a>
+
+<hr>
+<h2 id="一、传统IO编程"><a href="#一、传统IO编程" class="headerlink" title="一、传统IO编程"></a><font color=red>一、传统IO编程</font></h2><h3 id="1-阻塞式I-O的通信模型示意图"><a href="#1-阻塞式I-O的通信模型示意图" class="headerlink" title="1. 阻塞式I/O的通信模型示意图 "></a><font color=#F39C12>1. 阻塞式I/O的通信模型示意图 </font></h3><p> 每个客户端连接过来后，服务端都会启动一个线程去处理该客户端的请求 </p>
+<img src="http://note.youdao.com/yws/public/resource/15eccfd330f9fc2c526a311a724dde84/xmlnote/5B3D9F8D23824FB8970D6A08D696A6FE/20111" style="zoom:80%;" />
+
+<h3 id="2-业务场景"><a href="#2-业务场景" class="headerlink" title="2. 业务场景 "></a><font color=#F39C12>2. 业务场景 </font></h3><p>客户端每隔两秒发送字符串给服务端，服务端收到之后打印到控制台 </p>
+<h3 id="3-代码实现"><a href="#3-代码实现" class="headerlink" title="3. 代码实现 "></a><font color=#F39C12>3. 代码实现 </font></h3><p> <strong>服务端实现 ：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IOServer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//创建服务端socket对象</span></span><br><span class="line">        ServerSocket serverSocket = <span class="keyword">new</span> ServerSocket ( <span class="number">8000</span> );</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">            <span class="comment">//接收来自客户端的socket请求</span></span><br><span class="line">            Socket socket = serverSocket.accept ( );</span><br><span class="line"></span><br><span class="line">            <span class="comment">//使用匿名内部类和匿名对象的方式创建线程</span></span><br><span class="line">            <span class="keyword">new</span> Thread ( )&#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">                    BufferedInputStream b_in = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        String name = Thread.currentThread ( ).getName ( );</span><br><span class="line">                        <span class="comment">//获取网络输入流</span></span><br><span class="line">                        b_in = <span class="keyword">new</span> BufferedInputStream ( socket.getInputStream ( ) );</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">                        <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">while</span> ((len = b_in.read ( bytes )) != -<span class="number">1</span>)&#123;</span><br><span class="line">                            <span class="comment">//打印读取到的数据</span></span><br><span class="line">                            System.out.println ( <span class="string">&quot;线程&quot;</span> + name + <span class="string">&quot;：&quot;</span> + <span class="keyword">new</span> String ( bytes,<span class="number">0</span>,bytes.length ) );</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                        e.printStackTrace ( );</span><br><span class="line"></span><br><span class="line">                    &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">                        <span class="comment">//关闭资源</span></span><br><span class="line">                        <span class="keyword">if</span> (b_in!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                            <span class="keyword">try</span> &#123;</span><br><span class="line">                                b_in.close ();</span><br><span class="line">                            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                                e.printStackTrace ( );</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;.start ();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>客户端实现：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IOClient</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> ClientDemo ().start ();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ClientDemo</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//创建客户端socket对象</span></span><br><span class="line">                Socket socket = <span class="keyword">new</span> Socket ( <span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">8000</span> );</span><br><span class="line"></span><br><span class="line">                <span class="comment">//获取网络字节输出流</span></span><br><span class="line">                OutputStream out = socket.getOutputStream ( );</span><br><span class="line"></span><br><span class="line">                <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">                    out.write ( <span class="string">&quot;你好，服务端&quot;</span>.getBytes ( ) );</span><br><span class="line">                    Thread.sleep ( <span class="number">2000</span> );</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace ( );</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-存在的问题"><a href="#4-存在的问题" class="headerlink" title="4.存在的问题 "></a><font color=#F39C12>4.存在的问题 </font></h3><p>从服务端代码中我们可以看到，在传统的IO模型中，每个连接创建成功之后都需要一个线程来维护，每个线程包含一个while死循环 。</p>
+<p>如果在用户数量较少的情况下运行是没有问题的，但是对于用户数量比较多的业务来说，服务端可能需要支撑成千上万的连接，IO模型可能就不太合适了 。</p>
+<p><strong>如果有1万个连接就对应1万个线程，继而1万个while死循环</strong>，这种模型存在以下问题： </p>
+<ul>
+<li>当客户端越多，就会创建越多的处理线程。线程是操作系统中非常宝贵的资源，同一时刻有大量的线程处于阻塞状态是非常严重的资源浪费。并且如果务器遭遇洪峰流量冲击，例如双十一活动，线程池会瞬间被耗尽，导致服务器瘫痪。</li>
+<li>因为是阻塞式通信，线程爆炸之后操作系统频繁进行线程切换，应用性能急剧下降。</li>
+<li>IO编程中数据读写是以字节流为单位，效率不高。</li>
+</ul>
+<h3 id="二、NIO编程"><a href="#二、NIO编程" class="headerlink" title="二、NIO编程"></a><font color=red>二、NIO编程</font></h3><h3 id="1-非阻塞式I-O的通信模型示意图"><a href="#1-非阻塞式I-O的通信模型示意图" class="headerlink" title="1. 非阻塞式I/O的通信模型示意图 "></a><font color=#F39C12>1. 非阻塞式I/O的通信模型示意图 </font></h3><p>NIO，也叫做new-IO或者non-blocking-IO，可理解为非阻塞IO。NIO编程模型中，新来一个连接不再创建一个新的线程，而是可以把这条连接直接绑定到某个固定的线程，然后这条连接所有的读写都由这个线程来负责，我们用一幅图来对比一下IO与NIO </p>
+<img src="http://note.youdao.com/yws/public/resource/15eccfd330f9fc2c526a311a724dde84/xmlnote/0B803FF1B7C546A4B7D1B6BFC3DAF50A/20114" style="zoom: 50%;" />
+
+<p>如上图所示，IO模型中，一个连接都会创建一个线程，对应一个while死循环，死循环的目的就是不断监测这条连接上是否有数据可以读。但是在大多数情况下，1万个连接里面同一时刻只有少量的连接有数据可读，因此，很多个while死循环都白白浪费掉了，因为没有数据。</p>
+<p>而在NIO模型中，可以把这么多的while死循环变成一个死循环，这个死循环由一个线程控制。这就是NIO模型中选择器（Selector）的作用，一条连接来了之后，现在不创建一个while死循环去监听是否有数据可读了，而是直接把这条连接注册到<strong>选择器</strong>上，通过检查这个<strong>选择器</strong>，就可以批量监测出有数据可读的连接，进而读取数据。</p>
+<h3 id="2-举例说明传统I-O和NIO的区别"><a href="#2-举例说明传统I-O和NIO的区别" class="headerlink" title="2. 举例说明传统I/O和NIO的区别 "></a><font color=#F39C12>2. 举例说明传统I/O和NIO的区别 </font></h3><p>举个栗子，在一家餐厅里，客人有点菜的需求，一共有100桌客人，有两种方案可以解决客人点菜的问题：</p>
+<ul>
+<li><p>方案一：</p>
+<p>每桌客人配一个服务生，每个服务生就在餐桌旁给客人提供服务。如果客人要点菜，服务生就可以立刻提供点菜的服务。那么100桌客人就需要100个服务生提供服务，这就是IO模型，一个连接对应一个线程。</p>
+</li>
+</ul>
+<ul>
+<li><p>方案二：</p>
+<p>一个餐厅只有一个服务生（假设服务生可以忙的过来）。这个服务生隔段时间就询问所有的客人是否需要点菜，然后每一时刻处理所有客人的点菜要求。这就是NIO模型，所有客人都注册到同一个服务生，对应的就是所有的连接都注册到一个线程，然后批量轮询。</p>
+</li>
+</ul>
+<p>这就是NIO模型解决线程资源受限的方案，实际开发过程中，我们会开多个线程，每个线程都管理着一批连接，相对于IO模型中一个线程管理一条连接，消耗的线程资源大幅减少。</p>
+<h3 id="3-NIO的三大核心组件"><a href="#3-NIO的三大核心组件" class="headerlink" title="3. NIO的三大核心组件 "></a><font color=#F39C12>3. NIO的三大核心组件 </font></h3><p><strong>NIO的三大核心组件：通道（Channel）、缓冲（Buffer）、选择器（Selector）</strong></p>
+<ul>
+<li><p>通道（Channel）</p>
+<p>是传统IO中的Stream(流)的升级版。Stream是单向的、读写分离（inputstream和outputstream），Channel是双向的，既可以进行读操作，又可以进行写操作</p>
+</li>
+<li><p>缓冲（Buffer）</p>
+<p>Buffer可以理解为一块内存区域，可以写入数据，并且在之后读取它</p>
+</li>
+<li><p>选择器（Selector）</p>
+<p>选择器（Selector）可以实现一个单独的线程来监控多个注册在她上面的信道（Channel），通过一定的选择机制，实现多路复用的效果</p>
+</li>
+</ul>
+<h3 id="4-NIO相对于IO的优势"><a href="#4-NIO相对于IO的优势" class="headerlink" title="4. NIO相对于IO的优势 "></a><font color=#F39C12>4. NIO相对于IO的优势 </font></h3><ul>
+<li>IO是面向流的，每次都是从操作系统底层一个字节一个字节地读取数据，并且数据只能从一端读取到另一端，不能前后移动流中的数据。NIO则是面向缓冲区的，每次可以从这个缓冲区里面读取一块的数据，并且可以在需要时在缓冲区中前后移动</li>
+<li>IO是阻塞的，这意味着，当一个线程读取数据或写数据时，该线程被阻塞，直到有一些数据被读取，或数据完全写入，在此期间该线程不能干其他任何事情。而NIO是非阻塞的，不需要一直等待操作完成才能干其他事情，而是在等待的过程中可以同时去做别的事情，所以能最大限度地使用服务器的资源</li>
+<li>NIO引入了IO多路复用器selector。selector是一个提供channel注册服务的线程，可以同时对接多个Channel，并在线程池中为channel适配、选择合适的线程来处理channel。由于NIO模型中线程数量大大降低，线程切换效率因此也大幅度提高</li>
+</ul>
+<h3 id="5-代码实现"><a href="#5-代码实现" class="headerlink" title="5. 代码实现"></a><font color=#F39C12>5. 代码实现</font></h3><p> 和前面一样的场景，使用NIO实现（复制代码演示效果即可，客户端照样用原来的）： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NIOServer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 负责轮询是否有新的连接</span></span><br><span class="line">        Selector serverSelector = Selector.open();</span><br><span class="line">        <span class="comment">// 负责轮询处理连接中的数据</span></span><br><span class="line">        Selector clientSelector = Selector.open();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="comment">// 对应IO编程中服务端启动</span></span><br><span class="line">                    ServerSocketChannel listenerChannel = ServerSocketChannel.open();</span><br><span class="line">                    listenerChannel.socket().bind(<span class="keyword">new</span> InetSocketAddress(<span class="number">8000</span>));</span><br><span class="line">                    listenerChannel.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">                    <span class="comment">// OP_ACCEPT表示服务器监听到了客户连接，服务器可以接收这个连接了</span></span><br><span class="line">                    listenerChannel.register(serverSelector, SelectionKey.OP_ACCEPT);</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                        <span class="comment">// 监测是否有新的连接，这里的1指的是阻塞的时间为1ms</span></span><br><span class="line">                        <span class="keyword">if</span> (serverSelector.select(<span class="number">1</span>) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                            Set&lt;SelectionKey&gt; set = serverSelector.selectedKeys();</span><br><span class="line">                            Iterator&lt;SelectionKey&gt; keyIterator = set.iterator();</span><br><span class="line"></span><br><span class="line">                            <span class="keyword">while</span> (keyIterator.hasNext()) &#123;</span><br><span class="line">                                SelectionKey key = keyIterator.next();</span><br><span class="line"></span><br><span class="line">                                <span class="keyword">if</span> (key.isAcceptable()) &#123;</span><br><span class="line">                                    <span class="keyword">try</span> &#123;</span><br><span class="line">                                        <span class="comment">// (1) 每来一个新连接，不需要创建一个线程，而是直接注册到clientSelector</span></span><br><span class="line">                                        SocketChannel clientChannel = ((ServerSocketChannel) key.channel()).accept();</span><br><span class="line">                                        clientChannel.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">                                        <span class="comment">// OP_READ表示通道中已经有了可读的数据，可以执行读操作了（通道目前有数据，可以进行读操作了）</span></span><br><span class="line">                                        clientChannel.register(clientSelector, SelectionKey.OP_READ);</span><br><span class="line">                                    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                                        keyIterator.remove();</span><br><span class="line">                                    &#125;</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException ignored) &#123;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                String name = Thread.currentThread().getName();</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                        <span class="comment">// (2) 批量轮询是否有哪些连接有数据可读，这里的1指的是阻塞的时间为1ms</span></span><br><span class="line">                        <span class="keyword">if</span> (clientSelector.select(<span class="number">1</span>) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                            Set&lt;SelectionKey&gt; set = clientSelector.selectedKeys();</span><br><span class="line">                            Iterator&lt;SelectionKey&gt; keyIterator = set.iterator();</span><br><span class="line"></span><br><span class="line">                            <span class="keyword">while</span> (keyIterator.hasNext()) &#123;</span><br><span class="line">                                SelectionKey key = keyIterator.next();</span><br><span class="line"></span><br><span class="line">                                <span class="keyword">if</span> (key.isReadable()) &#123;</span><br><span class="line">                                    <span class="keyword">try</span> &#123;</span><br><span class="line">                                        SocketChannel clientChannel = (SocketChannel) key.channel();</span><br><span class="line">                                        ByteBuffer byteBuffer = ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">                                        <span class="comment">// (3) 读取数据以块为单位批量读取</span></span><br><span class="line">                                        clientChannel.read(byteBuffer);</span><br><span class="line">                                        byteBuffer.flip();</span><br><span class="line">                                        System.out.println(<span class="string">&quot;线程&quot;</span> + name + <span class="string">&quot;:&quot;</span> + Charset.defaultCharset().newDecoder().decode(byteBuffer)</span><br><span class="line">                                                .toString());</span><br><span class="line">                                    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                                        keyIterator.remove();</span><br><span class="line">                                        key.interestOps(SelectionKey.OP_READ);</span><br><span class="line">                                    &#125;</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException ignored) &#123;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、Netty"><a href="#三、Netty" class="headerlink" title="三、Netty"></a><font color=red>三、Netty</font></h2><h3 id="1-为什么使用Netty"><a href="#1-为什么使用Netty" class="headerlink" title="1. 为什么使用Netty "></a><font color=#F39C12>1. 为什么使用Netty </font></h3><p>我们已经有了NIO能够提高程序效率了，为什么还要使用Netty？</p>
+<p>简单的说：Netty封装了JDK的NIO，让你用得更爽，你不用再写一大堆复杂的代码了。</p>
+<p>官方术语：Netty是一个异步事件驱动的网络应用框架，用于快速开发可维护的高性能服务器和客户端。</p>
+<p><strong>下面是使用Netty不使用JDK原生NIO的一些原因：</strong></p>
+<ul>
+<li>使用JDK自带的NIO需要了解太多的概念，编程复杂</li>
+<li>Netty底层IO模型随意切换，而这一切只需要做微小的改动，就可以直接从NIO模型变身为IO模型</li>
+<li>Netty自带的拆包解包，异常检测等机制，可以从NIO的繁重细节中脱离出来，只需要关心业务逻辑</li>
+<li>Netty解决了JDK的很多包括空轮询在内的bug</li>
+<li>Netty底层对线程，selector做了很多细小的优化，精心设计的线程模型做到非常高效的并发处理</li>
+<li>自带各种协议栈让你处理任何一种通用协议都几乎不用亲自动手</li>
+<li>Netty社区活跃，遇到问题随时邮件列表或者issue</li>
+<li>Netty已经历各大rpc框架，消息中间件，分布式通信中间件线上的广泛验证，健壮性无比强大</li>
+</ul>
+<h3 id="2-代码实现"><a href="#2-代码实现" class="headerlink" title="2. 代码实现 "></a><font color=#F39C12>2. 代码实现 </font></h3><p>和IO编程一样的案例：</p>
+<p><strong>添加Netty依赖</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.netty&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;netty-all&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.1.5.Final&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>服务端：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NettyServer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ServerBootstrap serverBootstrap = <span class="keyword">new</span> ServerBootstrap();</span><br><span class="line"></span><br><span class="line">        NioEventLoopGroup boos = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line">        NioEventLoopGroup worker = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line">        serverBootstrap</span><br><span class="line">                .group(boos, worker)</span><br><span class="line">                .channel(NioServerSocketChannel.class)</span><br><span class="line">                .childHandler(<span class="keyword">new</span> ChannelInitializer&lt;NioSocketChannel&gt;() &#123;</span><br><span class="line">                    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initChannel</span><span class="params">(NioSocketChannel ch)</span> </span>&#123;</span><br><span class="line">                        ch.pipeline().addLast(<span class="keyword">new</span> StringDecoder());</span><br><span class="line">                        ch.pipeline().addLast(<span class="keyword">new</span> SimpleChannelInboundHandler&lt;String&gt;() &#123;</span><br><span class="line">                            <span class="meta">@Override</span></span><br><span class="line">                            <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">channelRead0</span><span class="params">(ChannelHandlerContext ctx, String msg)</span> </span>&#123;</span><br><span class="line">                                System.out.println(msg);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                .bind(<span class="number">8000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>客户端：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NettyClient</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        Bootstrap bootstrap = <span class="keyword">new</span> Bootstrap();</span><br><span class="line">        NioEventLoopGroup group = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line"></span><br><span class="line">        bootstrap.group(group)</span><br><span class="line">                .channel(NioSocketChannel.class)</span><br><span class="line">                .handler(<span class="keyword">new</span> ChannelInitializer&lt;Channel&gt;() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initChannel</span><span class="params">(Channel ch)</span> </span>&#123;</span><br><span class="line">                        ch.pipeline().addLast(<span class="keyword">new</span> StringEncoder());</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        Channel channel = bootstrap.connect(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">8000</span>).channel();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            channel.writeAndFlush(<span class="string">&quot;测试数据&quot;</span>);</span><br><span class="line">            Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Netty的事件驱动"><a href="#3-Netty的事件驱动" class="headerlink" title="3. Netty的事件驱动 "></a><font color=#F39C12>3. Netty的事件驱动 </font></h3><p>例如很多系统都会提供 onClick() 事件，这个事件就代表鼠标按下事件。事件驱动模型的大体思路如下：</p>
+<ol>
+<li>有一个事件队列</li>
+<li>鼠标按下时，往事件队列中增加一个点击事件</li>
+<li>有个事件泵，不断循环从队列取出事件，根据不同的事件，调用不同的函数</li>
+<li>事件一般都各自保存各自的处理方法的引用。这样，每个事件都能找到对应的处理方法</li>
+</ol>
+<img src="http://note.youdao.com/yws/public/resource/15eccfd330f9fc2c526a311a724dde84/xmlnote/19C50AB3161D41D0BF698AA2D369B762/20116" style="zoom:80%;" />
+
+<p><strong>为什么使用事件驱动？</strong></p>
+<ul>
+<li>程序中的任务可以并行执行</li>
+<li>任务之间高度独立，彼此之间不需要互相等待</li>
+<li>在等待的事件到来之前，任务不会阻塞</li>
+</ul>
+<p><strong>Netty使用事件驱动的方式作为底层架构</strong>，包括：</p>
+<ul>
+<li>事件队列（event queue）：接收事件的入口</li>
+<li>分发器（event mediator）：将不同的事件分发到不同的业务逻辑单元</li>
+<li>事件通道（event channel）：分发器与处理器之间的联系渠道</li>
+<li>事件处理器（event processor）：实现业务逻辑，处理完成后会发出事件，触发下一步操作</li>
+</ul>
+<p><img src="http://note.youdao.com/yws/public/resource/15eccfd330f9fc2c526a311a724dde84/xmlnote/457A4EBA5A2D499688B66ACB92AB003F/20118"></p>
+<h3 id="4-核心组件"><a href="#4-核心组件" class="headerlink" title="4. 核心组件"></a><font color=#F39C12>4. 核心组件</font></h3><p> <strong>Netty 的功能特性图：</strong> </p>
+<p><img src="http://note.youdao.com/yws/public/resource/15eccfd330f9fc2c526a311a724dde84/xmlnote/E6C0990A05F74EC5903A8831F4733035/20120"></p>
+<p><strong>Netty 功能特性：</strong></p>
+<ul>
+<li>传输服务，支持 BIO 和 NIO。</li>
+<li>容器集成：支持 OSGI、JBossMC、Spring、Guice 容器。</li>
+<li>协议支持：HTTP、Protobuf、二进制、文本、WebSocket 等，支持自定义协议。</li>
+</ul>
+<p> <strong>BIO和NIO的区别：</strong> </p>
+<table>
+<thead>
+<tr>
+<th><strong>场景</strong></th>
+<th>BIO</th>
+<th>NIO</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>有新连接请求时</td>
+<td>开一个新的线程处理</td>
+<td>使用多路复用原理，一个线程处理</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>连接数小且固定</td>
+<td>连接数特别多，连接比较短（轻操作）的场景</td>
+</tr>
+</tbody></table>
+<p><strong>Netty框架包含如下的组件：</strong></p>
+<ul>
+<li>ServerBootstrap ：用于接受客户端的连接以及为已接受的连接创建子通道，一般用于服务端。</li>
+<li>Bootstrap：不接受新的连接，并且是在父通道类完成一些操作，一般用于客户端的。</li>
+</ul>
+<ul>
+<li>Channel：对网络套接字的I/O操作，例如读、写、连接、绑定等操作进行适配和封装的组件。（双向通道，可以读又可以写）</li>
+<li>EventLoop：处理所有注册其上的channel的I/O操作。通常情况一个EventLoop可为多个channel提供服务。</li>
+<li>EventLoopGroup：包含有多个EventLoop的实例，用来管理 event Loop 的组件，可以理解为一个线程池，内部维护了一组线程。（一般会创建两个对象，一个用来接收，一个用来处理，如果只有一个压力会比较大）</li>
+</ul>
+<ul>
+<li>ChannelHandler和ChannelPipeline：例如一个流水线车间，当组件从流水线头部进入，穿越流水线，流水线上的工人按顺序对组件进行加工，到达流水线尾部时商品组装完成。流水线相当于<code>ChannelPipeline</code>，流水线工人相当于<code>ChannelHandler</code>，源头的组件当做event。</li>
+<li>ChannelInitializer：用于对刚创建的channel进行初始化，将ChannelHandler添加到channel的ChannelPipeline处理链路中。</li>
+</ul>
+<ul>
+<li>ChannelFuture：与jdk中线程的Future接口类似，即实现并行处理的效果。可以在操作执行成功或失败时自动触发监听器中的事件处理方法。</li>
+</ul>
+<p><strong>服务端：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NettyServer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 用于接受客户端的连接以及为已接受的连接创建子通道，一般用于服务端。</span></span><br><span class="line">        ServerBootstrap serverBootstrap = <span class="keyword">new</span> ServerBootstrap();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// EventLoopGroup包含有多个EventLoop的实例，用来管理event Loop的组件</span></span><br><span class="line">        <span class="comment">// 接受新连接线程</span></span><br><span class="line">        NioEventLoopGroup boos = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line">        <span class="comment">// 读取数据的线程</span></span><br><span class="line">        NioEventLoopGroup worker = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//服务端执行</span></span><br><span class="line">        serverBootstrap</span><br><span class="line">                .group(boos, worker)</span><br><span class="line">                <span class="comment">// Channel对网络套接字的I/O操作，</span></span><br><span class="line">                <span class="comment">// 例如读、写、连接、绑定等操作进行适配和封装的组件。</span></span><br><span class="line">                .channel(NioServerSocketChannel.class)</span><br><span class="line">                <span class="comment">// ChannelInitializer用于对刚创建的channel进行初始化</span></span><br><span class="line">                <span class="comment">// 将ChannelHandler添加到channel的ChannelPipeline处理链路中。</span></span><br><span class="line">                .childHandler(<span class="keyword">new</span> ChannelInitializer&lt;NioSocketChannel&gt;() &#123;</span><br><span class="line">                    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initChannel</span><span class="params">(NioSocketChannel ch)</span> </span>&#123;</span><br><span class="line">                        <span class="comment">// 组件从流水线头部进入，流水线上的工人按顺序对组件进行加工</span></span><br><span class="line">                        <span class="comment">// 流水线相当于ChannelPipeline</span></span><br><span class="line">                        <span class="comment">// 流水线工人相当于ChannelHandler</span></span><br><span class="line">                        ch.pipeline().addLast(<span class="keyword">new</span> StringDecoder());</span><br><span class="line">                        ch.pipeline().addLast(<span class="keyword">new</span> SimpleChannelInboundHandler&lt;String&gt;() &#123;</span><br><span class="line">                            <span class="comment">//这个工人有点麻烦，需要我们告诉他干啥事</span></span><br><span class="line">                            <span class="meta">@Override</span></span><br><span class="line">                            <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">channelRead0</span><span class="params">(ChannelHandlerContext ctx, String msg)</span> </span>&#123;</span><br><span class="line">                                System.out.println(msg);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                .bind(<span class="number">8000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>客户端：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NettyClient</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="comment">// 不接受新的连接，并且是在父通道类完成一些操作，一般用于客户端的。</span></span><br><span class="line">        Bootstrap bootstrap = <span class="keyword">new</span> Bootstrap();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// EventLoopGroup包含有多个EventLoop的实例，用来管理event Loop的组件</span></span><br><span class="line">        NioEventLoopGroup group = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//客户端执行</span></span><br><span class="line">        bootstrap.group(group)</span><br><span class="line">                <span class="comment">// Channel对网络套接字的I/O操作，</span></span><br><span class="line">                <span class="comment">// 例如读、写、连接、绑定等操作进行适配和封装的组件。</span></span><br><span class="line">                .channel(NioSocketChannel.class)</span><br><span class="line">                <span class="comment">// 用于对刚创建的channel进行初始化，</span></span><br><span class="line">                <span class="comment">// 将ChannelHandler添加到channel的ChannelPipeline处理链路中。</span></span><br><span class="line">                .handler(<span class="keyword">new</span> ChannelInitializer&lt;Channel&gt;() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initChannel</span><span class="params">(Channel ch)</span> </span>&#123;</span><br><span class="line">                        <span class="comment">// 组件从流水线头部进入，流水线上的工人按顺序对组件进行加工</span></span><br><span class="line">                        <span class="comment">// 流水线相当于ChannelPipeline</span></span><br><span class="line">                        <span class="comment">// 流水线工人相当于ChannelHandler</span></span><br><span class="line">                        ch.pipeline().addLast(<span class="keyword">new</span> StringEncoder());</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//客户端连接服务端</span></span><br><span class="line">        Channel channel = bootstrap.connect(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">8000</span>).channel();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="comment">// 客户端使用writeAndFlush方法向服务端发送数据，返回的是ChannelFuture</span></span><br><span class="line">            <span class="comment">// 与jdk中线程的Future接口类似，即实现并行处理的效果</span></span><br><span class="line">            <span class="comment">// 可以在操作执行成功或失败时自动触发监听器中的事件处理方法。</span></span><br><span class="line">            ChannelFuture future = channel.writeAndFlush(<span class="string">&quot;测试数据&quot;</span>);</span><br><span class="line">            Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>没办法，要恰饭的嘛！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/add/wechatpay.png" alt="Driven 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/add/alipay.png" alt="Driven 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/netty/" rel="tag"><i class="fa fa-tag"></i> netty</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/23/%E6%8E%A5%E5%8F%A3%E5%8A%A0%E5%AF%86/" rel="prev" title="摘要算法和加密算法">
+      <i class="fa fa-chevron-left"></i> 摘要算法和加密算法
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BC%A0%E7%BB%9FIO%E7%BC%96%E7%A8%8B"><span class="nav-text">一、传统IO编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%98%BB%E5%A1%9E%E5%BC%8FI-O%E7%9A%84%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9E%8B%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="nav-text">1. 阻塞式I&#x2F;O的通信模型示意图 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF"><span class="nav-text">2. 业务场景 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">3. 代码实现 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-text">4.存在的问题 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81NIO%E7%BC%96%E7%A8%8B"><span class="nav-text">二、NIO编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%9D%9E%E9%98%BB%E5%A1%9E%E5%BC%8FI-O%E7%9A%84%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9E%8B%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="nav-text">1. 非阻塞式I&#x2F;O的通信模型示意图 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E%E4%BC%A0%E7%BB%9FI-O%E5%92%8CNIO%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">2. 举例说明传统I&#x2F;O和NIO的区别 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-NIO%E7%9A%84%E4%B8%89%E5%A4%A7%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6"><span class="nav-text">3. NIO的三大核心组件 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-NIO%E7%9B%B8%E5%AF%B9%E4%BA%8EIO%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-text">4. NIO相对于IO的优势 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">5. 代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81Netty"><span class="nav-text">三、Netty</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8Netty"><span class="nav-text">1. 为什么使用Netty </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">2. 代码实现 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Netty%E7%9A%84%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8"><span class="nav-text">3. Netty的事件驱动 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6"><span class="nav-text">4. 核心组件</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Driven"
+      src="/images/add/header.jpg">
+  <p class="site-author-name" itemprop="name">Driven</p>
+  <div class="site-description" itemprop="description">大大的世界，小小的梦想</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=248147986&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;248147986&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:248147986@qq.com" title="E-Mail → mailto:248147986@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">湘ICP备2020019588号 </a>
+      <img src="/images/add/icp.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Driven</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='120,120,120' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://www.keepli.cn/2020/07/15/io%E4%B8%8Enio/',]
+      });
+      });
+  </script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'MXe3KzTG9EgB9R1XK8Pu9G73-gzGzoHsz',
+      appKey     : 'ANq0BdfX8Hcywav62xk2lHrX',
+      placeholder: "-(￢∀￢)σ 来快活啊~",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+﻿
+
+  
+    <script src="/js/cursor/fireworks.js"></script>
+  
+
+
+
+
+  <script src="/js/cursor/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+  
+
+</body>
+</html>
