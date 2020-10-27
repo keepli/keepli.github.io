@@ -92,8 +92,11 @@
 <h2 id="四-条件查询和分页查询"><a href="#四-条件查询和分页查询" class="headerlink" title="四. 条件查询和分页查询"></a><font color=red>四. 条件查询和分页查询</font></h2><h3 id="1-条件查询"><a href="#1-条件查询" class="headerlink" title="1.条件查询"></a>1.条件查询</h3><ul>
 <li>使用mybatis-plus提供的<code>EntityWrapper</code>对象封装where查询条件</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">EntityWrapper wrapper = <span class="keyword">new</span> EntityWrapper&lt;Article&gt;();</span><br><span class="line">wrapper.eq(<span class="string">&quot;id&quot;</span>, article.getId());</span><br><span class="line"></span><br><span class="line"><span class="comment">//动态sql，例如&lt;if test=&quot;null != field&quot;&gt; and field=&#x27;xxx&#x27; &lt;/if&gt;</span></span><br><span class="line">wrapper.eq(<span class="keyword">null</span> != map.get(field), field, map.get(field));</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">EntityWrapper wrapper = <span class="keyword">new</span> EntityWrapper&lt;Article&gt;();</span><br><span class="line">wrapper.eq(<span class="string">&quot;id&quot;</span>, article.getId());</span><br><span class="line"></span><br><span class="line"><span class="comment">//动态sql，例如&lt;if test=&quot;null != field&quot;&gt; and field=&#x27;xxx&#x27; &lt;/if&gt;</span></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">	第一个参数为Boolean类型</span></span><br><span class="line"><span class="comment">	第二个参数为String类型</span></span><br><span class="line"><span class="comment">	第三个参数为Object类型</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">wrapper.eq(<span class="keyword">null</span> != map.get(field), field, map.get(field));</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>具体使用参考下面代码</p>
+</blockquote>
 <h3 id="2-分页"><a href="#2-分页" class="headerlink" title="2.分页"></a>2.分页</h3><ul>
 <li>使用mybatis-plus提供的<code>Page</code>对象</li>
 </ul>

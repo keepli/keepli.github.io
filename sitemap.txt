@@ -214,14 +214,14 @@
   </url>
   
   <url>
-    <loc>http://www.keepli.cn/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</loc>
+    <loc>http://www.keepli.cn/tags/druid/</loc>
     <lastmod>2020-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://www.keepli.cn/tags/druid/</loc>
+    <loc>http://www.keepli.cn/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</loc>
     <lastmod>2020-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -349,14 +349,14 @@
   </url>
   
   <url>
-    <loc>http://www.keepli.cn/categories/springboot/</loc>
+    <loc>http://www.keepli.cn/categories/jdbc/</loc>
     <lastmod>2020-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://www.keepli.cn/categories/jdbc/</loc>
+    <loc>http://www.keepli.cn/categories/springboot/</loc>
     <lastmod>2020-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
