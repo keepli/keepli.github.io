@@ -838,12 +838,18 @@
 </li>
 <li><p>如果有三个Eureka，则每一个EurekaServer都需要注册到其它几个Eureka服务中，例如：有三个分别为10086、10087、10088，则：</p>
 <ul>
-<li>10086要注册到10087和10088上</li>
-<li>10087要注册到10086和10088上</li>
-<li>10088要注册到10086和10087上</li>
+<li><p>10086要注册到10087和10088上</p>
+</li>
+<li><p>10087要注册到10086和10088上</p>
+</li>
+<li><p>10088要注册到10086和10087上</p>
+</li>
 </ul>
 </li>
 </ul>
+<p><strong>生产端和服务端配置：</strong></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">service-url:</span></span><br><span class="line">      <span class="comment">#配置多个eureka服务节点</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://127.0.0.1:10086/eureka</span></span><br><span class="line">      <span class="string">,http://127.0.0.1:10087/eureka</span></span><br><span class="line">      <span class="string">,http://127.0.0.1:10088/eureka</span></span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="comment"># 更倾向使用ip地址，而不是host名</span></span><br><span class="line">    <span class="attr">prefer-ip-address:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># ip地址</span></span><br><span class="line">    <span class="attr">ip-address:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="5-Eureka客户端与服务端配置"><a href="#5-Eureka客户端与服务端配置" class="headerlink" title="5. Eureka客户端与服务端配置"></a>5. Eureka客户端与服务端配置</h3><p><strong>目标</strong>：配置eureka客户端user-service的注册、续约等配置项，配置eureka客户端consumer-demo的获取服务间隔时间，了解失效剔除和自我保护</p>
 <p><strong>分析</strong>：</p>
 <ul>
