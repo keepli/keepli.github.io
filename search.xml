@@ -131,6 +131,96 @@
       </tags>
   </entry>
   <entry>
+    <title>通用mapper+pagehelper分页插件的使用</title>
+    <url>/2020/07/25/%E9%80%9A%E7%94%A8mapper%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h3 id="一、环境搭建"><a href="#一、环境搭建" class="headerlink" title="一、环境搭建"></a><font color=#F39C12>一、环境搭建</font></h3><h4 id="1-导入maven依赖"><a href="#1-导入maven依赖" class="headerlink" title="1.导入maven依赖"></a>1.导入maven依赖</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--通用mapper起步依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>tk.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mapper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h4 id="2-dao接口编写"><a href="#2-dao接口编写" class="headerlink" title="2.dao接口编写"></a>2.dao接口编写</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//继承通用mapper提供的接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BrandMapper</span> <span class="keyword">extends</span> <span class="title">Mapper</span>&lt;<span class="title">Brand</span>&gt; </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-Brand实体类编写"><a href="#3-Brand实体类编写" class="headerlink" title="3.Brand实体类编写"></a>3.Brand实体类编写</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Table(name=&quot;tb_brand&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Brand</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line">	<span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue(strategy = GenerationType.IDENTITY)</span></span><br><span class="line">    <span class="meta">@Column(name = &quot;id&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> Integer id;<span class="comment">//品牌id</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column(name = &quot;name&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> String name;<span class="comment">//品牌名称</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column(name = &quot;image&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> String image;<span class="comment">//品牌图片地址</span></span><br><span class="line">	</span><br><span class="line">    <span class="meta">@Column(name = &quot;letter&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> String letter;<span class="comment">//品牌的首字母</span></span><br><span class="line">	</span><br><span class="line">    <span class="meta">@Column(name = &quot;seq&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> Integer seq;<span class="comment">//排序</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-配置-MapperScan-“dao包路径”"><a href="#4-配置-MapperScan-“dao包路径”" class="headerlink" title="4.配置@MapperScan(“dao包路径”)"></a>4.配置@MapperScan(“dao包路径”)</h4><p><strong>注意：这个注解是通用mapper提供的</strong></p>
+<h3 id="二、查询方法"><a href="#二、查询方法" class="headerlink" title="二、查询方法"></a><font color=#F39C12>二、查询方法</font></h3><h4 id="1-查询所有"><a href="#1-查询所有" class="headerlink" title="1.查询所有"></a>1.查询所有</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">selectAll ()<span class="comment">//返回List</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-通过id查询"><a href="#2-通过id查询" class="headerlink" title="2.通过id查询"></a>2.通过id查询</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">selectByPrimaryKey ( id )<span class="comment">//返回实体类</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">selectOne ( brand )<span class="comment">//返回实体类，参数是实体类</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="三、新增方法"><a href="#三、新增方法" class="headerlink" title="三、新增方法"></a><font color=#F39C12>三、新增方法</font></h3><h4 id="1-新增并且算上null值"><a href="#1-新增并且算上null值" class="headerlink" title="1.新增并且算上null值"></a>1.新增并且算上null值</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">insert ( brand )</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-新增不算上null值"><a href="#2-新增不算上null值" class="headerlink" title="2.新增不算上null值"></a>2.新增不算上null值</h4><ul>
+<li>带<code>Selective</code>是排除<code>null</code>值的</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">insertSelective ( brand )<span class="comment">//推荐使用</span></span><br></pre></td></tr></table></figure>
+
+<img src="https://img-blog.csdnimg.cn/20201028115605247.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70#pic_center"  />
+
+
+
+<h3 id="四、更新方法"><a href="#四、更新方法" class="headerlink" title="四、更新方法"></a><font color=#F39C12>四、更新方法</font></h3><h4 id="1-更新并且算上null值"><a href="#1-更新并且算上null值" class="headerlink" title="1.更新并且算上null值"></a>1.更新并且算上null值</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">updateByPrimaryKey ( brand )</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-更新不算上null值"><a href="#2-更新不算上null值" class="headerlink" title="2.更新不算上null值"></a>2.更新不算上null值</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">updateByPrimaryKeySelective ( brand )<span class="comment">//推荐使用</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="五、删除方法"><a href="#五、删除方法" class="headerlink" title="五、删除方法"></a><font color=#F39C12>五、删除方法</font></h3><h4 id="1-通过id删除"><a href="#1-通过id删除" class="headerlink" title="1.通过id删除"></a>1.通过id删除</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">deleteByPrimaryKey ( id )</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="六、按条件查询"><a href="#六、按条件查询" class="headerlink" title="六、按条件查询"></a><font color=#F39C12>六、按条件查询</font></h3><ul>
+<li>controller层</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 多条件查询</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> brand</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@PostMapping(&quot;/search&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result&lt;List&lt;Brand&gt;&gt; search(<span class="meta">@RequestBody</span> Brand brand)&#123;</span><br><span class="line">    List&lt;Brand&gt; brandList = brandService.findList ( brand );</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Result&lt;&gt; ( <span class="keyword">true</span>,StatusCode.OK,<span class="string">&quot;根据条件查询品牌成功&quot;</span>,brandList);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>service层</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Brand&gt; <span class="title">findList</span><span class="params">(Brand brand)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//自定义条件搜索对象 Example</span></span><br><span class="line">    Example example = <span class="keyword">new</span> Example ( Brand.class );</span><br><span class="line">    Example.Criteria criteria = example.createCriteria ( );<span class="comment">//条件构造器</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (brand!=<span class="keyword">null</span>)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//brand.name!=null 并且不为&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> (!StringUtils.isEmpty ( brand.getName () ))&#123;</span><br><span class="line">            <span class="comment">//根据名字模糊查询 where name like &#x27;%华为%&#x27;</span></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">                第一个参数是String类型（对应数据表的列名）</span></span><br><span class="line"><span class="comment">                第二个参数是Object类型（对应的value值）</span></span><br><span class="line"><span class="comment">            */</span></span><br><span class="line">            criteria.andLike ( <span class="string">&quot;name&quot;</span>,<span class="string">&quot;%&quot;</span>+brand.getName ()+<span class="string">&quot;%&quot;</span> );</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//brand.letter!=null 并且不为&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> (!StringUtils.isEmpty ( brand.getLetter () ))&#123;</span><br><span class="line">            <span class="comment">//根据首字母查询 and letter=&#x27;H&#x27; (因为首字母就一个字符，不用like)</span></span><br><span class="line">            criteria.andEqualTo ( <span class="string">&quot;letter&quot;</span>,brand.getLetter () );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> brandMapper.selectByExample ( example );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在使用上建议把条件查询逻辑抽调一个方法，可以方便复用</p>
+</blockquote>
+<p><strong>更多<code>criteria</code>的方法可以查看源码：</strong></p>
+<ul>
+<li>以下是截取的一部分源码的方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> Example.<span class="function">Criteria <span class="title">andIsNull</span><span class="params">(String property)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.addCriterion(<span class="keyword">this</span>.column(property) + <span class="string">&quot; is null&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> (Example.Criteria)<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> Example.<span class="function">Criteria <span class="title">andIsNotNull</span><span class="params">(String property)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.addCriterion(<span class="keyword">this</span>.column(property) + <span class="string">&quot; is not null&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> (Example.Criteria)<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> Example.<span class="function">Criteria <span class="title">andEqualTo</span><span class="params">(String property, Object value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.addCriterion(<span class="keyword">this</span>.column(property) + <span class="string">&quot; =&quot;</span>, value, <span class="keyword">this</span>.property(property));</span><br><span class="line">    <span class="keyword">return</span> (Example.Criteria)<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> Example.<span class="function">Criteria <span class="title">andNotEqualTo</span><span class="params">(String property, Object value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.addCriterion(<span class="keyword">this</span>.column(property) + <span class="string">&quot; &lt;&gt;&quot;</span>, value, <span class="keyword">this</span>.property(property));</span><br><span class="line">    <span class="keyword">return</span> (Example.Criteria)<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> Example.<span class="function">Criteria <span class="title">andGreaterThan</span><span class="params">(String property, Object value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.addCriterion(<span class="keyword">this</span>.column(property) + <span class="string">&quot; &gt;&quot;</span>, value, <span class="keyword">this</span>.property(property));</span><br><span class="line">    <span class="keyword">return</span> (Example.Criteria)<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="七、分页查询"><a href="#七、分页查询" class="headerlink" title="七、分页查询"></a><font color=#F39C12>七、分页查询</font></h3><h4 id="1-pagehelper分页插件"><a href="#1-pagehelper分页插件" class="headerlink" title="1.pagehelper分页插件"></a>1.<code>pagehelper</code>分页插件</h4><ul>
+<li>maven依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--mybatis分页插件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-代码实现"><a href="#2-代码实现" class="headerlink" title="2.代码实现"></a>2.代码实现</h4><ul>
+<li>controller层</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 分页查询</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> page</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> size</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;/search/&#123;page&#125;/&#123;size&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result&lt;PageInfo&lt;Brand&gt;&gt; findByPage(<span class="meta">@PathVariable</span> Integer page,</span><br><span class="line">                                          <span class="meta">@PathVariable</span> Integer size)&#123;</span><br><span class="line">    PageInfo&lt;Brand&gt; brandPageInfo = brandService.findByPage ( page, size );</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Result&lt;&gt; ( <span class="keyword">true</span>,StatusCode.OK,<span class="string">&quot;分页查询品牌成功&quot;</span>,brandPageInfo);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>service层</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> PageInfo&lt;Brand&gt; <span class="title">findByPage</span><span class="params">(Integer page, Integer size)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//开启分页查询</span></span><br><span class="line">    PageHelper.startPage ( page,size );</span><br><span class="line">    <span class="comment">//封装分页bean</span></span><br><span class="line">    PageInfo&lt;Brand&gt; brandPageInfo = <span class="keyword">new</span> PageInfo&lt;&gt; ( brandMapper.selectAll ( ) );</span><br><span class="line">    <span class="keyword">return</span> brandPageInfo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="八、分页条件查询"><a href="#八、分页条件查询" class="headerlink" title="八、分页条件查询"></a><font color=#F39C12>八、分页条件查询</font></h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> PageInfo&lt;Brand&gt; <span class="title">findByPageAndList</span><span class="params">(Integer page, Integer size, Brand brand)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//调用抽取出来的条件查询方法获得查询条件</span></span><br><span class="line">    Example example = createExample ( brand );</span><br><span class="line">    <span class="comment">//开启分页查询</span></span><br><span class="line">    PageHelper.startPage ( page,size );</span><br><span class="line">    <span class="comment">//封装分页bean</span></span><br><span class="line">    PageInfo&lt;Brand&gt; brandPageInfo = <span class="keyword">new</span> PageInfo&lt;&gt; ( brandMapper.selectByExample ( example ) );</span><br><span class="line">    <span class="keyword">return</span> brandPageInfo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>通用mapper</category>
+      </categories>
+      <tags>
+        <tag>通用mapper</tag>
+        <tag>pagehelper分页插件</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>传统I/O与NIO</title>
     <url>/2020/07/15/io%E4%B8%8Enio/</url>
     <content><![CDATA[<p> <em>传统 I / O 与 NIO 的区别，netty框架的简单了解</em></p>
@@ -1746,7 +1836,7 @@
   <entry>
     <title>公共异常处理类</title>
     <url>/2020/03/01/%E5%85%AC%E5%85%B1%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E7%B1%BB/</url>
-    <content><![CDATA[<p> <em>该公共异常类是注解是 spring-boot-starter-web的 jar包上的，主要是跟 web项目的 controller一起使用</em></p>
+    <content><![CDATA[<p> <em>该公共异常类是注解是 spring-boot-starter-web的 jar包上的，主要是跟 web项目的 controller一起使用，@ControllerAdvice注解，全局捕获异常类，只要作用在@RequestMapping上，所有的异常都会被捕获。</em> </p>
 <a id="more"></a>
 
 <hr>
@@ -1754,7 +1844,7 @@
 <ul>
 <li>在controller包下创建公共异常处理类BaseExceptionHandler，并添加代码</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseExceptionHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ExceptionHandler(Exception.class)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">exceptionHandler</span><span class="params">(Exception e)</span></span>&#123;</span><br><span class="line">        <span class="comment">//编写出现异常之后的逻辑</span></span><br><span class="line">        System.out.println ( <span class="string">&quot;出现异常了&quot;</span> );</span><br><span class="line"></span><br><span class="line">        <span class="comment">//指定出现某种异常的具体逻辑</span></span><br><span class="line">        <span class="keyword">if</span> (e <span class="keyword">instanceof</span> NullPointerException)&#123;</span><br><span class="line">            System.out.println ( <span class="string">&quot;出现的是空指针异常&quot;</span> );</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;出现了异常&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseExceptionHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ExceptionHandler(Exception.class)</span><span class="comment">//一定要填写class对象，否则启动异常</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">exceptionHandler</span><span class="params">(Exception e)</span></span>&#123;</span><br><span class="line">        <span class="comment">//编写出现异常之后的逻辑</span></span><br><span class="line">        System.out.println ( <span class="string">&quot;出现异常了&quot;</span> );</span><br><span class="line"></span><br><span class="line">        <span class="comment">//指定出现某种异常的具体逻辑</span></span><br><span class="line">        <span class="keyword">if</span> (e <span class="keyword">instanceof</span> NullPointerException)&#123;</span><br><span class="line">            System.out.println ( <span class="string">&quot;出现的是空指针异常&quot;</span> );</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;出现了异常：&quot;</span> + e.getMessage ();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>springboot</category>
       </categories>
