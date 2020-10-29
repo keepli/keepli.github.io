@@ -158,8 +158,28 @@ eureka:
 
 - 如果有三个Eureka，则每一个EurekaServer都需要注册到其它几个Eureka服务中，例如：有三个分别为10086、10087、10088，则：
   - 10086要注册到10087和10088上
+  
   - 10087要注册到10086和10088上
+  
   - 10088要注册到10086和10087上
+  
+
+**生产端和服务端配置：**
+
+```yml
+eureka:
+  client:
+    service-url:
+      #配置多个eureka服务节点
+      defaultZone: http://127.0.0.1:10086/eureka
+      ,http://127.0.0.1:10087/eureka
+      ,http://127.0.0.1:10088/eureka
+  instance:
+    # 更倾向使用ip地址，而不是host名
+    prefer-ip-address: true
+    # ip地址
+    ip-address: 127.0.0.1
+```
 
 ### 5. Eureka客户端与服务端配置
 

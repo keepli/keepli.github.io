@@ -876,7 +876,7 @@ canvas_ribbon:
 #自己添加的,增加背景几何线条效果
 canvas_nest:
   enable: true			# 是否显示true|false
-  onmobile: true 		# 是否在移动端展示true|false
+  onmobile: false 		# 是否在移动端展示true|false
   color: "120,120,120" 	# 线条的颜色（RGB表示）, 用 `,` 隔开
   opacity: 0.5 			# 线条头透明度: 0~1
   zIndex: -1 			# 用于控制线条所在层的位置, 默认:-1。值越大，显示的层面离用户越近。

@@ -153,6 +153,12 @@ docker inspect 容器名称
 docker ps
 docker ps -a #查看历史运行过的容器
 ```
+#### 9. 设置docker启动容器自动启动
+
+```shell
+docker update --restart=always 容器名称
+```
+
 ### <font color=red>数据卷相关：</font>
 
 #### 1. 配置数据卷：

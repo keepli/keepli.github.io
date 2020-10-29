@@ -161,8 +161,15 @@ EntityWrapper wrapper = new EntityWrapper<Article>();
 wrapper.eq("id", article.getId());
 
 //动态sql，例如<if test="null != field"> and field='xxx' </if>
+/* 
+	第一个参数为Boolean类型
+	第二个参数为String类型
+	第三个参数为Object类型
+*/
 wrapper.eq(null != map.get(field), field, map.get(field));
 ```
+
+> 具体使用参考下面代码
 
 ### 2.分页
 
