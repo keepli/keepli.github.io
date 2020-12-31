@@ -153,10 +153,22 @@ docker inspect 容器名称
 docker ps
 docker ps -a #查看历史运行过的容器
 ```
-#### 9. 设置docker启动容器自动启动
+#### 9. 设置docker启动容器自动启动：
 
 ```shell
-docker update --restart=always 容器名称
+docker update --restart=always 容器名称/容器id
+```
+
+#### 10.将docker的文件或目录复制到宿主机中
+
+```shell
+docker cp 容器名称:docker容器中的文件或目录路径 宿主机目录路径
+```
+
+#### 11.将宿主机下的文件或目录复制到docker中
+
+```shell
+docker cp 宿主机中的文件或目录路径 容器名称:docker容器目录路径
 ```
 
 ### <font color=red>数据卷相关：</font>

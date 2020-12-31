@@ -21,6 +21,18 @@ categories: 通用mapper
 
 <!-- more -->
 
+```xml
+        <!--每个工程都有Pojo，都需要用到该包对应的注解-->
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+```
+
+
+
 #### 2.dao接口编写
 
 ```java
@@ -66,14 +78,33 @@ public class Brand implements Serializable{
 selectAll ()//返回List
 ```
 
-#### 2.通过id查询
+#### 2.通过主键id查询单个
 
 ```java
-selectByPrimaryKey ( id )//返回实体类
+selectByPrimaryKey ( id )//通过主键id查询，返回实体类
 ```
 
+#### 3.通过id或其它属性查询单个
+
 ```java
-selectOne ( brand )//返回实体类，参数是实体类
+selectOne ( brand )//返回实体类，参数是实体类，哪个属性不为null则以哪个属性进行查询
+```
+
+#### 4.通过id或其它属性查询集合
+
+```java
+    /**
+     * 根据父id查询
+     * @param pid
+     * @return
+     */
+    public List<Category> findByParentId(Integer pid){
+         //根据父id查询 SELECT * FROM `tb_category` WHERE parent_id=#{pid}
+        //封装一个JavaBean对象，如果该JavaBean对象指定属性不为null，则会将指定属性做为查询条件
+        Category category = new Category ( );
+        category.setParentId ( pid );
+        return categoryMapper.select ( category );
+    }
 ```
 
 
@@ -145,7 +176,7 @@ deleteByPrimaryKey ( id )
 
 ```java
     public List<Brand> findList(Brand brand) {
-        //自定义条件搜索对象 Example
+        //自定义条件搜索对象 Example（注意：如果在for循环中需要重新创建一个新对象）
         Example example = new Example ( Brand.class );
         Example.Criteria criteria = example.createCriteria ( );//条件构造器
 
@@ -155,7 +186,7 @@ deleteByPrimaryKey ( id )
             if (!StringUtils.isEmpty ( brand.getName () )){
                 //根据名字模糊查询 where name like '%华为%'
                 /*
-                    第一个参数是String类型（对应数据表的列名）
+                    第一个参数是String类型（对应数据表的列名,注意要填写实体类的属性名）
                     第二个参数是Object类型（对应的value值）
                 */
                 criteria.andLike ( "name","%"+brand.getName ()+"%" );
@@ -266,5 +297,50 @@ deleteByPrimaryKey ( id )
         PageInfo<Brand> brandPageInfo = new PageInfo<> ( brandMapper.selectByExample ( example ) );
         return brandPageInfo;
     }
+```
+
+
+
+### <font color=#F39C12>九、如何实现自定义的SQL语句查询方法？</font>
+
+**通过往dao接口中加入自定义方法就可实现**
+
+```java
+public interface BrandMapper extends Mapper<Brand> {
+
+    /**
+     * 根据分类id查询品牌集合
+     * @param categoryId
+     * @return
+     */
+    @Select( "SELECT tb.* FROM tb_category_brand tcb,tb_brand tb WHERE tcb.category_id=#{categoryId} AND tb.id=tcb.brand_id" )
+    List<Brand> findByCategoryId(Integer categoryId);
+}
+```
+
+**还可以通过xml配置文件进行实现**
+
+### <font color=#F39C12>十、yml文件配置</font>
+
+#### 1.使用mapper.xml
+
+```yml
+#mybatis跟spring是平级关系，属于第一梯队
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.changgou.goods.pojo
+```
+
+### 2.将SQL语句打印到控制台
+
+```yml
+#开启通用mapper的日志
+#logging跟spring是平级关系，属于第一梯队
+logging:
+  level:
+    #com.changgou.user.dao是dao包路径
+    com.changgou.user.dao: debug
 ```
 

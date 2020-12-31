@@ -40,8 +40,6 @@ top: true
 
 ### 2.IdWorker工具类（分布式id生成器）
 ```java
-package entity.util;
-
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -100,9 +98,9 @@ public class IdWorker {
     }
     /**
      * @param workerId
-     *            工作机器ID
+     *            工作机器ID(范围0-31)
      * @param datacenterId
-     *            序列号
+     *            数据中心ID(范围0-31)
      */
     public IdWorker(long workerId, long datacenterId) {
         if (workerId > maxWorkerId || workerId < 0) {
@@ -166,14 +164,14 @@ public class IdWorker {
         mpid.append(datacenterId);
         String name = ManagementFactory.getRuntimeMXBean().getName();
         if (!name.isEmpty()) {
-         /*
-          * GET jvmPid
-          */
+            /*
+             * GET jvmPid
+             */
             mpid.append(name.split("@")[0]);
         }
-      /*
-       * MAC + PID 的 hashcode 获取16个低位
-       */
+        /*
+         * MAC + PID 的 hashcode 获取16个低位
+         */
         return (mpid.toString().hashCode() & 0xffff) % (maxWorkerId + 1);
     }
 
@@ -201,9 +199,15 @@ public class IdWorker {
         return id;
     }
 
-
+    public static void main(String[] args) {
+        IdWorker idWorker = new IdWorker(0,0);
+		
+        for (int i = 0; i <10000; i++) {
+            long nextId=idWorker.nextId();
+			System.out.println(nextId);
+        }
+    }
 }
-
 ```
 
 ### 3.分布式id生成器的使用

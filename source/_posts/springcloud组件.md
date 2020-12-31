@@ -460,12 +460,12 @@ public class ConsumerApplication {
 
 ```java
 //声明当前类是一个Feign客户端，指定服务名为user-service
-@FeignClient("user-service")
+@FeignClient(name = "user-service",path = "/user")
 public interface UserClient {
 
     //http://user-service/user/123
-    @GetMapping("/user/{id}")
-    User queryById(@PathVariable Long id);
+    @GetMapping("/{id}")
+    User findById(@PathVariable Long id);
 }
 ```
 
@@ -489,7 +489,9 @@ public class ControllerFeignConsumer {
 }
 ```
 
-访问http://localhost:8080/cf/8跟访问http://localhost:8080/user-service/user/8一样
+访问http://localhost:8080/cf/8跟访问http://localhost:8080/user/8一样
+
+<font color=red>注意：feign中的路径要跟调用的controller路径一致，否则会出现异常</font>
 
 ### 2.Feign负载均衡及熔断
 
@@ -762,6 +764,11 @@ public class MyParamGatewayFilterFactory extends AbstractGatewayFilterFactory<My
 1. 编写全局过滤器
 2. 测试
 
+接口说明：
+
+- GlobalFilter全局过滤器必须实现
+- Ordered用来排序
+
 **小结**：
 
 ```java
@@ -772,17 +779,19 @@ public class MyGlobalFilter implements GlobalFilter, Ordered {
         System.out.println("--------------全局过滤器MyGlobalFilter------------------");
         String token = exchange.getRequest().getQueryParams().getFirst("token");
         if(StringUtils.isBlank(token)){
-            //设置响应状态码为未授权
+            //设置响应状态码为401未授权
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+            //完成响应
             return exchange.getResponse().setComplete();
         }
+        //过滤器放行
         return chain.filter(exchange);
     }
 
     @Override
     public int getOrder() {
         //值越小越先执行
-        return 1;
+        return 0;
     }
 }
 ```
@@ -833,8 +842,10 @@ spring:
             #allowedOrigins: * # 这种写法或者下面的都可以，*表示全部
             allowedOrigins:
               - "http://docs.spring.io"
+            #配置的请求的方式，下面配置只能允许get方式请求
             allowedMethods:
               - GET
+             #- POST
 ```
 
 >上述配置表示：可以允许来自 http://docs.spring.io 的get请求方式获取服务数据。
@@ -883,6 +894,7 @@ spring:
             #allowedOrigins: * # 这种写法或者下面的都可以，*表示全部
             allowedOrigins:
               - "http://docs.spring.io"
+            #配置允许的请求方式
             allowedMethods:
               - GET
 

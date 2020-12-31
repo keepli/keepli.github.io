@@ -4,7 +4,6 @@ date: 2020-02-19
 updated: 2020-02-19
 tags: mybatis-plus
 categories: 持久层框架
-top: true
 ---
 
  *MyBatis-Plus是MyBatis的增强版，对经常使用到的SQL中CRUD语法进行的封装，提高了开发效率，并且减少了性能的损耗和繁琐的配置*
