@@ -50,7 +50,7 @@
   <entry>
     <title>vue常用指令</title>
     <url>/2020/09/15/vue%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h4 id="v-bind"><a href="#v-bind" class="headerlink" title="v-bind"></a>v-bind</h4><blockquote>
+    <content><![CDATA[<h4 id="v-bind（有简写方式）"><a href="#v-bind（有简写方式）" class="headerlink" title="v-bind（有简写方式）"></a>v-bind（有简写方式）</h4><blockquote>
 <p>该指令用来动态修改标签中的属性信息</p>
 </blockquote>
 <p>动态绑定class有两种语法实现</p>
