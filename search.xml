@@ -62,7 +62,7 @@
 
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    url: <span class="string">&quot;https://www.baidu.com&quot;</span>,</span><br><span class="line">    is-a: <span class="literal">true</span>,</span><br><span class="line">    is-b: <span class="literal">false</span>  </span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">      getClasses: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">          <span class="keyword">return</span> &#123;<span class="attr">a</span>: <span class="built_in">this</span>.is-a, <span class="attr">b</span>: <span class="built_in">this</span>.is-b&#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;  </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-
+<a id="more"></a>
 
 <h4 id="v-on（有简写方式）"><a href="#v-on（有简写方式）" class="headerlink" title="v-on（有简写方式）"></a>v-on（有简写方式）</h4><blockquote>
 <p>该指令用来绑定事件</p>
