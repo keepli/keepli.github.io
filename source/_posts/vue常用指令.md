@@ -6,7 +6,7 @@ tags: vue
 categories: 前端
 ---
 
-#### v-bind（有简写方式）
+#### <font color=#F39C12>v-bind（有简写方式）</font>
 
 > 该指令用来动态修改标签中的属性信息
 
@@ -47,7 +47,7 @@ var app = new Vue({
 
 <!-- more -->
 
-#### v-on（有简写方式）
+#### <font color=#F39C12>v-on（有简写方式）</font>
 
 > 该指令用来绑定事件
 
@@ -103,7 +103,7 @@ var app = new Vue({
 
 
 
-#### v-if、v-else、v-else-if
+#### <font color=#F39C12>v-if、v-else、v-else-if</font>
 
 >该指令用来做判断，如果条件满足就渲染
 
@@ -127,7 +127,7 @@ var app = new Vue({
 
 
 
-#### v-show
+#### <font color=#F39C12>v-show</font>
 
 > 该指令用来隐藏标签
 
@@ -154,7 +154,7 @@ var app = new Vue({
 
 
 
-#### v-for
+#### <font color=#F39C12>v-for</font>
 
 > 该指令用来遍历数组和对象
 
@@ -214,7 +214,7 @@ var app = new Vue({
 
 
 
-#### v-model
+#### <font color=#F39C12>v-model</font>
 
 >该指令用来对表单元素数据进行双向绑定
 
@@ -325,7 +325,7 @@ var app = new Vue({
 
 
 
-#### v-once
+#### <font color=#F39C12>v-once</font>
 
 > 使用该指令表示元素和组件只渲染一次，不会随着数据的变化而变化
 
@@ -345,7 +345,7 @@ var app = new Vue({
 
 
 
-#### v-html
+#### <font color=#F39C12>v-html</font>
 
 > 使用该指令可以把字符串的数据在插值中显示时自动转换为HTML格式
 
@@ -365,7 +365,7 @@ var app = new Vue({
 
 
 
-#### v-pre
+#### <font color=#F39C12>v-pre</font>
 
 > 该指令可以让插值语法不做任何解析，将原本的数据进行原封不动的展示
 
