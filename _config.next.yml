@@ -179,7 +179,7 @@ site_state: true
 # Key is the link label showing to end users.
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social: #侧边栏社交信息链接
-  QQ: http://wpa.qq.com/msgrd?v=3&uin=248147986&site=qq&menu=yes || fab fa-qq
+  QQ: http://wpa.qq.com/msgrd?v=3&uin=248147986&site=qq&menu=yes || fa fa-qq
   #GitHub: https://github.com/keepli || fab fa-github
   E-Mail: mailto:248147986@qq.com || fa fa-envelope
   #Weibo: https://weibo.com/yourname || fab fa-weibo
