@@ -1,4 +1,14 @@
+---
+title: mybatis的底层原理分析
+date: 2020-12-05
+updated: 2020-12-06
+tags: mybatis
+categories: mybatis
+---
+
 Mybatis是一个ORM框架，ORM是（ **Object Relational Mapping**  ）的简写，翻译过来就是 **对象-关系映射** ，简单来说就是把数据库和实体类及实体类的属性对应起来，让我们可以操作实体类就能实现操作数据库。
+
+<!--more-->
 
 在分析底层原理之前，先看单独使用Mybatis时的执行流程：
 
