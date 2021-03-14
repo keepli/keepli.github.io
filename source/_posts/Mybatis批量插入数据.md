@@ -8,13 +8,11 @@ categories: mybatis
 
 本文主要讲Mybatis批量插入数据的三种方式效率对比和往数据库批量插入100万条数据实现的思路分析，数据库为MySql。
 
-<!--more-->
-
 ## <font color=red>一、三种方式批量插入</font>
 
 ### <font color=#F39C12>1.for循环insert</font>
 
-```
+``` java
         long start = System.currentTimeMillis();
         for(int i = 0 ;i < 100000; i++) {
             User user = new User();
@@ -25,6 +23,8 @@ categories: mybatis
         }
         long end = System.currentTimeMillis();
         System.out.println("---------------" + (start - end) + "---------------");
+```
+``` xml
     <insert id="insert">
       INSERT INTO t_user (id, name, password)
           VALUES(#{id}, #{name}, #{password})
@@ -35,7 +35,7 @@ categories: mybatis
 
 ### <font color=#F39C12>2.Mybatis batch模式</font>
 
-```
+```java
     SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);//跟上述sql区别
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
@@ -50,17 +50,18 @@ categories: mybatis
         sqlSession.commit();
         long end = System.currentTimeMillis();
         System.out.println("---------------" + (start - end) + "---------------");
+```
+```xml
     <insert id="insert">
       INSERT INTO t_user (id, name, password)
           VALUES(#{id}, #{name}, #{password})
     </insert>
 ```
-
 时间为203660ms
 
 ### <font color=#F39C12>3.批量foreach插入</font>
 
-```
+```java
       long start = System.currentTimeMillis();
         List<User> userList = new ArrayList<>();
         for (int i = 0; i < 100000; i++) {
@@ -73,7 +74,9 @@ categories: mybatis
         userMapper.insertBatch(userList);
         long end = System.currentTimeMillis();
         System.out.println("---------------" + (start - end) + "---------------");
-<insert id="insertBatch">
+```
+```xml
+    <insert id="insertBatch">
         INSERT INTO t_user
         (id, name, password)
         VALUES
