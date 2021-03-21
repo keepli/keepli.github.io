@@ -256,22 +256,14 @@
 
       
           <p><em>mysql在数据备份时因为mysql版本不同，导致于高版本数据库生成的sql文件，放到低版本数据库中不能执行，在Navicat中生成sql文件时是可以指定版本的，那么就可以解决这个问题</em></p>
-<h3 id="1-查看要导入数据的mysql版本号"><a href="#1-查看要导入数据的mysql版本号" class="headerlink" title="1.查看要导入数据的mysql版本号"></a>1.查看要导入数据的mysql版本号</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -V #执行该命令可以在不登录的情况下查看mysql版本，注意V一定要大写</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-生成对应版本的sql文件"><a href="#2-生成对应版本的sql文件" class="headerlink" title="2.生成对应版本的sql文件"></a>2.生成对应版本的sql文件</h3><ul>
-<li>选择数据库后找到Navicat的数据传输</li>
-</ul>
-<img src="https://img-blog.csdnimg.cn/20210107103536445.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70" style="zoom: 33%;" />
-
-<ul>
-<li>指定相应的sql文件版本</li>
-</ul>
-<img src="https://img-blog.csdnimg.cn/20210107103921191.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70" style="zoom:33%;" />
-
-<blockquote>
-<p>完成以上步骤就大工告成了，不过在不同的Navicat版本中会有些不同，我的是12.0的版本</p>
-</blockquote>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/10/16/Navicat%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9Asql%E6%96%87%E4%BB%B6%E7%89%88%E6%9C%AC/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -352,13 +344,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="java中System-getProperty-方法详解"><a href="#java中System-getProperty-方法详解" class="headerlink" title="java中System.getProperty()方法详解"></a>java中System.getProperty()方法详解</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;java版本号：&quot;</span> + System.getProperty(<span class="string">&quot;java.version&quot;</span>)); <span class="comment">// java版本号  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java提供商名称：&quot;</span> + System.getProperty(<span class="string">&quot;java.vendor&quot;</span>)); <span class="comment">// Java提供商名称  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java提供商网站：&quot;</span> + System.getProperty(<span class="string">&quot;java.vendor.url&quot;</span>)); <span class="comment">// Java提供商网站  </span></span><br><span class="line">System.out.println(<span class="string">&quot;jre目录：&quot;</span> + System.getProperty(<span class="string">&quot;java.home&quot;</span>)); <span class="comment">// Java，哦，应该是jre目录  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java虚拟机规范版本号：&quot;</span> + System.getProperty(<span class="string">&quot;java.vm.specification.version&quot;</span>)); <span class="comment">// Java虚拟机规范版本号  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java虚拟机规范提供商：&quot;</span> + System.getProperty(<span class="string">&quot;java.vm.specification.vendor&quot;</span>)); <span class="comment">// Java虚拟机规范提供商  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java虚拟机规范名称：&quot;</span> + System.getProperty(<span class="string">&quot;java.vm.specification.name&quot;</span>)); <span class="comment">// Java虚拟机规范名称  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java虚拟机版本号：&quot;</span> + System.getProperty(<span class="string">&quot;java.vm.version&quot;</span>)); <span class="comment">// Java虚拟机版本号  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java虚拟机提供商：&quot;</span> + System.getProperty(<span class="string">&quot;java.vm.vendor&quot;</span>)); <span class="comment">// Java虚拟机提供商  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java虚拟机名称：&quot;</span> + System.getProperty(<span class="string">&quot;java.vm.name&quot;</span>)); <span class="comment">// Java虚拟机名称  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java规范版本号：&quot;</span> + System.getProperty(<span class="string">&quot;java.specification.version&quot;</span>)); <span class="comment">// Java规范版本号  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java规范提供商：&quot;</span> + System.getProperty(<span class="string">&quot;java.specification.vendor&quot;</span>)); <span class="comment">// Java规范提供商  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java规范名称：&quot;</span> + System.getProperty(<span class="string">&quot;java.specification.name&quot;</span>)); <span class="comment">// Java规范名称  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java类版本号：&quot;</span> + System.getProperty(<span class="string">&quot;java.class.version&quot;</span>)); <span class="comment">// Java类版本号  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java类路径：&quot;</span> + System.getProperty(<span class="string">&quot;java.class.path&quot;</span>)); <span class="comment">// Java类路径  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java lib路径：&quot;</span> + System.getProperty(<span class="string">&quot;java.library.path&quot;</span>)); <span class="comment">// Java lib路径  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java输入输出临时路径：&quot;</span> + System.getProperty(<span class="string">&quot;java.io.tmpdir&quot;</span>)); <span class="comment">// Java输入输出临时路径  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java编译器：&quot;</span> + System.getProperty(<span class="string">&quot;java.compiler&quot;</span>)); <span class="comment">// Java编译器  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java执行路径：&quot;</span> + System.getProperty(<span class="string">&quot;java.ext.dirs&quot;</span>)); <span class="comment">// Java执行路径  </span></span><br><span class="line">System.out.println(<span class="string">&quot;操作系统名称：&quot;</span> + System.getProperty(<span class="string">&quot;os.name&quot;</span>)); <span class="comment">// 操作系统名称  </span></span><br><span class="line">System.out.println(<span class="string">&quot;操作系统的架构：&quot;</span> + System.getProperty(<span class="string">&quot;os.arch&quot;</span>)); <span class="comment">// 操作系统的架构  </span></span><br><span class="line">System.out.println(<span class="string">&quot;操作系统版本号：&quot;</span> + System.getProperty(<span class="string">&quot;os.version&quot;</span>)); <span class="comment">// 操作系统版本号  </span></span><br><span class="line">System.out.println(<span class="string">&quot;文件分隔符：&quot;</span> + System.getProperty(<span class="string">&quot;file.separator&quot;</span>)); <span class="comment">// 文件分隔符  </span></span><br><span class="line">System.out.println(<span class="string">&quot;路径分隔符：&quot;</span> + System.getProperty(<span class="string">&quot;path.separator&quot;</span>)); <span class="comment">// 路径分隔符  </span></span><br><span class="line">System.out.println(<span class="string">&quot;直线分隔符：&quot;</span> + System.getProperty(<span class="string">&quot;line.separator&quot;</span>)); <span class="comment">// 直线分隔符  </span></span><br><span class="line">System.out.println(<span class="string">&quot;操作系统用户名：&quot;</span> + System.getProperty(<span class="string">&quot;user.name&quot;</span>)); <span class="comment">// 用户名  </span></span><br><span class="line">System.out.println(<span class="string">&quot;操作系统用户的主目录：&quot;</span> + System.getProperty(<span class="string">&quot;user.home&quot;</span>)); <span class="comment">// 用户的主目录  </span></span><br><span class="line">System.out.println(<span class="string">&quot;当前程序所在目录：&quot;</span> + System.getProperty(<span class="string">&quot;user.dir&quot;</span>)); <span class="comment">// 当前程序所在目录 </span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>键 相关值的描述</p>
-<p>java.version Java运行时环境版本<br>java.vendor Java运行时环境供应商<br>java.vendor.url Java供应商的 URL<br>java.home Java安装目录<br>java.vm.specification.version Java虚拟机规范版本<br>java.vm.specification.vendor Java虚拟机规范供应商<br>java.vm.specification.name Java虚拟机规范名称<br>java.vm.version Java虚拟机实现版本<br>java.vm.vendor Java虚拟机实现供应商<br>java.vm.name Java 虚拟机实现名称<br>java.specification.version Java运行时环境规范版本<br>java.specification.vendor Java运行时环境规范供应商<br>java.specification.name Java运行时环境规范名称<br>java.class.version Java类格式版本号<br>java.class.path Java类路径<br>java.library.path 加载库时搜索的路径列表<br>java.io.tmpdir 默认的临时文件路径<br>java.compiler 要使用的 JIT 编译器的名称<br>java.ext.dirs 一个或多个扩展目录的路径<br>os.name 操作系统的名称<br>os.arch 操作系统的架构<br>os.version 操作系统的版本<br>file.separator 文件分隔符（在 UNIX 系统中是“/”）<br>path.separator 路径分隔符（在 UNIX 系统中是“:”）<br>line.separator 行分隔符（在 UNIX 系统中是“/n”）<br>user.name 用户的账户名称<br>user.home 用户的主目录<br>user.dir 用户的当前工作目录</p>
-
+          <h3 id="java中System-getProperty-方法详解"><a href="#java中System-getProperty-方法详解" class="headerlink" title="java中System.getProperty()方法详解"></a>java中System.getProperty()方法详解</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/10/01/System%E7%B1%BB%E8%A7%A3%E6%9E%90/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

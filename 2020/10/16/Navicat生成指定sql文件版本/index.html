@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"www.keepli.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"width":240},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="mysql在数据备份时因为mysql版本不同，导致于高版本数据库生成的sql文件，放到低版本数据库中不能执行，在Navicat中生成sql文件时是可以指定版本的，那么就可以解决这个问题 1.查看要导入数据的mysql版本号1mysql -V #执行该命令可以在不登录的情况下查看mysql版本，注意V一定要大写  2.生成对应版本的sql文件 选择数据库后找到Navicat的数据传输     指定相">
+  <meta name="description" content="mysql在数据备份时因为mysql版本不同，导致于高版本数据库生成的sql文件，放到低版本数据库中不能执行，在Navicat中生成sql文件时是可以指定版本的，那么就可以解决这个问题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Navicat生成指定sql文件版本">
 <meta property="og:url" content="http://www.keepli.cn/2020/10/16/Navicat%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9Asql%E6%96%87%E4%BB%B6%E7%89%88%E6%9C%AC/index.html">
 <meta property="og:site_name" content="听风知秋雨">
-<meta property="og:description" content="mysql在数据备份时因为mysql版本不同，导致于高版本数据库生成的sql文件，放到低版本数据库中不能执行，在Navicat中生成sql文件时是可以指定版本的，那么就可以解决这个问题 1.查看要导入数据的mysql版本号1mysql -V #执行该命令可以在不登录的情况下查看mysql版本，注意V一定要大写  2.生成对应版本的sql文件 选择数据库后找到Navicat的数据传输     指定相">
+<meta property="og:description" content="mysql在数据备份时因为mysql版本不同，导致于高版本数据库生成的sql文件，放到低版本数据库中不能执行，在Navicat中生成sql文件时是可以指定版本的，那么就可以解决这个问题">
 <meta property="og:locale">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210107103536445.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210107103921191.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70">
@@ -262,6 +262,8 @@
 
       
         <p><em>mysql在数据备份时因为mysql版本不同，导致于高版本数据库生成的sql文件，放到低版本数据库中不能执行，在Navicat中生成sql文件时是可以指定版本的，那么就可以解决这个问题</em></p>
+<a id="more"></a>
+
 <h3 id="1-查看要导入数据的mysql版本号"><a href="#1-查看要导入数据的mysql版本号" class="headerlink" title="1.查看要导入数据的mysql版本号"></a>1.查看要导入数据的mysql版本号</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -V #执行该命令可以在不登录的情况下查看mysql版本，注意V一定要大写</span><br></pre></td></tr></table></figure>
 
 <h3 id="2-生成对应版本的sql文件"><a href="#2-生成对应版本的sql文件" class="headerlink" title="2.生成对应版本的sql文件"></a>2.生成对应版本的sql文件</h3><ul>
