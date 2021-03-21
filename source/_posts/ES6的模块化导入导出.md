@@ -11,6 +11,8 @@ categories: 前端
 - export导出的变量/常量，在import导入的时候<font color=red>需要</font>知道导出时候的名称（必须指定）
 - export default导出的变量/常量，在import导入的时候<font color=red>不需要</font>指定导出时候的名称（可以自定义），<span style="background-color:yellow">但是一个js文件中只能存在一个default</span>
 
+<!-- more -->
+
 **aaa.js文件：**
 
 - 导出数据

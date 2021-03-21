@@ -16,7 +16,7 @@ categories: docker
 docker pull nginx
 ```
 
-
+<!-- more -->
 
 ####  2.创建需要挂载的相应的挂载目录 
 

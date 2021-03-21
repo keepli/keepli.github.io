@@ -8,6 +8,8 @@ categories: mysql
 
 *mysql在数据备份时因为mysql版本不同，导致于高版本数据库生成的sql文件，放到低版本数据库中不能执行，在Navicat中生成sql文件时是可以指定版本的，那么就可以解决这个问题*
 
+<!-- more -->
+
 ### 1.查看要导入数据的mysql版本号
 
 ```shell

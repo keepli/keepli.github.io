@@ -8,6 +8,8 @@ categories: java
 
 ### java中System.getProperty()方法详解
 
+<!-- more -->
+
 ```java 
 System.out.println("java版本号：" + System.getProperty("java.version")); // java版本号  
 System.out.println("Java提供商名称：" + System.getProperty("java.vendor")); // Java提供商名称  
