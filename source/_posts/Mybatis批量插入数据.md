@@ -8,6 +8,8 @@ categories: mybatis
 
 本文主要讲Mybatis批量插入数据的三种方式效率对比和往数据库批量插入100万条数据实现的思路分析，数据库为MySql。
 
+<!--more-->
+
 ## <font color=red>一、三种方式批量插入</font>
 
 ### <font color=#F39C12>1.for循环insert</font>
