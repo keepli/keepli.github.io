@@ -277,14 +277,14 @@
   </url>
   
   <url>
-    <loc>http://www.keepli.cn/tags/docker/</loc>
+    <loc>http://www.keepli.cn/tags/java/</loc>
     <lastmod>2021-03-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://www.keepli.cn/tags/java/</loc>
+    <loc>http://www.keepli.cn/tags/docker/</loc>
     <lastmod>2021-03-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -312,13 +312,6 @@
   </url>
   
   <url>
-    <loc>http://www.keepli.cn/tags/mybatis-plus/</loc>
-    <lastmod>2021-03-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://www.keepli.cn/tags/mongDB/</loc>
     <lastmod>2021-03-21</lastmod>
     <changefreq>daily</changefreq>
@@ -333,7 +326,7 @@
   </url>
   
   <url>
-    <loc>http://www.keepli.cn/tags/vue/</loc>
+    <loc>http://www.keepli.cn/tags/mybatis-plus/</loc>
     <lastmod>2021-03-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -341,6 +334,20 @@
   
   <url>
     <loc>http://www.keepli.cn/tags/springboot/</loc>
+    <lastmod>2021-03-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.keepli.cn/tags/druid/</loc>
+    <lastmod>2021-03-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.keepli.cn/tags/vue/</loc>
     <lastmod>2021-03-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -383,6 +390,13 @@
   
   <url>
     <loc>http://www.keepli.cn/tags/websocket%E5%8D%8F%E8%AE%AE/</loc>
+    <lastmod>2021-03-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.keepli.cn/tags/%E5%B9%82%E7%AD%89%E6%80%A7/</loc>
     <lastmod>2021-03-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -432,20 +446,6 @@
   
   <url>
     <loc>http://www.keepli.cn/tags/nginx/</loc>
-    <lastmod>2021-03-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.keepli.cn/tags/druid/</loc>
-    <lastmod>2021-03-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.keepli.cn/tags/%E5%B9%82%E7%AD%89%E6%80%A7/</loc>
     <lastmod>2021-03-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -510,14 +510,14 @@
   </url>
   
   <url>
-    <loc>http://www.keepli.cn/categories/docker/</loc>
+    <loc>http://www.keepli.cn/categories/java/</loc>
     <lastmod>2021-03-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://www.keepli.cn/categories/java/</loc>
+    <loc>http://www.keepli.cn/categories/docker/</loc>
     <lastmod>2021-03-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -538,6 +538,13 @@
   </url>
   
   <url>
+    <loc>http://www.keepli.cn/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2021-03-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.keepli.cn/categories/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/</loc>
     <lastmod>2021-03-21</lastmod>
     <changefreq>daily</changefreq>
@@ -545,7 +552,7 @@
   </url>
   
   <url>
-    <loc>http://www.keepli.cn/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <loc>http://www.keepli.cn/categories/jdbc/</loc>
     <lastmod>2021-03-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -573,6 +580,13 @@
   </url>
   
   <url>
+    <loc>http://www.keepli.cn/categories/%E5%B9%82%E7%AD%89%E6%80%A7/</loc>
+    <lastmod>2021-03-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.keepli.cn/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2021-03-21</lastmod>
     <changefreq>daily</changefreq>
@@ -588,20 +602,6 @@
   
   <url>
     <loc>http://www.keepli.cn/categories/%E9%80%9A%E7%94%A8mapper/</loc>
-    <lastmod>2021-03-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.keepli.cn/categories/jdbc/</loc>
-    <lastmod>2021-03-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.keepli.cn/categories/%E5%B9%82%E7%AD%89%E6%80%A7/</loc>
     <lastmod>2021-03-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
