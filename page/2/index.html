@@ -193,7 +193,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/05/13/springcloud%E7%BB%84%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/10/16/Navicat%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9Asql%E6%96%87%E4%BB%B6%E7%89%88%E6%9C%AC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/add/header.jpg">
@@ -207,7 +207,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/13/springcloud%E7%BB%84%E4%BB%B6/" class="post-title-link" itemprop="url">springcloud组件</a>
+            <a href="/2020/10/16/Navicat%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9Asql%E6%96%87%E4%BB%B6%E7%89%88%E6%9C%AC/" class="post-title-link" itemprop="url">Navicat生成指定sql文件版本</a>
         </h2>
 
         <div class="post-meta">
@@ -217,14 +217,198 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-05-13 00:00:00" itemprop="dateCreated datePublished" datetime="2020-05-13T00:00:00+08:00">2020-05-13</time>
+              <time title="创建时间：2020-10-16 00:00:00" itemprop="dateCreated datePublished" datetime="2020-10-16T00:00:00+08:00">2020-10-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/10/16/Navicat%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9Asql%E6%96%87%E4%BB%B6%E7%89%88%E6%9C%AC/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/16/Navicat%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9Asql%E6%96%87%E4%BB%B6%E7%89%88%E6%9C%AC/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  ﻿
+	
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em>mysql在数据备份时因为mysql版本不同，导致于高版本数据库生成的sql文件，放到低版本数据库中不能执行，在Navicat中生成sql文件时是可以指定版本的，那么就可以解决这个问题</em></p>
+<h3 id="1-查看要导入数据的mysql版本号"><a href="#1-查看要导入数据的mysql版本号" class="headerlink" title="1.查看要导入数据的mysql版本号"></a>1.查看要导入数据的mysql版本号</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -V #执行该命令可以在不登录的情况下查看mysql版本，注意V一定要大写</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-生成对应版本的sql文件"><a href="#2-生成对应版本的sql文件" class="headerlink" title="2.生成对应版本的sql文件"></a>2.生成对应版本的sql文件</h3><ul>
+<li>选择数据库后找到Navicat的数据传输</li>
+</ul>
+<img src="https://img-blog.csdnimg.cn/20210107103536445.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70" style="zoom: 33%;" />
+
+<ul>
+<li>指定相应的sql文件版本</li>
+</ul>
+<img src="https://img-blog.csdnimg.cn/20210107103921191.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2h1d2VuNzk4Ng==,size_16,color_FFFFFF,t_70" style="zoom:33%;" />
+
+<blockquote>
+<p>完成以上步骤就大工告成了，不过在不同的Navicat版本中会有些不同，我的是12.0的版本</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/10/01/System%E7%B1%BB%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/add/header.jpg">
+      <meta itemprop="name" content="Driven">
+      <meta itemprop="description" content="大大的世界，小小的梦想">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风知秋雨">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/01/System%E7%B1%BB%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">System类解析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-10-01T00:00:00+08:00">2020-10-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/10/01/System%E7%B1%BB%E8%A7%A3%E6%9E%90/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/01/System%E7%B1%BB%E8%A7%A3%E6%9E%90/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  ﻿
+	
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="java中System-getProperty-方法详解"><a href="#java中System-getProperty-方法详解" class="headerlink" title="java中System.getProperty()方法详解"></a>java中System.getProperty()方法详解</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;java版本号：&quot;</span> + System.getProperty(<span class="string">&quot;java.version&quot;</span>)); <span class="comment">// java版本号  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java提供商名称：&quot;</span> + System.getProperty(<span class="string">&quot;java.vendor&quot;</span>)); <span class="comment">// Java提供商名称  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java提供商网站：&quot;</span> + System.getProperty(<span class="string">&quot;java.vendor.url&quot;</span>)); <span class="comment">// Java提供商网站  </span></span><br><span class="line">System.out.println(<span class="string">&quot;jre目录：&quot;</span> + System.getProperty(<span class="string">&quot;java.home&quot;</span>)); <span class="comment">// Java，哦，应该是jre目录  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java虚拟机规范版本号：&quot;</span> + System.getProperty(<span class="string">&quot;java.vm.specification.version&quot;</span>)); <span class="comment">// Java虚拟机规范版本号  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java虚拟机规范提供商：&quot;</span> + System.getProperty(<span class="string">&quot;java.vm.specification.vendor&quot;</span>)); <span class="comment">// Java虚拟机规范提供商  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java虚拟机规范名称：&quot;</span> + System.getProperty(<span class="string">&quot;java.vm.specification.name&quot;</span>)); <span class="comment">// Java虚拟机规范名称  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java虚拟机版本号：&quot;</span> + System.getProperty(<span class="string">&quot;java.vm.version&quot;</span>)); <span class="comment">// Java虚拟机版本号  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java虚拟机提供商：&quot;</span> + System.getProperty(<span class="string">&quot;java.vm.vendor&quot;</span>)); <span class="comment">// Java虚拟机提供商  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java虚拟机名称：&quot;</span> + System.getProperty(<span class="string">&quot;java.vm.name&quot;</span>)); <span class="comment">// Java虚拟机名称  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java规范版本号：&quot;</span> + System.getProperty(<span class="string">&quot;java.specification.version&quot;</span>)); <span class="comment">// Java规范版本号  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java规范提供商：&quot;</span> + System.getProperty(<span class="string">&quot;java.specification.vendor&quot;</span>)); <span class="comment">// Java规范提供商  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java规范名称：&quot;</span> + System.getProperty(<span class="string">&quot;java.specification.name&quot;</span>)); <span class="comment">// Java规范名称  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java类版本号：&quot;</span> + System.getProperty(<span class="string">&quot;java.class.version&quot;</span>)); <span class="comment">// Java类版本号  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java类路径：&quot;</span> + System.getProperty(<span class="string">&quot;java.class.path&quot;</span>)); <span class="comment">// Java类路径  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java lib路径：&quot;</span> + System.getProperty(<span class="string">&quot;java.library.path&quot;</span>)); <span class="comment">// Java lib路径  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java输入输出临时路径：&quot;</span> + System.getProperty(<span class="string">&quot;java.io.tmpdir&quot;</span>)); <span class="comment">// Java输入输出临时路径  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java编译器：&quot;</span> + System.getProperty(<span class="string">&quot;java.compiler&quot;</span>)); <span class="comment">// Java编译器  </span></span><br><span class="line">System.out.println(<span class="string">&quot;Java执行路径：&quot;</span> + System.getProperty(<span class="string">&quot;java.ext.dirs&quot;</span>)); <span class="comment">// Java执行路径  </span></span><br><span class="line">System.out.println(<span class="string">&quot;操作系统名称：&quot;</span> + System.getProperty(<span class="string">&quot;os.name&quot;</span>)); <span class="comment">// 操作系统名称  </span></span><br><span class="line">System.out.println(<span class="string">&quot;操作系统的架构：&quot;</span> + System.getProperty(<span class="string">&quot;os.arch&quot;</span>)); <span class="comment">// 操作系统的架构  </span></span><br><span class="line">System.out.println(<span class="string">&quot;操作系统版本号：&quot;</span> + System.getProperty(<span class="string">&quot;os.version&quot;</span>)); <span class="comment">// 操作系统版本号  </span></span><br><span class="line">System.out.println(<span class="string">&quot;文件分隔符：&quot;</span> + System.getProperty(<span class="string">&quot;file.separator&quot;</span>)); <span class="comment">// 文件分隔符  </span></span><br><span class="line">System.out.println(<span class="string">&quot;路径分隔符：&quot;</span> + System.getProperty(<span class="string">&quot;path.separator&quot;</span>)); <span class="comment">// 路径分隔符  </span></span><br><span class="line">System.out.println(<span class="string">&quot;直线分隔符：&quot;</span> + System.getProperty(<span class="string">&quot;line.separator&quot;</span>)); <span class="comment">// 直线分隔符  </span></span><br><span class="line">System.out.println(<span class="string">&quot;操作系统用户名：&quot;</span> + System.getProperty(<span class="string">&quot;user.name&quot;</span>)); <span class="comment">// 用户名  </span></span><br><span class="line">System.out.println(<span class="string">&quot;操作系统用户的主目录：&quot;</span> + System.getProperty(<span class="string">&quot;user.home&quot;</span>)); <span class="comment">// 用户的主目录  </span></span><br><span class="line">System.out.println(<span class="string">&quot;当前程序所在目录：&quot;</span> + System.getProperty(<span class="string">&quot;user.dir&quot;</span>)); <span class="comment">// 当前程序所在目录 </span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>键 相关值的描述</p>
+<p>java.version Java运行时环境版本<br>java.vendor Java运行时环境供应商<br>java.vendor.url Java供应商的 URL<br>java.home Java安装目录<br>java.vm.specification.version Java虚拟机规范版本<br>java.vm.specification.vendor Java虚拟机规范供应商<br>java.vm.specification.name Java虚拟机规范名称<br>java.vm.version Java虚拟机实现版本<br>java.vm.vendor Java虚拟机实现供应商<br>java.vm.name Java 虚拟机实现名称<br>java.specification.version Java运行时环境规范版本<br>java.specification.vendor Java运行时环境规范供应商<br>java.specification.name Java运行时环境规范名称<br>java.class.version Java类格式版本号<br>java.class.path Java类路径<br>java.library.path 加载库时搜索的路径列表<br>java.io.tmpdir 默认的临时文件路径<br>java.compiler 要使用的 JIT 编译器的名称<br>java.ext.dirs 一个或多个扩展目录的路径<br>os.name 操作系统的名称<br>os.arch 操作系统的架构<br>os.version 操作系统的版本<br>file.separator 文件分隔符（在 UNIX 系统中是“/”）<br>path.separator 路径分隔符（在 UNIX 系统中是“:”）<br>line.separator 行分隔符（在 UNIX 系统中是“/n”）<br>user.name 用户的账户名称<br>user.home 用户的主目录<br>user.dir 用户的当前工作目录</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/09/15/vue%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/add/header.jpg">
+      <meta itemprop="name" content="Driven">
+      <meta itemprop="description" content="大大的世界，小小的梦想">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风知秋雨">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/15/vue%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">vue常用指令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-15 00:00:00" itemprop="dateCreated datePublished" datetime="2020-09-15T00:00:00+08:00">2020-09-15</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-20 00:00:00" itemprop="dateModified" datetime="2020-05-20T00:00:00+08:00">2020-05-20</time>
+                <time title="修改时间：2020-11-01 00:00:00" itemprop="dateModified" datetime="2020-11-01T00:00:00+08:00">2020-11-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -232,7 +416,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">微服务架构</span></a>
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
                 </span>
             </span>
 
@@ -245,8 +429,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/05/13/springcloud%E7%BB%84%E4%BB%B6/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/13/springcloud%E7%BB%84%E4%BB%B6/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/09/15/vue%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/15/vue%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -262,10 +446,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p> <em>SpringCloud各组件的作用和使用</em></p>
+          <h4 id="v-bind（有简写方式）"><a href="#v-bind（有简写方式）" class="headerlink" title="v-bind（有简写方式）"></a><font color=#F39C12>v-bind（有简写方式）</font></h4><blockquote>
+<p>该指令用来动态修改标签中的属性信息</p>
+</blockquote>
+<p>动态绑定class有两种语法实现</p>
+<ul>
+<li>对象语法</li>
+<li>数组语法</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">v-bind:href</span>=<span class="string">&quot;url&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--以下是简写方式--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">:href</span>=<span class="string">&quot;url&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--可以动态切换class来改变样式（以下使用的是对象语法）--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--方法一--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">&quot;&#123;a:is-a,b:is-b&#125;&quot;</span>&gt;</span>动态切换class<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--方法二--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">&quot;getClasses()&quot;</span>&gt;</span>动态切换class<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    url: <span class="string">&quot;https://www.baidu.com&quot;</span>,</span><br><span class="line">    is-a: <span class="literal">true</span>,</span><br><span class="line">    is-b: <span class="literal">false</span>  </span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">      getClasses: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">          <span class="keyword">return</span> &#123;<span class="attr">a</span>: <span class="built_in">this</span>.is-a, <span class="attr">b</span>: <span class="built_in">this</span>.is-b&#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;  </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/13/springcloud%E7%BB%84%E4%BB%B6/#more" rel="contents">
+              <a class="btn" href="/2020/09/15/vue%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -289,7 +483,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/05/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/08/13/FastDFS%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/add/header.jpg">
@@ -303,7 +497,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">微服务架构</a>
+            <a href="/2020/08/13/FastDFS%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">FastDFS分布式文件系统</a>
         </h2>
 
         <div class="post-meta">
@@ -313,370 +507,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-05-10 00:00:00" itemprop="dateCreated datePublished" datetime="2020-05-10T00:00:00+08:00">2020-05-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">微服务架构</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/05/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  ﻿
-	
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><em>微服务架构与SOA架构</em></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/04/15/mongDB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/add/header.jpg">
-      <meta itemprop="name" content="Driven">
-      <meta itemprop="description" content="大大的世界，小小的梦想">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="听风知秋雨">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/15/mongDB/" class="post-title-link" itemprop="url">MongDB非关系型数据库</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-15 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-15T00:00:00+08:00">2020-04-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">非关系型数据库</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/04/15/mongDB/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/15/mongDB/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  ﻿
-	
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p> <em>MongDB做为一款由 C++编写的非关系型数据库（NoSql）,却有着最接近 SQL型数据库的功能，使用成本比 SQL型数据库低，做为评论系统来使用非常不错</em></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/15/mongDB/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/04/10/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E5%B8%A6%E5%9B%9E%E5%AE%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/add/header.jpg">
-      <meta itemprop="name" content="Driven">
-      <meta itemprop="description" content="大大的世界，小小的梦想">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="听风知秋雨">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/10/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E5%B8%A6%E5%9B%9E%E5%AE%B6/" class="post-title-link" itemprop="url">live2d看板娘带回家</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-10 10:12:22" itemprop="dateCreated datePublished" datetime="2020-04-10T10:12:22+08:00">2020-04-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/04/10/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E5%B8%A6%E5%9B%9E%E5%AE%B6/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/10/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E5%B8%A6%E5%9B%9E%E5%AE%B6/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  ﻿
-	
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p> <em>萌萌的看板娘不仅B格上来了，还能在你遨游知识的海洋时进行互动，可萌可看家，还等什么，动手吧~</em></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/10/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E5%B8%A6%E5%9B%9E%E5%AE%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/04/10/hexo%E5%8D%9A%E5%AE%A2%E8%AE%BF%E9%97%AE%E9%83%A8%E5%88%86%E9%A1%B5%E9%9D%A2404%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/add/header.jpg">
-      <meta itemprop="name" content="Driven">
-      <meta itemprop="description" content="大大的世界，小小的梦想">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="听风知秋雨">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/10/hexo%E5%8D%9A%E5%AE%A2%E8%AE%BF%E9%97%AE%E9%83%A8%E5%88%86%E9%A1%B5%E9%9D%A2404%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">hexo博客访问部分页面404的解决方法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-10 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-10T00:00:00+08:00">2020-04-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/04/10/hexo%E5%8D%9A%E5%AE%A2%E8%AE%BF%E9%97%AE%E9%83%A8%E5%88%86%E9%A1%B5%E9%9D%A2404%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/10/hexo%E5%8D%9A%E5%AE%A2%E8%AE%BF%E9%97%AE%E9%83%A8%E5%88%86%E9%A1%B5%E9%9D%A2404%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  ﻿
-	
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><em>本地启动访问正常，部署之后访问部分页面出现404，主要因为部署之后修改了文件名、标签、分类等等信息，因为缓存原因导致部署之后访问出现404</em></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/10/hexo%E5%8D%9A%E5%AE%A2%E8%AE%BF%E9%97%AE%E9%83%A8%E5%88%86%E9%A1%B5%E9%9D%A2404%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/03/15/hexo%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81mermaid%E5%9B%BE%E8%A1%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/add/header.jpg">
-      <meta itemprop="name" content="Driven">
-      <meta itemprop="description" content="大大的世界，小小的梦想">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="听风知秋雨">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/15/hexo%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81mermaid%E5%9B%BE%E8%A1%A8/" class="post-title-link" itemprop="url">hexo中如何支持mermaid图表</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-15 12:30:36" itemprop="dateCreated datePublished" datetime="2020-03-15T12:30:36+08:00">2020-03-15</time>
+              <time title="创建时间：2020-08-13 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-13T00:00:00+08:00">2020-08-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-16 11:40:30" itemprop="dateModified" datetime="2020-03-16T11:40:30+08:00">2020-03-16</time>
+                <time title="修改时间：2020-10-29 00:00:00" itemprop="dateModified" datetime="2020-10-29T00:00:00+08:00">2020-10-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -684,7 +522,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
+                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">分布式文件系统</span></a>
                 </span>
             </span>
 
@@ -697,8 +535,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/15/hexo%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81mermaid%E5%9B%BE%E8%A1%A8/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/15/hexo%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81mermaid%E5%9B%BE%E8%A1%A8/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/08/13/FastDFS%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/13/FastDFS%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -714,10 +552,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p> <em>使用mermaid图表的人都说好，但是hexo不支持，以下是我亲自试用开启hexo对mermaid图表支持，大家可以放心、安全、无毒使用！！！</em></p>
+          <h3 id="一、FastDFS简介"><a href="#一、FastDFS简介" class="headerlink" title="一、FastDFS简介"></a><font color=red>一、FastDFS简介</font></h3><h4 id="1-FastDFS体系结构"><a href="#1-FastDFS体系结构" class="headerlink" title="1.FastDFS体系结构"></a><font color=#F39C12>1.FastDFS体系结构</font></h4><p>FastDFS是一个开源的轻量级<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F">分布式文件系统</a>，它对文件进行管理，功能包括：文件存储、文件同步、文件访问（文件上传、文件下载）等，解决了大容量存储和负载均衡的问题。特别适合以文件为载体的在线服务，如相册网站、视频网站等等。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/03/15/hexo%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81mermaid%E5%9B%BE%E8%A1%A8/#more" rel="contents">
+              <a class="btn" href="/2020/08/13/FastDFS%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -741,7 +579,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/03/10/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%B9%82%E7%AD%89%E6%80%A7/">
+    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/07/25/%E9%80%9A%E7%94%A8mapper%E7%9A%84%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/add/header.jpg">
@@ -755,7 +593,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/10/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%B9%82%E7%AD%89%E6%80%A7/" class="post-title-link" itemprop="url">如何设计接口的幂等性（insert/update）</a>
+            <a href="/2020/07/25/%E9%80%9A%E7%94%A8mapper%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">通用mapper+pagehelper分页插件的使用</a>
         </h2>
 
         <div class="post-meta">
@@ -765,15 +603,22 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-03-10 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-10T00:00:00+08:00">2020-03-10</time>
+              <time title="创建时间：2020-07-25 00:00:00" itemprop="dateCreated datePublished" datetime="2020-07-25T00:00:00+08:00">2020-07-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-28 00:00:00" itemprop="dateModified" datetime="2020-07-28T00:00:00+08:00">2020-07-28</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B9%82%E7%AD%89%E6%80%A7/" itemprop="url" rel="index"><span itemprop="name">幂等性</span></a>
+                  <a href="/categories/%E9%80%9A%E7%94%A8mapper/" itemprop="url" rel="index"><span itemprop="name">通用mapper</span></a>
                 </span>
             </span>
 
@@ -786,8 +631,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/10/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%B9%82%E7%AD%89%E6%80%A7/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/10/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%B9%82%E7%AD%89%E6%80%A7/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/07/25/%E9%80%9A%E7%94%A8mapper%E7%9A%84%E4%BD%BF%E7%94%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/25/%E9%80%9A%E7%94%A8mapper%E7%9A%84%E4%BD%BF%E7%94%A8/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -803,10 +648,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p> <em>在使用insert和update方法对数据库表的数据进行操作会涉及到幂等性问题（ 同样的请求，不论请求多少次，资源的状态是一样的 ），在分布式开发中保证幂等性显得尤为重要，以下方法具体选用要根据实际情况</em></p>
+          <h3 id="一、环境搭建"><a href="#一、环境搭建" class="headerlink" title="一、环境搭建"></a><font color=#F39C12>一、环境搭建</font></h3><h4 id="1-导入maven依赖"><a href="#1-导入maven依赖" class="headerlink" title="1.导入maven依赖"></a>1.导入maven依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--通用mapper起步依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>tk.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mapper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/03/10/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%B9%82%E7%AD%89%E6%80%A7/#more" rel="contents">
+              <a class="btn" href="/2020/07/25/%E9%80%9A%E7%94%A8mapper%E7%9A%84%E4%BD%BF%E7%94%A8/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -830,7 +675,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/03/01/%E5%85%AC%E5%85%B1%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E7%B1%BB/">
+    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/07/15/io%E4%B8%8Enio/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/add/header.jpg">
@@ -844,7 +689,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/01/%E5%85%AC%E5%85%B1%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E7%B1%BB/" class="post-title-link" itemprop="url">公共异常处理类</a>
+            <a href="/2020/07/15/io%E4%B8%8Enio/" class="post-title-link" itemprop="url">传统I/O与NIO</a>
         </h2>
 
         <div class="post-meta">
@@ -854,7 +699,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-03-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-01T00:00:00+08:00">2020-03-01</time>
+              <time title="创建时间：2020-07-15 00:00:00" itemprop="dateCreated datePublished" datetime="2020-07-15T00:00:00+08:00">2020-07-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -862,7 +707,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/springboot/" itemprop="url" rel="index"><span itemprop="name">springboot</span></a>
+                  <a href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">网络编程</span></a>
                 </span>
             </span>
 
@@ -875,8 +720,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/01/%E5%85%AC%E5%85%B1%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E7%B1%BB/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/01/%E5%85%AC%E5%85%B1%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E7%B1%BB/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/07/15/io%E4%B8%8Enio/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/15/io%E4%B8%8Enio/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -892,10 +737,188 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p> <em>该公共异常类是注解是 spring-boot-starter-web的 jar包上的，主要是跟 web项目的 controller一起使用，@ControllerAdvice注解，全局捕获异常类，只要作用在@RequestMapping上，所有的异常都会被捕获。</em> </p>
+          <p> <em>传统 I / O 与 NIO 的区别，netty框架的简单了解</em></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/03/01/%E5%85%AC%E5%85%B1%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E7%B1%BB/#more" rel="contents">
+              <a class="btn" href="/2020/07/15/io%E4%B8%8Enio/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/06/23/%E6%8E%A5%E5%8F%A3%E5%8A%A0%E5%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/add/header.jpg">
+      <meta itemprop="name" content="Driven">
+      <meta itemprop="description" content="大大的世界，小小的梦想">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风知秋雨">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/23/%E6%8E%A5%E5%8F%A3%E5%8A%A0%E5%AF%86/" class="post-title-link" itemprop="url">摘要算法和加密算法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-23 00:00:00" itemprop="dateCreated datePublished" datetime="2020-06-23T00:00:00+08:00">2020-06-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8A%A0%E5%AF%86/" itemprop="url" rel="index"><span itemprop="name">加密</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/06/23/%E6%8E%A5%E5%8F%A3%E5%8A%A0%E5%AF%86/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/23/%E6%8E%A5%E5%8F%A3%E5%8A%A0%E5%AF%86/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  ﻿
+	
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em>数据在网络上传输时，如果不对数据进行加密，很容易被黑客和不法分子窃取，比如使用抓包工具就能获取到没有加密的数据，直接就可能造成财产损失和账号密码泄露等等严重的风险，所以，对网络的传输数据进行加密至关重要，本文主要对摘要算法和加密算法做个简单介绍</em></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/23/%E6%8E%A5%E5%8F%A3%E5%8A%A0%E5%AF%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.keepli.cn/2020/06/10/%E7%8E%AF%E4%BF%A1IM%E7%9A%84%E9%9B%86%E6%88%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/add/header.jpg">
+      <meta itemprop="name" content="Driven">
+      <meta itemprop="description" content="大大的世界，小小的梦想">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风知秋雨">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/10/%E7%8E%AF%E4%BF%A1IM%E7%9A%84%E9%9B%86%E6%88%90/" class="post-title-link" itemprop="url">环信IM的集成</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-10 00:00:00" itemprop="dateCreated datePublished" datetime="2020-06-10T00:00:00+08:00">2020-06-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/" itemprop="url" rel="index"><span itemprop="name">即时通讯</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/06/10/%E7%8E%AF%E4%BF%A1IM%E7%9A%84%E9%9B%86%E6%88%90/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/10/%E7%8E%AF%E4%BF%A1IM%E7%9A%84%E9%9B%86%E6%88%90/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  ﻿
+	
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em>第三方即时通讯服务，环信 IM云的集成使用，我这里主要以 web集成为主，如何把单聊模块集成到自己的项目进行的操作讲解，更多详细操作可以参考官网提供的开发文档</em></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/10/%E7%8E%AF%E4%BF%A1IM%E7%9A%84%E9%9B%86%E6%88%90/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -918,7 +941,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -986,20 +1009,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
